@@ -104,9 +104,9 @@ public class RoleService implements IRoleService {
     public void updateStatus(SharedCommand command) {
         Role role = this.searchByID(command.getId());
         role.fainWhenConcurrencyViolation(command.getVersion());
-        if(role.getStatus() == EnableStatus.DISABLE){
+        if (role.getStatus() == EnableStatus.DISABLE) {
             role.changeStatus(EnableStatus.ENABLE);
-        }else{
+        } else {
             role.changeStatus(EnableStatus.DISABLE);
         }
         roleRepository.update(role);

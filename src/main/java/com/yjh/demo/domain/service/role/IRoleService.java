@@ -20,7 +20,7 @@ public interface IRoleService {
 
     Role searchByID(String id);
 
-    Role searchByName(String name,String appKey);
+    Role searchByName(String name, String appKey);
 
     Role create(CreateRoleCommand command);
 

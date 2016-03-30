@@ -236,8 +236,4 @@ public class CoreStringUtils {
 
         return src + String.valueOf(time).substring(timeStrLen - diffLen, timeStrLen);
     }
-
-    public static boolean isBlank(String str) {
-        return CoreStringUtils.isBlank(str);
-    }
 }

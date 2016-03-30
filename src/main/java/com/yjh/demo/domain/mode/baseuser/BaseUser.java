@@ -2,6 +2,7 @@ package com.yjh.demo.domain.mode.baseuser;
 
 import com.yjh.demo.core.enums.EnableStatus;
 import com.yjh.demo.core.id.ConcurrencySafeEntity;
+import com.yjh.demo.core.util.CoreDateUtils;
 import com.yjh.demo.domain.mode.appkey.AppKey;
 import com.yjh.demo.domain.mode.role.Role;
 
@@ -18,7 +19,7 @@ public class BaseUser extends ConcurrencySafeEntity {
     private String lastLoginIP;     //最后登录ip
     private Date lastLoginDate;     //最后登录时间
     private String lastLoginPlatform;//最后登录平台
-    private Date createDate;        //创建角色
+    private Date createDate;        //创建时间
     private Role role;               //用户角色
     private AppKey appKey;          //应用标识
     private EnableStatus status;     //状态
@@ -37,6 +38,26 @@ public class BaseUser extends ConcurrencySafeEntity {
 
     public void changeLastLoginIP(String lastLoginIP) {
         this.lastLoginIP = lastLoginIP;
+    }
+
+    public void changeLastLoginDate(Date lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public void changeLastLoginPlatform(String lastLoginPlatform) {
+        this.lastLoginPlatform = lastLoginPlatform;
+    }
+
+    public void changeRole(Role role) {
+        this.role = role;
+    }
+
+    public void changeAppKey(AppKey appKey) {
+        this.appKey = appKey;
+    }
+
+    public void changeStatus(EnableStatus status) {
+        this.status = status;
     }
 
     private void setUserName(String userName) {

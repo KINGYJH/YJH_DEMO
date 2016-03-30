@@ -8,4 +8,5 @@ import java.io.Serializable;
  * Created by YJH on 2016/3/30.
  */
 public interface IBaseUserRepository<T, ID extends Serializable> extends IHibernateGenericRepository<T, ID> {
+    BaseUser searchByName(String userName, String appKey);
 }

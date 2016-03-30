@@ -42,6 +42,8 @@
         <version.validation>1.1.0.Final</version.validation>
         <version.servlet-api>2.5</version.servlet-api>
         <version.freemarker>2.3.21</version.freemarker>
+        <version.orika>1.4.5</version.orika>
+        <version.shiro>1.2.3</version.shiro>
     </properties>
 
 
@@ -208,6 +210,40 @@
             <version>${version.freemarker}</version>
         </dependency>
         <!-- End freemarker -->
+
+        <!-- Orika -->
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>${version.orika}</version>
+        </dependency>
+        <!-- End Orika -->
+
+        <!-- Shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${version.shiro}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>${version.shiro}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${version.shiro}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>${version.shiro}</version>
+        </dependency>
+        <!-- End Shiro -->
 
     </dependencies>
 </project>
