@@ -1,0 +1,11 @@
+/* Write your styles */
+.app-alert-layer-ul-data{
+    list-style: none;
+    overflow: overlay;
+}
+.app-alert-layer-ul-data li{
+    width: 30%;
+    float: left;
+    padding-left: 15px;
+    margin-top: 20px;
+}

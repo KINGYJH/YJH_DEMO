@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field" default-cascade="all">
+    <class name="com.yjh.demo.domain.mode.role.Role" table="t_role" lazy="true">
+        <id name="id" type="java.lang.String" column="id" unsaved-value="null" length="32">
+            <generator class="uuid"/>
+        </id>
+
+        <version column="version" name="version" type="java.lang.Integer"/>
+
+        <property name="updateDate" column="update_date" type="java.util.Date"/>
+
+        <property name="name" column="name" type="java.lang.String"/>
+
+        <property name="description" column="description" type="java.lang.String"/>
+
+        <bag name="permissions" cascade="save-update" table="t_role_permission">
+            <key column="role_id"/>
+            <many-to-many class="com.yjh.demo.domain.mode.permission.Permission" column="permission_id"/>
+        </bag>
+
+        <many-to-one name="appKey" column="app_key_id" class="com.yjh.demo.domain.mode.appkey.AppKey"/>
+
+        <property name="status" column="status">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.yjh.demo.core.enums.EnableStatus</param>
+                <param name="type">4</param>
+            </type>
+        </property>
+    </class>
+</hibernate-mapping>

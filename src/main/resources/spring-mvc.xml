@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 表单后台验证 -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator" />
+        <property name="validationMessageSource" ref="messageSource" />
+    </bean>
+    <mvc:annotation-driven validator="validator">
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"></bean>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg index="0">
+                    <bean class="java.nio.charset.Charset"
+                          factory-method="forName">
+                        <constructor-arg value="UTF-8"/>
+                    </bean>
+                </constructor-arg>
+            </bean>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value><!-- For sb IE download -->
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+                <property name="features">
+                    <list>
+                        <value>WriteMapNullValue</value>
+                        <value>WriteDateUseDateFormat</value>
+                    </list>
+                </property>
+            </bean>
+            <bean class="org.springframework.http.converter.ResourceHttpMessageConverter"></bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+    <!-- 组件自动扫描 -->
+    <context:component-scan base-package="com.yjh.demo.interfaces"/>
+
+    <!--主要作用于@Controller激活该模式下面是一种简写形式
+         它会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter，
+         是spring MVC为@Controllers分发请求所必须的   -->
+    <mvc:annotation-driven/>
+
+    <!-- FreeMarker视图解析 在这里配置后缀名ftl和视图解析器。。 -->
+    <bean id="freemarkerConfiguration"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:freemarker.properties" />
+    </bean>
+
+    <bean id="freemarkerConfig"
+          class="com.yjh.demo.core.freemarker.support.spring.FreeMarkerConfigurerExtension">
+        <property name="freemarkerSettings" ref="freemarkerConfiguration" />
+        <property name="templateLoaderPath" value="/WEB-INF/views/" />
+        <property name="defaultEncoding" value="UTF-8" />
+        <!--<property name="freemarkerVariables">-->
+        <!--<map>-->
+        <!--<entry key="xml_escape" value-ref="fmXmlEscape" />-->
+        <!--</map>-->
+        <!--</property>-->
+    </bean>
+
+    <!--<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />-->
+
+    <bean id="freemarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+        <property name="contentType" value="text/html; charset=UTF-8" />
+        <property name="cache" value="true" />
+        <property name="prefix" value="" />
+        <property name="suffix" value=".ftl" />
+        <property name="order" value="0" />
+        <!--<property name="exposeSpringMacroHelpers" value="false" /> &lt;!&ndash; imported in freemarker.properties &ndash;&gt;-->
+        <property name="requestContextAttribute" value="request" />
+    </bean>
+
+    <!-- 对静态资源文件的访问 -->
+    <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
+</beans>
