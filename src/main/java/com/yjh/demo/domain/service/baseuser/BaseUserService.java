@@ -97,7 +97,7 @@ public class BaseUserService implements IBaseUserService {
     }
 
     @Override
-    public void upDateStatus(SharedCommand command) {
+    public void updateStatus(SharedCommand command) {
         BaseUser baseUser = this.searchByID(command.getId());
         baseUser.fainWhenConcurrencyViolation(command.getVersion());
         if (baseUser.getStatus() == EnableStatus.DISABLE) {

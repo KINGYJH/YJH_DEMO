@@ -2,15 +2,15 @@
 <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
     <div class="am-offcanvas-bar admin-offcanvas-bar">
         <ul class="am-list admin-sidebar-list">
-            <li><a href="admin-index.html"><span class="am-icon-home"></span> 首页</a></li>
+            <li><a href="[@spring.url '/'/]"><span class="am-icon-home"></span> 首页</a></li>
             <li class="admin-parent">
                 <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 页面模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                 <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
                     <li>
                         <a data-am-collapse="{target:'#collapse-nav-users'}" class="am-cf"><span class="am-icon-check"></span> 用户管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                         <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nav-users">
-                            <li><a href="[@spring.url '/user/list.htm'/]"><span class="am-icon-users"></span>用户列表</a></li>
-                            <li><a href="[@spring.url '/user/create.htm'/]"><span class="am-icon-user-secret"></span>用户创建</a></li>
+                            <li><a href="[@spring.url '/base_user/list.htm'/]"><span class="am-icon-users"></span>用户列表</a></li>
+                            <li><a href="[@spring.url '/base_user/create.htm'/]"><span class="am-icon-user-secret"></span>用户创建</a></li>
                         </ul>
                     </li>
 
@@ -23,10 +23,17 @@
                     </li>
 
                     <li>
-                        <a data-am-collapse="{target:'#collapse-nav-resources'}" class="am-cf"><span class="am-icon-check"></span> 访问资源管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                        <a data-am-collapse="{target:'#collapse-nav-resources'}" class="am-cf"><span class="am-icon-check"></span> 权限管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
                         <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nav-resources">
-                            <li><a href="[@spring.url '/permission/list.htm'/]"><span class="am-icon-users"></span>访问资源列表</a></li>
-                            <li><a href="[@spring.url '/permission/create.htm'/]"><span class="am-icon-user-secret"></span>访问资源创建</a></li>
+                            <li><a href="[@spring.url '/permission/list.htm'/]"><span class="am-icon-users"></span>权限列表</a></li>
+                            <li><a href="[@spring.url '/permission/create.htm'/]"><span class="am-icon-user-secret"></span>创先创建</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a data-am-collapse="{target:'#collapse-nav-appKey'}" class="am-cf"><span class="am-icon-check"></span> AppKey管理 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                        <ul class="am-list am-collapse admin-sidebar-sub" id="collapse-nav-appKey">
+                            <li><a href="[@spring.url '/app_key/list.htm'/]"><span class="am-icon-users"></span>AppKey列表</a></li>
+                            <li><a href="[@spring.url '/app_key/create.htm'/]"><span class="am-icon-user-secret"></span>AppKey创建</a></li>
                         </ul>
                     </li>
                 </ul>

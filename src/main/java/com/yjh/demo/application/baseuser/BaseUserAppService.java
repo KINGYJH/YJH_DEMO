@@ -66,8 +66,8 @@ public class BaseUserAppService implements IBaseUserAppService {
     }
 
     @Override
-    public void upDateStatus(SharedCommand command) {
-        baseUserService.upDateStatus(command);
+    public void updateStatus(SharedCommand command) {
+        baseUserService.updateStatus(command);
     }
 
     @Override

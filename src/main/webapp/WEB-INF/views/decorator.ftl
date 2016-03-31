@@ -1,5 +1,6 @@
 [#--[#assign shiro = JspTaglibs["/WEB-INF/shiro.tld"]]--]
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
                    _ooOoo_
                   o8888888o
@@ -32,13 +33,13 @@
     <meta name="author" content="pengyi"/>
     <link rel="icon" type="image/png" href="[@spring.url '/resources/assets/i/favicon.png'/]">
     <link rel="apple-touch-icon-precomposed" href="[@spring.url '/resources/assets/i/app-icon72x72@2x.png'/]">
-    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
     <link rel="stylesheet" href="[@spring.url '/resources/assets/css/amazeui.css'/]"/>
     <link rel="stylesheet" href="[@spring.url '/resources/assets/css/amazeui.min.css'/]"/>
     <link rel="stylesheet" href="[@spring.url '/resources/assets/css/admin.css'/]">
     <link rel="stylesheet" href="[@spring.url '/resources/assets/css/app.css'/]">
-    [#--<link rel="stylesheet" href="[@spring.url '/resources/assets/css/amazeui.flat.css'/]"/>--]
-    [#--<link rel="stylesheet" href="[@spring.url '/resources/assets/css/amazeui.flat.min.css'/]"/>--]
+[#--<link rel="stylesheet" href="[@spring.url '/resources/assets/css/amazeui.flat.css'/]"/>--]
+[#--<link rel="stylesheet" href="[@spring.url '/resources/assets/css/amazeui.flat.min.css'/]"/>--]
 [/@block]
     <title>YJH_DEMO-[@block name="title"][/@block]</title>
 [@block name="topResources"]
@@ -51,9 +52,9 @@
 [/@block]
 
 <div class="am-cf admin-main">
-    [@block name="sidebar"]
-        [#include "/shared/sidebar.ftl"]
-    [/@block]
+[@block name="sidebar"]
+    [#include "/shared/sidebar.ftl"]
+[/@block]
 
     <!-- content start -->
     <div class="admin-content">
@@ -61,13 +62,13 @@
         <div class="am-cf am-padding">
             <ol class="am-breadcrumb">
                 <li><a href="/" class="am-icon-home">首页</a></li>
-                [@block name="contentTitle"][/@block]
+            [@block name="contentTitle"][/@block]
             </ol>
         </div>
 
-        [@block name="content"]
+    [@block name="content"]
 
-        [/@block]
+    [/@block]
     </div>
     <!-- content end -->
 
@@ -79,9 +80,10 @@
 
 
 [@block name="bottomResources"]
-    <script src="[@spring.url '/resources/assets/js/jquery.min.js'/]"></script>
-    <script src="[@spring.url '/resources/assets/js/amazeui.min.js'/]"></script>
-    <script src="[@spring.url '/resources/assets/js/app.js'/]"></script>
+<script src="[@spring.url '/resources/assets/js/jquery.min.js'/]"></script>
+<script src="[@spring.url '/resources/assets/js/amazeui.min.js'/]"></script>
+<script src="[@spring.url '/resources/assets/js/app.js'/]"></script>
+<script src="[@spring.url '/resources/assets/js/common.js'/]"></script>
 [/@block]
 </body>
 </html>

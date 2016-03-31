@@ -1,7 +1,7 @@
 package com.yjh.demo.interfaces.shared.web;
 
 
-import com.yjh.demo.interfaces.shared.command.AbstractBasicCommand;
+import com.yjh.demo.core.common.AbstractBasicCommand;
 
 /**
  * Created by YJH on 2016/3/30.

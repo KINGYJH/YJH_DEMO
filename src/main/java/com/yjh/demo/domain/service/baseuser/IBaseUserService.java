@@ -24,7 +24,7 @@ public interface IBaseUserService {
 
     BaseUser edit(EditBaseUserCommand command);
 
-    void upDateStatus(SharedCommand command);
+    void updateStatus(SharedCommand command);
 
     void resetPassword(ResetPasswordCommand command);
 
