@@ -15,6 +15,17 @@ public class IndexController {
         return new ModelAndView("/index");
     }
 
+
+    @RequestMapping(value = "/page404.htm")
+    public ModelAndView page404() {
+        return new ModelAndView("/error/404");
+    }
+
+    @RequestMapping(value = "/page500.htm")
+    public ModelAndView page500() {
+        return new ModelAndView("/error/500");
+    }
+
     @RequestMapping(value = "/test")
     public ModelAndView test() {
         return new ModelAndView("/test");

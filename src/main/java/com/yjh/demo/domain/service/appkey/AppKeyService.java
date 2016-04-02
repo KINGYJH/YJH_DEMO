@@ -7,11 +7,14 @@ import com.yjh.demo.application.shared.command.SharedCommand;
 import com.yjh.demo.core.enums.EnableStatus;
 import com.yjh.demo.core.exception.ExistException;
 import com.yjh.demo.core.exception.NoFoundException;
+import com.yjh.demo.core.util.CoreStringUtils;
 import com.yjh.demo.domain.mode.appkey.AppKey;
 import com.yjh.demo.domain.mode.appkey.IAppKeyRepository;
 import com.yjh.demo.infrastructure.persistence.hibernate.generic.Pagination;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +41,12 @@ public class AppKeyService implements IAppKeyService {
     @Override
     public Pagination<AppKey> pagination(ListAppKeyCommand command) {
         List<Criterion> criterionList = new ArrayList<Criterion>();
+        if (!CoreStringUtils.isEmpty(command.getName())) {
+            criterionList.add(Restrictions.like("name", command.getName(), MatchMode.ANYWHERE));
+        }
+        if (null != command.getStatus()) {
+            criterionList.add(Restrictions.eq("status", command.getStatus()));
+        }
         List<Order> orderList = new ArrayList<Order>();
         orderList.add(Order.desc("updateDate"));
         return appKeyRepository.pagination(command.getPage(), command.getPageSize(), criterionList, orderList);
@@ -88,9 +97,9 @@ public class AppKeyService implements IAppKeyService {
     public void updateStatus(SharedCommand command) {
         AppKey appKey = this.searchByID(command.getId());
         appKey.fainWhenConcurrencyViolation(command.getVersion());
-        if(appKey.getStatus() == EnableStatus.DISABLE){
+        if (appKey.getStatus() == EnableStatus.DISABLE) {
             appKey.changeStatus(EnableStatus.ENABLE);
-        }else{
+        } else {
             appKey.changeStatus(EnableStatus.DISABLE);
         }
         appKeyRepository.update(appKey);

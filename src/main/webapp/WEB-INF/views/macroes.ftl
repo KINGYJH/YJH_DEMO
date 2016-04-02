@@ -3,21 +3,22 @@
     [#if alertMessage?? && (alertMessage.type)??]
         [#switch alertMessage.type.getValue()]
             [#case 0]
-                [#local alertClass = "am-alert-success"]
+                [#local alertClass = "alert-success"]
                 [#break]
             [#case 1]
-                [#local alertClass = "am-alert-secondary"]
+                [#local alertClass = "alert-info"]
                 [#break]
             [#case 2]
-                [#local alertClass = "am-alert-warning"]
+                [#local alertClass = "alert-warning"]
                 [#break]
             [#case 3]
-                [#local alertClass = "am-alert-danger"]
+                [#local alertClass = "alert-danger"]
                 [#break]
         [/#switch]
-    <div class="am-alert ${alertClass}" data-am-alert>
-        <button type="button" class="am-close">&times;</button>
-        <p>${alertMessage.type.getName()}:${alertMessage.message}</p>
+    <div class="alert ${alertClass} alert-custom alert-dismissible show-alert" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+        <i class="fa fa-check-circle m-right-xs"></i><strong>${alertMessage.type.getName()}</strong> ${alertMessage.message}
+        <i><span class="pull-right time-message">5秒后制动关闭</span></i>
     </div>
     [/#if]
 [/#macro]
@@ -31,8 +32,8 @@
 
 [#--//TODO with parameters--]
 [#macro showPagination path]
-<div class="tile color row">
-    <section class="tile color col-md-12">
+<div class="row">
+    <section class="col-md-12">
         [#local totalPage = (pagination.count / pagination.pageSize)?ceiling]
 
         [#if path?contains("?")]

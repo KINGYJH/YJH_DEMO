@@ -18,6 +18,8 @@ public interface IAppKeyAppService {
 
     Pagination<AppKeyRepresentation> pagination(ListAppKeyCommand command);
 
+    Pagination<AppKeyRepresentation> paginationJSON(ListAppKeyCommand command);
+
     AppKeyRepresentation searchByID(String id);
 
     AppKeyRepresentation searchByName(String name);

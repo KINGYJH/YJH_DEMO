@@ -19,7 +19,7 @@ public class AppKey extends ConcurrencySafeEntity {
         this.name = name;
     }
 
-    public void changeDescription(String descridescriptionbe) {
+    public void changeDescription(String description) {
         this.description = description;
     }
 

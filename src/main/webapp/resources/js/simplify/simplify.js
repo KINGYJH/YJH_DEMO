@@ -1,11 +1,11 @@
 $(function	()	{
-	//scrollable sidebar
+	//滚动栏
 	$('.scrollable-sidebar').slimScroll({
 		height: '100%',
 		size: '0px'
 	});
 	
-	//Collapsible Sidebar Menu
+	//Collapsible Sidebar Menu 左侧菜单栏
 	$('.sidebar-menu .openable > a').click(function()	{
 		
 		if(!$('aside').hasClass('sidebar-mini') || Modernizr.mq('(max-width: 991px)'))	{
@@ -21,17 +21,17 @@ $(function	()	{
 		return false;
 	});
 
-	//Open active menu
+	//Open active menu 打开菜单
 	if(!$('.sidebar-menu').hasClass('sidebar-mini') || Modernizr.mq('(max-width: 767px)'))	{
 		$('.openable.open').children('.submenu').slideDown(200);
 	}
 	
-	//Toggle User container on sidebar menu
+	//Toggle User container on sidebar menu 切换用户容器的侧边栏菜单
 	$('#btn-collapse').click(function()	{
 		$('.sidebar-header').toggleClass('active');
 	});
 	
-	//theme setting
+	//theme setting 主题设置
 	$("#theme-setting-icon").click(function()	{ 
 		if($('#theme-setting').hasClass('open'))	{
 			$('#theme-setting').removeClass('open');
@@ -78,29 +78,6 @@ $(function	()	{
 	$('.dropdown-menu input').click(function(e) {
         e.stopPropagation(); //This will prevent the event from bubbling up and close the dropdown when you type/click on text boxes.
     });
-	
-	//to do list
-	$('.task-finish').click(function()	{ 
-		if($(this).is(':checked'))	{
-			$(this).parent().parent().addClass('selected');					
-		}
-		else	{
-			$(this).parent().parent().removeClass('selected');
-		}
-	});
-
-	//Delete to do list
-	$('.task-del').click(function()	{			
-		var activeList = $(this).parent().parent();
-
-		activeList.addClass('removed');
-				
-		setTimeout(function() {
-			activeList.remove();
-		}, 1000);
-			
-		return false;
-	});
 	
 	var $activeWidget = '';
 	var $activeWidgetHeader;
@@ -238,7 +215,6 @@ $(window).load(function() {
 $(window).scroll(function(){
 		
 	 var position = $(window).scrollTop();
-	
 	 if(position >= 200)	{
 		$('.scroll-to-top').addClass('active')
 	 }

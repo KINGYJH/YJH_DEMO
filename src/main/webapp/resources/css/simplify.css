@@ -1792,6 +1792,7 @@ a.list-group-item.active:focus {
   background: #e36159;
 }
 .scroll-to-top {
+  padding-top: 15px;
   position: fixed;
   display: block;
   right: -100px;
@@ -3852,6 +3853,7 @@ table tbody td.text-right {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   margin-top: 50px;
+  display:none
 }
 .custom-popup .popup-header {
   background-color: #e4e4e4;

@@ -190,7 +190,7 @@ public class AppKeyController extends BaseController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Pagination<AppKeyRepresentation> list(ListAppKeyCommand command) {
-        return appKeyAppService.pagination(command);
+    public Pagination<AppKeyRepresentation> list(@RequestBody ListAppKeyCommand command) {
+        return appKeyAppService.paginationJSON(command);
     }
 }

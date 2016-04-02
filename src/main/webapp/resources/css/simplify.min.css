@@ -1971,6 +1971,7 @@ a.list-group-item.active, a.list-group-item.active:focus, a.list-group-item.acti
 }
 
 .scroll-to-top {
+    padding-top: 15px;
     position: fixed;
     display: block;
     right: -100px;
@@ -4267,7 +4268,8 @@ table tbody td.text-right {
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
-    margin-top: 50px
+    margin-top: 50px;
+    display:none
 }
 
 .custom-popup .popup-header {

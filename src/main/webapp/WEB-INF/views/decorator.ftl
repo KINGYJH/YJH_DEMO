@@ -57,8 +57,9 @@
     <link href="[@spring.url '/resources/css/owl.theme.default.min.css'/]" rel="stylesheet">
 
     <!-- 模板自定义css -->
-    <link href="[@spring.url '/resources/css/simplify.min.css'/]" rel="stylesheet">
-
+    <link href="[@spring.url '/resources/css/simplify.css'/]" rel="stylesheet">
+    [#--<link href="[@spring.url '/resources/css/simplify.min.css'/]" rel="stylesheet">--]
+    <link href="[@spring.url '/resources/css/reset.css'/]" rel="stylesheet">
 [/@block]
 </head>
 
@@ -94,7 +95,7 @@
 </div>
 
 <!-- top 返回顶部按钮 -->
-<a href="#" class="scroll-to-top hidden-print"><i class="fa fa-chevron-up fa-lg"></i></a>
+<a href="#" class="scroll-to-top hidden-print active"><i class="fa fa-chevron-up fa-lg"></i></a>
 
 [@block name="bottomResources"]
 <!-- ================================================== -->
@@ -105,6 +106,9 @@
 <!-- Bootstrap -->
 <script src="[@spring.url '/resources/bootstrap/js/bootstrap.min.js'/]"></script>
 
+<!--验证表单-->
+<script src="[@spring.url '/resources/js/parsley/parsley.js' /]" type="text/javascript"></script>
+
 <!-- Flot 绘图js -->
 [#--<script src="[@spring.url '/resources/js/jquery.flot.min.js'/]"></script>--]
 
@@ -113,7 +117,6 @@
 
 <!-- Nicescroll 滚动条 -->
 <script src="[@spring.url '/resources/js/nicescroll/jquery.nicescroll.js'/]"></script>
-<script src="[@spring.url '/resources/js/nicescroll/jquery.nicescroll.min.js'/]"></script>
 
 <!-- Morris 时间系列绘图 -->
 [#--<script src="[@spring.url '/resources/js/rapheal.min.js'/]"></script>--]
@@ -129,7 +132,7 @@
 [#--<script src='[@spring.url '/resources/js/uncompressed/skycons.js'/]'></script>--]
 
 <!-- Popup Overlay 弹出层 -->
-[#--<script src="[@spring.url '/resources/js/jquery.popupoverlay.min.js'/]"></script>--]
+<script src="[@spring.url '/resources/js/jquery.popupoverlay.min.js'/]"></script>
 
 <!-- Easy Pie Chart 饼状图 -->
 [#--<script src="[@spring.url '/resources/js/jquery.easypiechart.min.js'/]"></script>--]
@@ -145,7 +148,7 @@
 
 <!-- 模板自定义js -->
 <script src="[@spring.url '/resources/js/simplify/simplify.js'/]"></script>
-[#--<script src="[@spring.url '/resources/js/simplify/simplify_dashboard.js'/]"></script>--]
+<script src="[@spring.url '/resources/js/simplify/simplify_dashboard.js'/]"></script>
 
 <!-- 公共js库 -->
 <script src="[@spring.url '/resources/js/common.js'/]"></script>

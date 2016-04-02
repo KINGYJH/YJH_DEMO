@@ -48,9 +48,19 @@
     </servlet-mapping>
 
     <session-config>
-        <session-timeout>180000</session-timeout>
+        <session-timeout>30</session-timeout>
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
+
+    <!-- 404，500页面错误 -->
+    <error-page>
+    <error-code>404</error-code>
+    <location>/page404.htm</location>
+    </error-page>
+    <error-page>
+    <error-code>500</error-code>
+    <location>/page500.htm</location>
+    </error-page>
 
     <display-name>yjh_demo</display-name>
     <welcome-file-list>

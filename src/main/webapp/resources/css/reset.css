@@ -1,0 +1,69 @@
+.overflow-auto td,.overflow-auto th{
+    min-width: 150px;
+}
+td,th{
+    text-align: center;
+    margin-top: 10px;
+}
+.dataTables_info{
+    margin-top: 30px;
+}
+.parsley-errors-list{
+    padding-left: 0;
+}
+
+.contract-show li{
+    list-style: none;
+    font-size: 16px;
+    font-weight: bolder;
+}
+.contract-show span{
+    line-height: 60px;
+    text-align: right;
+}
+.contract-box{
+    min-height: 40px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding:10px;
+    margin:10px;
+}
+.contract-box img{
+    width: 220px;
+    height: 220px;
+}
+.colorbox .colorbox-list{
+    padding:10px;
+    margin:10px;
+}
+.check-td-modal{
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: -18px;
+}
+.check-td-info{
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom:20px;
+}
+.selector-box{
+    max-height:470px;
+    overflow: auto;
+}
+.selector-box .check-toggler{
+    float: right;
+    margin: 15px 10px 0 0;
+}
+.check-toggler:before {
+    content: "\f00d";
+    font-family: "FontAwesome";
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 14px;
+    color: #ff4a43;
+}

@@ -1,61 +1,52 @@
-[@override name="title"]AppKey管理-查看AppKey[/@override]
+[@override name="title"]AppKey管理 - AppKey查看[/@override]
 [@override name="topResources"]
     [@super /]
 
 [/@override]
 
-[@override name="contentTitle"]
-<li><a href="[@spring.url '/app_key/pagination.htm'/]">AppKey管理</a></li>
-<li class="am-active">查看AppKey</li>
+[@override name="breadcrumb"]
+<ul class="breadcrumb">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="/app_key/pagination.htm">AppKey管理</a></li>
+    <li>AppKey查看</li>
+</ul>
 [/@override]
 
-[@override name="content"]
-<div class="am-g">
+[@override name="headerText"]
+AppKey 查看
+[/@override]
+
+[@override name="subContent"]
     [@mc.showAlert /]
-    <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
-        啦啦啦啦啦啦啦啦
-    </div>
-
-    <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-        <ul class="am-list am-list-static am-list-border am-list-striped">
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="contract-show">
             <li>
-                <div class="am-g">
-                    <span class="am-u-sm-6 am-lg-text-right">AppKey名称 :</span>
-                    <div class="am-u-sm-6">${appKey.name!!}</div>
-                </div>
+                <span class="col-md-3">AppKey名称</span>
+                <div class="col-md-8 contract-box">${appKey.name!}</div>
             </li>
-
             <li>
-                <div class="am-g">
-                    <span class="am-u-sm-6 am-lg-text-right">AppKey描述 :</span>
-                    <div class="am-u-sm-6">${appKey.description!}</div>
-                </div>
+                <span class="col-md-3">AppKey项目名</span>
+                <div class="col-md-8 contract-box">${appKey.projectName!}</div>
             </li>
-
             <li>
-                <div class="am-g">
-                    <span class="am-u-sm-6 am-lg-text-right">AppKey项目名 :</span>
-                    <div class="am-u-sm-6">${appKey.projectName!}</div>
-                </div>
+                <span class="col-md-3">AppKey描述</span>
+                <div class="col-md-8 contract-box">${appKey.description!}</div>
             </li>
-
             <li>
-                <div class="am-g">
-                    <span class="am-u-sm-6 am-lg-text-right">AppKey状态 :</span>
-                    <div class="am-u-sm-6">${(appKey.status.getName())!}</div>
-                </div>
+                <span class="col-md-3">AppKey最近更新时间</span>
+                <div class="col-md-8 contract-box">${appKey.updateDate?datetime!}</div>
             </li>
-
             <li>
-                <div class="am-g">
-                    <div class="am-u-sm-12 am-text-center">
-                        <a class="am-btn am-btn-default am-round am-btn-secondary"
-                           href="[@spring.url '/app_key/create.htm'/]">在创建一个</a>
-                        <a class="am-btn am-btn-default am-round am-btn-success"
-                           href="[@spring.url '/app_key/pagination.htm'/]">返回列表</a>
-                    </div>
-                </div>
+                <span class="col-md-3">AppKey状态</span>
+                <div class="col-md-8 contract-box">${(appKey.status.getName())!}</div>
             </li>
+            <div>
+                <div class="col-sm-offset-6 col-sm-12">
+                    <a href="[@spring.url '/app_key/create.htm' /]" class="btn btn-success">再创建一个</a>
+                    <a href="[@spring.url '/app_key/pagination.htm' /]" class="btn btn-default">返回列表</a>
+                </div>
+            </div>
         </ul>
     </div>
 </div>

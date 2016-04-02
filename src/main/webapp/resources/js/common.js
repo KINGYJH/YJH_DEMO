@@ -27,9 +27,9 @@ if (typeof(logger) == 'undefined') {
 /**
  * 浏览器信息
  */
-(function() {
+(function () {
     var userAgent = navigator.userAgent.toLowerCase();
-    G.browser.version = (userAgent.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [])[1];
+    G.browser.version = (userAgent.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1];
     G.browser.msie = /msie/.test(userAgent) && !/opera/.test(userAgent);
     G.browser.mozilla = /mozilla/.test(userAgent) && !/(compatible|webkit)/.test(userAgent);
     G.browser.opera = /opera/.test(userAgent);
@@ -40,14 +40,15 @@ if (typeof(logger) == 'undefined') {
         try {
             document.execCommand("BackgroundImageCache", false, true);
         }
-        catch (e) {}
+        catch (e) {
+        }
     }
 })();
 
 /**
  * 操作系统信息
  */
-(function() {
+(function () {
     if (typeof(navigator.platform) == "undefined") {
         G.platform.unknown = true;
     }
@@ -87,12 +88,12 @@ if (typeof(logger) == 'undefined') {
 /**
  * 日志封装
  */
-(function() {
+(function () {
     logger._enable = typeof(console) != "undefined" && typeof(console.log) != "undefined";
     if (logger._enable) {
         if (typeof(console.log) == "function") {
             // here comes normal browsers, firefox and chrome
-            logger._log = function() {
+            logger._log = function () {
                 try {
                     //console.log.apply(console, arguments);
                 }
@@ -101,7 +102,7 @@ if (typeof(logger) == 'undefined') {
             };
         } else if (typeof(console.log) == "object") {
             //  console.log in IE8 isn't a true Javascript function. It doesn't support the apply or call methods.
-            logger._log = function() {
+            logger._log = function () {
                 try {
                     //console.log(Array.prototype.slice.call(arguments));
                 }
@@ -110,17 +111,19 @@ if (typeof(logger) == 'undefined') {
             };
         } else {
             // a blank function
-            logger._log = function() {}();
+            logger._log = function () {
+            }();
         }
     } else {
-        logger._log = function() {};
+        logger._log = function () {
+        };
     }
     var debugLevels = {
-        none : 0,
-        debug : 1,
-        info : 2,
-        warn : 3,
-        error : 4
+        none: 0,
+        debug: 1,
+        info: 2,
+        warn: 3,
+        error: 4
     }
     var level = debugLevels[G.debug];
     if (typeof(level) == "undefined") {
@@ -130,16 +133,18 @@ if (typeof(logger) == 'undefined') {
         if (level > 0) {
             if (debugLevels[func] > 0) {
                 if (debugLevels[func] >= level) {
-                    logger[func] = function() {
+                    logger[func] = function () {
                         logger._log.apply(logger, arguments);
                     };
                 }
                 else {
-                    logger[func] = function() {};
+                    logger[func] = function () {
+                    };
                 }
             }
         } else {
-            logger[func] = function() {};
+            logger[func] = function () {
+            };
         }
     }
 })();
@@ -158,65 +163,73 @@ function StringBuilder(str) {
 
 StringBuilder.prototype = {
 
-    append : function (str) {
+    append: function (str) {
         this._strings.push(str);
         return this;
     },
 
-    clear : function () {
+    clear: function () {
         this._strings.length = 0;
     },
 
-    toString : function () {
+    toString: function () {
         var str = (arguments.length == 0) ? "" : arguments[0];
         return this._strings.join(str);
     }
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
 
+    //showAlert自动隐藏
+    var _showAlert = $(".show-alert");
+    var _showAlert_timeOut = 5;
+    if (_showAlert[0]) {
+        function doWork() {
+            _showAlert.find(".time-message").text(_showAlert_timeOut + "秒后自动关闭");
+            if (_showAlert_timeOut > 0) {
+                setTimeout(doWork, 1000);
+            }else{
+                _showAlert.css("display", "none");
+            }
+            _showAlert_timeOut--;
+        }
+        setTimeout(doWork, 1000);
+    }
+
+    //水平滚动条
+    var _scroll = $(".nice-scrollbar");   //容器
+
+    if (_scroll[0]) {
+        _scroll.niceScroll({
+            cursorcolor: "#000000",
+            zindex: 100,
+            bouncescroll: true,
+            cursoropacitymax: 0.4,
+            cursorborderradius: "5px",
+            cursorwidth: "8px"
+        });
+    }
 
     //设置cookie
-    function setCookie(name, value, expires){   //创建cookie
+    function setCookie(name, value, expires) {   //创建cookie
         var oDate = new Date();
         oDate.setDate(oDate.getDate() + 10);
-        document.cookie = name + '=' + value + ';' + expires + '=' + oDate +";path =/";
+        document.cookie = name + '=' + value + ';' + expires + '=' + oDate + ";path =/";
     };
 
-    function getCookie(name){   //获取cookie
+    function getCookie(name) {   //获取cookie
         var cookieArr = document.cookie.split('; ');
-        for(var i = 0; i < cookieArr.length; i++){
+        for (var i = 0; i < cookieArr.length; i++) {
             var nameArr = cookieArr[i].split('=');
-            if(nameArr[0] == name){
+            if (nameArr[0] == name) {
                 return nameArr[1];
             }
         }
         return '';
     };
 
-    function removeCookie(name){   //移除cookie
+    function removeCookie(name) {   //移除cookie
         setCookie(name, 'null', -1)
-    };
-
-    //背景切换设置
-    var themeBtn =  $('#color-schemes').find('a');
-    $(themeBtn).on('click', function(){
-        var thisClass = $(this).attr('class');
-        setCookie('themeName', thisClass, 365);
-    });
-
-    if(getCookie('themeName').length > 0){
-        $('body').attr('class',getCookie('themeName'));
-        $('.change-bg').addClass(getCookie('themeName'));
-    }else{
-        var bodyClass = $('body').attr('class');
-        $('.change-bg').addClass(bodyClass);
-    }
-
-    if(G.browser.mozilla){
-        $(".dropdown-menu").find("a").css({
-            'whiteSpace' : 'normal'
-        });
     };
 
 });
