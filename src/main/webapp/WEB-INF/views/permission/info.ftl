@@ -1,68 +1,58 @@
-[@override name="title"]访问资源管理-查看访问资源[/@override]
+[@override name="title"]权限管理 - 权限查看[/@override]
 [@override name="topResources"]
-
     [@super /]
+
 [/@override]
 
-[@override name="contentTitle"]
-<li><a href="[@spring.url '/resource/list.htm'/]">访问资源管理</a></li>
-<li class="am-active">查看访问资源</li>
+[@override name="breadcrumb"]
+<ul class="breadcrumb">
+    <li><a href="index.html">首页</a></li>
+    <li><a href="/permission/pagination.htm">权限管理</a></li>
+    <li>AppKey查看</li>
+</ul>
 [/@override]
 
-[@override name="content"]
-<div class="am-g">
+[@override name="headerText"]
+权限 查看
+[/@override]
+
+[@override name="subContent"]
     [@mc.showAlert /]
-    <ul class="am-list am-list-static am-list-border">
-        <li>
-            <div class="am-g">
-                <div class="am-u-sm-5 am-text-right">访问资源名称 : </div>
-                <div class="am-u-sm-6">${resource.resName!}</div>
-            </div>
-        </li>
-
-        <li>
-            <div class="am-g">
-                <div class="am-u-sm-5 am-text-right">访问资源key : </div>
-                <div class="am-u-sm-6">${resource.resKey!}</div>
-            </div>
-        </li>
-
-        <li>
-            <div class="am-g">
-                <div class="am-u-sm-5 am-text-right">访问资源Url : </div>
-                <div class="am-u-sm-6">${resource.resUrl!}</div>
-            </div>
-        </li>
-
-        <li>
-            <div class="am-g">
-                <div class="am-u-sm-5 am-text-right">访问资源类型 : </div>
-                <div class="am-u-sm-6">${(resource.type.getName())!}</div>
-            </div>
-        </li>
-
-        <li>
-            <div class="am-g">
-                <div class="am-u-sm-5 am-text-right">访问资源等级 : </div>
-                <div class="am-u-sm-6">${resource.level!}</div>
-            </div>
-        </li>
-
-        <li>
-            <div class="am-g">
-                <div class="am-u-sm-5 am-text-right">父级访问资源 : </div>
-                <div class="am-u-sm-6"></div>
-            </div>
-        </li>
-
-        <li>
-            <div class="am-g">
-                <div class="am-u-sm-1 am-u-sm-centered">
-                    <a class="am-btn am-btn-default am-round am-btn-success" href="[@spring.url '/resource/list.htm'/]">返回列表</a>
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="contract-show">
+            <li>
+                <span class="col-md-3">权限名称</span>
+                <div class="col-md-8 contract-box">${permission.name!}</div>
+            </li>
+            <li>
+                <span class="col-md-3">权限值</span>
+                <div class="col-md-8 contract-box">${permission.value!}</div>
+            </li>
+            <li>
+                <span class="col-md-3">权限描述</span>
+                <div class="col-md-8 contract-box">${permission.description!}</div>
+            </li>
+            <li>
+                <span class="col-md-3">appKey</span>
+                <div class="col-md-8 contract-box">${permission.appKey.name!}</div>
+            </li>
+            <li>
+                <span class="col-md-3">AppKey最近更新时间</span>
+                <div class="col-md-8 contract-box">${permission.updateDate?datetime!}</div>
+            </li>
+            <li>
+                <span class="col-md-3">AppKey状态</span>
+                <div class="col-md-8 contract-box">${(permission.status.getName())!}</div>
+            </li>
+            <div>
+                <div class="col-sm-offset-6 col-sm-12">
+                    <a href="[@spring.url '/permission/create.htm' /]" class="btn btn-success">再创建一个</a>
+                    <a href="[@spring.url '/permission/pagination.htm' /]" class="btn btn-default">返回列表</a>
                 </div>
             </div>
-        </li>
-    </ul>
+        </ul>
+    </div>
 </div>
 [/@override]
 

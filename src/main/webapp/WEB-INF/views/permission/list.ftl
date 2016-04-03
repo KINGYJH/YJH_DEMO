@@ -1,102 +1,146 @@
-[@override name="title"]访问资源管理-访问资源列表[/@override]
+[@override name="title"]权限管理[/@override]
 [@override name="topResources"]
-
     [@super /]
+
 [/@override]
 
-[@override name="contentTitle"]
-<li class="am-active">访问资源管理</li>
+[@override name="breadcrumb"]
+<ul class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li>权限管理</li>
+</ul>
 [/@override]
 
-[@override name="content"]
-<div class="am-g">
-    <div class="am-u-sm-12 am-u-md-3">
-        <div class="am-form-group">
-            <select data-am-selected="{btnSize: 'sm'}">
-                <option value="option1">所有类别</option>
-                <option value="option2">IT业界</option>
-                <option value="option3">数码产品</option>
-                <option value="option3">笔记本电脑</option>
-                <option value="option3">平板电脑</option>
-                <option value="option3">只能手机</option>
-                <option value="option3">超极本</option>
-            </select>
-        </div>
-    </div>
-    <div class="am-u-sm-12 am-u-md-3">
-        <div class="am-input-group am-input-group-sm">
-            <input type="text" class="am-form-field">
-          <span class="am-input-group-btn">
-            <button class="am-btn am-btn-default" type="button">搜索</button>
-          </span>
-        </div>
-    </div>
+[@override name="headerText"]
+权限 管理
+[/@override]
+
+[@override name="subContent"]
+    [@mc.showAlert /]
+<div class="row margin-md">
+    <a href="/permission/create.htm" class="btn btn-md btn-success">新增权限</a>
 </div>
-
-<div class="am-g">
-    <div class="am-u-sm-12">
-        <form class="am-form">
-            <table class="am-table am-table-striped am-table-hover table-main am-text-center">
-                <thead class="am-text-center">
-                <tr>
-                    <th>访问资源名称</th>
-                    <th>访问资源key</th>
-                    <th>访问资源url</th>
-                    <th>访问资源类型</th>
-                    <th>访问资源等级</th>
-                    <th>访问资源描述</th>
-                    <th>父级资源</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                    [#if pagination.data??]
-                        [#list pagination.data as resource ]
-                        <tr>
-                            <td>${resource.resName!}</td>
-                            <td>${resource.resKey!}</td>
-                            <td>${resource.resUrl!}</td>
-                            <td>${(resource.type.getName())!}</td>
-                            <td>${resource.level!}</td>
-                            <td>${resource.description!}</td>
-                            <td></td>
-                            <td>
-                                <div class="am-btn-toolbar">
-                                    <div class="am-btn-group am-btn-group-xs">
-                                        <a href="[@spring.url '/resource/edit.htm/${resource.id!}'/]" class="am-btn am-btn-default am-btn-secondary am-btn-xs"><span class="am-icon-pencil-square-o"></span> 编辑</a>
-                                        <a href="[@spring.url '/resource/show.htm/${resource.id!}'/]" class="am-btn am-btn-default am-btn-success am-btn-xs am-hide-sm-only"><span class="am-icon-copy"></span> 查看</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        [/#list]
-                    [/#if]
-                </tbody>
-            </table>
-            <div class="am-cf">
-                共 15 条记录
-                <div class="am-fr">
-                    <ul class="am-pagination">
-                        <li class="am-disabled"><a href="#">«</a></li>
-                        <li class="am-active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">»</a></li>
-                    </ul>
-                </div>
+<div class="smart-widget widget-dark-blue">
+    <div class="smart-widget-header">
+        <span class="smart-widget-option">
+            [#--<span class="refresh-icon-animated" style="display: none;"><i--]
+            [#--class="fa fa-circle-o-notch fa-spin"></i></span>--]
+                <a href="#" class="widget-toggle-hidden-option"><i class="fa fa-cog"></i></a>
+            <a href="#" class="widget-collapse-option" data-toggle="collapse"><i class="fa fa-chevron-up"></i></a>
+            [#--<a href="#" class="widget-refresh-option"><i class="fa fa-refresh"></i></a>--]
+            <a href="#" class="widget-remove-option"><i class="fa fa-times"></i></a>
+        </span>
+        <form class="form-inline no-margin" role="form">
+            <div class="form-group">
+                <label for="name" class="control-label">权限名称</label>
+                <input type="text" class="form-control" id="name" name="name" value="${command.name!}"
+                       placeholder="权限名称"/>
             </div>
-            <hr />
-            <p>注：.....</p>
+            <div class="form-group">
+                <label for="appKey" class="control-label">AppKey</label>
+                <select class="form-control" id="appKey" name="appKey" data="${command.appKey!}">
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="status" class="control-label">权限状态</label>
+                <select name="status" id class="form-control">
+                    [#assign status = (command.status!)?default("") /]
+                    <option value="">全部</option>
+                    <option value="ENABLE" [@mc.selected status "ENABLE" /]>启用</option>
+                    <option value="DISABLE" [@mc.selected status "DISABLE" /]>禁用</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-md btn-success">查询</button>
+            </div>
         </form>
     </div>
+    <div class="smart-widget-inner">
+        <div class="smart-widget-hidden-section" style="display: none;">
+            <ul class="widget-color-list clearfix">
+                <li style="background-color:#20232b;" data-color="widget-dark"></li>
+                <li style="background-color:#4c5f70;" data-color="widget-dark-blue"></li>
+                <li style="background-color:#23b7e5;" data-color="widget-blue"></li>
+                <li style="background-color:#2baab1;" data-color="widget-green"></li>
+                <li style="background-color:#edbc6c;" data-color="widget-yellow"></li>
+                <li style="background-color:#fbc852;" data-color="widget-orange"></li>
+                <li style="background-color:#e36159;" data-color="widget-red"></li>
+                <li style="background-color:#7266ba;" data-color="widget-purple"></li>
+                <li style="background-color:#f5f5f5;" data-color="widget-light-grey"></li>
+                <li style="background-color:#fff;" data-color="reset"></li>
+            </ul>
+        </div>
+        <div class="smart-widget-body no-padding">
+            <div class="padding-md">
+                <section class="overflow-auto nice-scrollbar">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>权限名称</th>
+                            <th>权限值</th>
+                            <th>权限描述</th>
+                            <th>appKey</th>
+                            <th>权限最近更新时间</th>
+                            <th>权限状态</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            [#if pagination.data??]
+                                [#list pagination.data as permission ]
+                                <tr>
+                                    <td>${permission.name!}</td>
+                                    <td>${permission.value!}</td>
+                                    <td>${permission.description!}</td>
+                                    <td>${permission.appKey.name!}</td>
+                                    <td>${permission.updateDate?datetime}</td>
+                                    <td>${(permission.status.getName())!}</td>
+                                    <td>
+                                        <a href="[@spring.url '/permission/info.htm/${permission.id!}'/]"
+                                           data-toggle="tooltip" data-placement="top" title="点击查看详情">
+                                            <span class="label label-info">查看</span>
+                                        </a>
+                                        <a href="[@spring.url '/permission/edit.htm/${permission.id!}'/]"
+                                           data-toggle="tooltip" data-placement="top" title="点击修改信息">
+                                            <span class="label label-success">修改</span>
+                                        </a>
+                                        [#if permission.status == "ENABLE"]
+                                            <a href="[@spring.url '/permission/update_status?id=${permission.id!}&version=${permission.version!}'/]"
+                                               data-toggle="tooltip" data-placement="top" title="点击禁用此数据">
+                                                <span class="label label-danger">禁用</span>
+                                            </a>
+                                        [#else]
+                                            <a href="[@spring.url '/permission/update_status?id=${permission.id!}&version=${permission.version!}'/]"
+                                               data-toggle="tooltip" data-placement="top" title="点击启用此数据">
+                                                <span class="label label-danger">启用</span>
+                                            </a>
+                                        [/#if]
+                                    </td>
+                                </tr>
+                                [/#list]
+                            [/#if]
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+            <div class="bg-grey">
+                [#if pagination!]
+            [@mc.showPagination '/permission/pagination.htm?name=${command.name!}&status=${command.status!}' /]
+        [/#if]
+            </div>
+        </div>
 
+    </div>
 </div>
+    [#include 'shared/confirmation.ftl'/]
 [/@override]
 
 [@override name="bottomResources"]
     [@super /]
-
+<script src="[@spring.url '/resources/js/ajax.js'/]"></script>
+<script type="text/javascript">
+    $("#appKey").selectAjaxData({url: "/app_key/all_list"});
+</script>
 [/@override]
 [@extends name="/decorator.ftl"/]

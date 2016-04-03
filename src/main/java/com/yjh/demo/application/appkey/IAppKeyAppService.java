@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface IAppKeyAppService {
 
+    List<AppKeyRepresentation> allList();
+
     List<AppKeyRepresentation> list(ListAppKeyCommand command);
 
     Pagination<AppKeyRepresentation> pagination(ListAppKeyCommand command);

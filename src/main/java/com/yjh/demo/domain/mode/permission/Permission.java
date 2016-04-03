@@ -21,7 +21,7 @@ public class Permission extends ConcurrencySafeEntity {
         this.name = name;
     }
 
-    public void changeDescription(String describe) {
+    public void changeDescription(String description) {
         this.description = description;
     }
 

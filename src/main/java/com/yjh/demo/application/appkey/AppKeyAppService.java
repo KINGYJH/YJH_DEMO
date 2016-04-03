@@ -31,6 +31,12 @@ public class AppKeyAppService implements IAppKeyAppService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<AppKeyRepresentation> allList() {
+        return mappingService.mapAsList(appKeyService.list(new ListAppKeyCommand()), AppKeyRepresentation.class);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<AppKeyRepresentation> list(ListAppKeyCommand command) {
         return mappingService.mapAsList(appKeyService.list(command), AppKeyRepresentation.class);
     }

@@ -93,7 +93,7 @@ public class PermissionController extends BaseController {
             permission = permissionAppService.searchByID(id);
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(this.getMessage("permission.id.not.found.message", new Object[]{id}, locale));
+            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("permission.id.not.found.message", new Object[]{id}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/permission/pagination.htm");
         } catch (Exception e) {
@@ -114,7 +114,7 @@ public class PermissionController extends BaseController {
             permission = permissionAppService.searchByID(id);
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(this.getMessage("permission.id.not.found.message", new Object[]{id}, locale));
+            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("permission.id.not.found.message", new Object[]{id}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/permission/pagination.htm");
         } catch (Exception e) {
@@ -152,9 +152,9 @@ public class PermissionController extends BaseController {
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
             if (e.getMessage().indexOf("AppKey") != -1) {
-                alertMessage = new AlertMessage(this.getMessage("appKey.id.not.found.message", new Object[]{command.getAppKey()}, locale));
+                alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.message", new Object[]{command.getAppKey()}, locale));
             } else {
-                alertMessage = new AlertMessage(this.getMessage("permission.id.not.found.message", new Object[]{command.getId()}, locale));
+                alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("permission.id.not.found.message", new Object[]{command.getId()}, locale));
                 redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
                 return new ModelAndView("redirect:/permission/pagination.htm");
             }
@@ -187,7 +187,7 @@ public class PermissionController extends BaseController {
             return new ModelAndView("redirect:/permission/pagination.htm");
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(this.getMessage("permission.id.not.found.message", new Object[]{command.getId()}, locale));
+            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("permission.id.not.found.message", new Object[]{command.getId()}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/permission/pagination.htm");
         } catch (Exception e) {

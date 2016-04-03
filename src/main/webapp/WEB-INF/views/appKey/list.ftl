@@ -6,7 +6,7 @@
 
 [@override name="breadcrumb"]
 <ul class="breadcrumb">
-    <li><a href="index.html">首页</a></li>
+    <li><a href="/">首页</a></li>
     <li>AppKey管理</li>
 </ul>
 [/@override]
@@ -89,18 +89,22 @@ AppKey 管理
                                     <td>${appKey.updateDate?datetime}</td>
                                     <td>${(appKey.status.getName())!}</td>
                                     <td>
-                                        <a href="/app_key/info.htm/${appKey.id!}" data-toggle="tooltip" data-placement="top" title="点击产看详情">
+                                        <a href="[@spring.url '/app_key/info.htm/${appKey.id!}'/]" data-toggle="tooltip"
+                                           data-placement="top" title="点击查看详情">
                                             <span class="label label-info">查看</span>
                                         </a>
-                                        <a href="/app_key/edit.htm/${appKey.id!}" data-toggle="tooltip" data-placement="top" title="点击修改信息">
+                                        <a href="[@spring.url '/app_key/edit.htm/${appKey.id!}'/]" data-toggle="tooltip"
+                                           data-placement="top" title="点击修改信息">
                                             <span class="label label-success">修改</span>
                                         </a>
                                         [#if appKey.status == "ENABLE"]
-                                            <a href="/app_key/update_status?id=${appKey.id!}&version=${appKey.version!}" data-toggle="tooltip" data-placement="top" title="点击禁用此数据">
+                                            <a href="[@spring.url '/app_key/update_status?id=${appKey.id!}&version=${appKey.version!}'/]"
+                                               data-toggle="tooltip" data-placement="top" title="点击禁用此数据">
                                                 <span class="label label-danger">禁用</span>
                                             </a>
                                         [#else]
-                                            <a href="/app_key/update_status?id=${appKey.id!}&version=${appKey.version!}" data-toggle="tooltip" data-placement="top" title="点击启用此数据">
+                                            <a href="[@spring.url '/app_key/update_status?id=${appKey.id!}&version=${appKey.version!}'/]"
+                                               data-toggle="tooltip" data-placement="top" title="点击启用此数据">
                                                 <span class="label label-danger">启用</span>
                                             </a>
                                         [/#if]
@@ -114,7 +118,7 @@ AppKey 管理
             </div>
             <div class="bg-grey">
                 [#if pagination!]
-            [@mc.showPagination '/app_key/pagination' /]
+            [@mc.showPagination '/app_key/pagination.htm?name=${command.name!}&status=${command.status!}' /]
         [/#if]
             </div>
         </div>

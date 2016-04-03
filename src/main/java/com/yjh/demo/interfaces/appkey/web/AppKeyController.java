@@ -12,6 +12,7 @@ import com.yjh.demo.core.exception.NoFoundException;
 import com.yjh.demo.infrastructure.persistence.hibernate.generic.Pagination;
 import com.yjh.demo.interfaces.shared.web.AlertMessage;
 import com.yjh.demo.interfaces.shared.web.BaseController;
+import com.yjh.demo.interfaces.shared.web.JsonMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -85,7 +87,7 @@ public class AppKeyController extends BaseController {
             appKey = appKeyAppService.searchByID(id);
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(this.getMessage("appKey.id.not.found.message", new Object[]{id}, locale));
+            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.message", new Object[]{id}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/app_key/pagination.htm");
         } catch (Exception e) {
@@ -106,7 +108,7 @@ public class AppKeyController extends BaseController {
             appKey = appKeyAppService.searchByID(id);
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(this.getMessage("appKey.id.not.found.message", new Object[]{id}, locale));
+            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.message", new Object[]{id}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/app_key/pagination.htm");
         } catch (Exception e) {
@@ -141,7 +143,7 @@ public class AppKeyController extends BaseController {
                     .addObject(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(this.getMessage("appKey.id.not.found.message", new Object[]{command.getId()}, locale));
+            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.message", new Object[]{command.getId()}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/app_key/pagination.htm");
         } catch (Exception e) {
@@ -172,7 +174,7 @@ public class AppKeyController extends BaseController {
             return new ModelAndView("redirect:/app_key/pagination.htm");
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(this.getMessage("appKey.id.not.found.message", new Object[]{command.getId()}, locale));
+            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.message", new Object[]{command.getId()}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/app_key/pagination.htm");
         } catch (Exception e) {
@@ -192,5 +194,21 @@ public class AppKeyController extends BaseController {
     @ResponseBody
     public Pagination<AppKeyRepresentation> list(@RequestBody ListAppKeyCommand command) {
         return appKeyAppService.paginationJSON(command);
+    }
+
+    @RequestMapping(value = "/all_list")
+    @ResponseBody
+    public JsonMessage allList() {
+        JsonMessage jsonMessage = new JsonMessage();
+        try {
+            List<AppKeyRepresentation> data = appKeyAppService.allList();
+            jsonMessage.setData(data);
+            jsonMessage.setCode("200");
+            jsonMessage.setMessage("查询成功");
+        } catch (Exception e) {
+            jsonMessage.setCode("500");
+            jsonMessage.setMessage("查询失败");
+        }
+        return jsonMessage;
     }
 }

@@ -20,7 +20,7 @@ import java.util.List;
  * Created by YJH on 2016/3/30.
  */
 @Service("permissionAppService")
-@Transactional(propagation = Propagation.REQUIRED, readOnly = true, rollbackFor = Exception.class)
+@Transactional(propagation = Propagation.REQUIRED, readOnly = false, rollbackFor = Exception.class)
 public class PermissionAppService implements IPermissionAppService {
 
     @Autowired

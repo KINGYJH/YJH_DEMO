@@ -28,9 +28,10 @@ AppKey 创建
                 <div class="col-md-9">
                     <input class="form-control" id="name" name="name"
                            value="${command.name!}" placeholder="输入AppKey名称"
-                           data-parsley-required="true" data-parsley-trigger="change" required/>
+                           data-parsley-required="true" data-parsley-required-message="AppKey名称不能为空"
+                           data-parsley-trigger="change"/>
+                    [@spring.showErrors "name" "parsley-required"/]
                 </div>
-                [@spring.showErrors "name"/]
             </div>
 
             [@spring.bind "command.projectName"/]
@@ -39,9 +40,10 @@ AppKey 创建
                 <div class="col-md-9">
                     <input class="form-control" id="projectName" name="projectName"
                            value="${command.projectName!}" placeholder="AppKey项目名称"
-                           data-parsley-required="true" data-parsley-trigger="change" required/>
+                           data-parsley-required="true" data-parsley-required-message="AppKey项目名不能为空"
+                           data-parsley-trigger="change"/>
+                    [@spring.showErrors "projectName" "parsley-required"/]
                 </div>
-                [@spring.showErrors "name"/]
             </div>
 
             [@spring.bind "command.description"/]
@@ -50,24 +52,26 @@ AppKey 创建
                 <div class="col-md-9">
                     <input class="form-control" id="description" name="description"
                            value="${command.description!}" placeholder="AppKey描述"
-                           data-parsley-required="true" data-parsley-trigger="change" required/>
+                           data-parsley-required="true" data-parsley-required-message="AppKey描述不能为空"
+                           data-parsley-trigger="change"/>
+                    [@spring.showErrors "description" "parsley-required"/]
                 </div>
-                [@spring.showErrors "name"/]
             </div>
 
             [@spring.bind "command.status"/]
             <div class="form-group">
                 <label for="status" class="col-md-3 control-label">AppKey状态*</label>
                 <div class="col-md-9">
-                    <select class="form-control" name="status" data-parsley-trigger="change"
-                            data-parsley-required-message="请选择AppKey状态" required>
+                    <select class="form-control" name="status"
+                            data-parsley-required="true" data-parsley-required-message="请选择AppKey状态"
+                            data-parsley-trigger="change">
                         [#assign status = (command.status!)?default("") /]
                         <option value="">请选择</option>
                         <option value="ENABLE" [@mc.selected status "ENABLE"/]>启用</option>
                         <option value="DISABLE" [@mc.selected status "DISABLE"/]>禁用</option>
                     </select>
+                    [@spring.showErrors "name"/]
                 </div>
-                [@spring.showErrors "name"/]
             </div>
             <div class="text-center m-top-md">
                 <button type="reset" class="btn btn-info">重置</button>

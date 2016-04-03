@@ -335,21 +335,16 @@ kind of variable. This temp value is only used in this macro lib -->
 -->
 <#macro showErrors id classOrStyle="">
     <#if spring.status.errorMessages?size != 0>
-    <div id="parsley-id-${id}">
-        <label class="col-md-3"></label>
-        <div class="col-md-9">
-            <ul class="parsley-errors-list">
-                <#list status.errorMessages as error>
-                    <#if classOrStyle == "">
-                        <li class="am-alert am-alert-danger">${error}</li>
-                    <#else>
-                        <li class="am-alert am-alert-danger ${classOrStyle}">${error}</li>
-                    </#if>
-                    <#if error_has_next>${separator}</#if>
-                </#list>
-            </ul>
-        </div>
-    </div>
+    <ul class="parsley-errors-list filled" id="parsley-id-${id}">
+        <#list status.errorMessages as error>
+            <#if classOrStyle == "">
+            <li class="parsley-type">${error}</li>
+            <#else>
+            <li class="parsley-type ${classOrStyle}">${error}</li>
+            </#if>
+            <#if error_has_next>${separator}</#if>
+        </#list>
+    </ul>
     </#if>
 </#macro>
 

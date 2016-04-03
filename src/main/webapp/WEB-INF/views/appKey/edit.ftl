@@ -31,9 +31,10 @@ AppKey 修改
                 <div class="col-md-9">
                     <input class="form-control" id="name" name="name"
                            value="${appKey.name!command.name}" placeholder="输入AppKey名称"
-                           data-parsley-required="true" data-parsley-trigger="change" required/>
+                           data-parsley-required="true" data-parsley-required-message="AppKey名称不能为空"
+                           data-parsley-trigger="change"/>
+                    [@spring.showErrors "name" "parsley-required"/]
                 </div>
-                [@spring.showErrors "name"/]
             </div>
 
             [@spring.bind "command.projectName"/]
@@ -42,9 +43,10 @@ AppKey 修改
                 <div class="col-md-9">
                     <input class="form-control" id="projectName" name="projectName"
                            value="${appKey.projectName!command.projectName}" placeholder="AppKey项目名称"
-                           data-parsley-required="true" data-parsley-trigger="change" required/>
+                           data-parsley-required="true" data-parsley-required-message="AppKey项目名不能为空"
+                           data-parsley-trigger="change"/>
+                    [@spring.showErrors "projectName" "parsley-required"/]
                 </div>
-                [@spring.showErrors "name"/]
             </div>
 
             [@spring.bind "command.description"/]
@@ -53,9 +55,10 @@ AppKey 修改
                 <div class="col-md-9">
                     <input class="form-control" id="description" name="description"
                            value="${appKey.description!command.description}" placeholder="AppKey描述"
-                           data-parsley-required="true" data-parsley-trigger="change" required/>
+                           data-parsley-required="true" data-parsley-required-message="AppKey描述不能为空"
+                           data-parsley-trigger="change"/>
+                    [@spring.showErrors "description" "parsley-required"/]
                 </div>
-                [@spring.showErrors "name"/]
             </div>
 
             <div class="text-center m-top-md">
