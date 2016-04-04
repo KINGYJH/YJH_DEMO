@@ -29,7 +29,6 @@ $.fn.selectAjaxData = function (options) {
             dataType: defaults.dataType,
             success: function (data) {
                 var results = data.data;
-                console.log(results);
 
                 if (undefined != results) {
                     $this.append("<option value=''>请选择</option>");

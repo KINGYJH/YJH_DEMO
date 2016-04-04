@@ -150,8 +150,12 @@
 <script src="[@spring.url '/resources/js/simplify/simplify.js'/]"></script>
 <script src="[@spring.url '/resources/js/simplify/simplify_dashboard.js'/]"></script>
 
+<script src="[@spring.url '/resources/js/fastjson.js'/]"></script>
+
 <!-- 公共js库 -->
 <script src="[@spring.url '/resources/js/common.js'/]"></script>
+<script src="[@spring.url '/resources/js/ArrayPrototype.js'/]"></script>
+<script src="[@spring.url '/resources/js/StringUtil.js'/]"></script>
 [/@block]
 </body>
 </html>

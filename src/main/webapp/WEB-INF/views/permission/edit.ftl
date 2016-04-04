@@ -6,7 +6,7 @@
 
 [@override name="breadcrumb"]
 <ul class="breadcrumb">
-    <li><a href="index.html">首页</a></li>
+    <li><a href="/">首页</a></li>
     <li><a href="/permission/pagination.htm">权限管理</a></li>
     <li>权限修改</li>
 </ul>
@@ -30,7 +30,7 @@
                 <label for="name" class="col-md-3 control-label">权限名称*</label>
                 <div class="col-md-9">
                     <input class="form-control" id="name" name="name"
-                           value="${permission.name!command.name}" placeholder="输入权限名称名称"
+                           value="${permission.name!command.name}" placeholder="输入权限名称"
                            data-parsley-required="true" data-parsley-required-message="权限名称不能为空"
                            data-parsley-trigger="change"/>
                     [@spring.showErrors "name" "parsley-required"/]

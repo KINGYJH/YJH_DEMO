@@ -45,6 +45,7 @@ public class AppKeyAppService implements IAppKeyAppService {
     @Transactional(readOnly = true)
     public Pagination<AppKeyRepresentation> pagination(ListAppKeyCommand command) {
         command.verifyPage();
+        command.verifyPageSize(15);
         Pagination<AppKey> pagination = appKeyService.pagination(command);
         List<AppKeyRepresentation> data = mappingService.mapAsList(pagination.getData(), AppKeyRepresentation.class);
         return new Pagination<AppKeyRepresentation>(data, pagination.getCount(), pagination.getPage(), pagination.getPageSize());

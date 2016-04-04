@@ -188,11 +188,12 @@ $(document).ready(function () {
             _showAlert.find(".time-message").text(_showAlert_timeOut + "秒后自动关闭");
             if (_showAlert_timeOut > 0) {
                 setTimeout(doWork, 1000);
-            }else{
+            } else {
                 _showAlert.css("display", "none");
             }
             _showAlert_timeOut--;
         }
+
         setTimeout(doWork, 1000);
     }
 

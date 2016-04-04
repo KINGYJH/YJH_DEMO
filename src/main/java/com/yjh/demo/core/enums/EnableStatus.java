@@ -5,8 +5,9 @@ package com.yjh.demo.core.enums;
  */
 public enum EnableStatus {
 
-    ENABLE("启用", 0, Boolean.FALSE),
-    DISABLE("禁用", 1, Boolean.FALSE);
+    ALL("全部",0,Boolean.TRUE),
+    ENABLE("启用", 1, Boolean.FALSE),
+    DISABLE("禁用", 2, Boolean.FALSE);
 
     private EnableStatus(String name, int value, Boolean onlyQuery) {
         this.name = name;

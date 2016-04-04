@@ -11,6 +11,7 @@ public class ListPermissionCommand extends BasicPaginationCommand {
     private String name;
     private EnableStatus status;
     private String appKey;
+    private String permissionName;
 
     public String getName() {
         return name;
@@ -34,5 +35,13 @@ public class ListPermissionCommand extends BasicPaginationCommand {
 
     public void setAppKey(String appKey) {
         this.appKey = appKey;
+    }
+
+    public String getPermissionName() {
+        return permissionName;
+    }
+
+    public void setPermissionName(String permissionName) {
+        this.permissionName = permissionName;
     }
 }

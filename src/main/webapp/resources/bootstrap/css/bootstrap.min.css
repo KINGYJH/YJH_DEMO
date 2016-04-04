@@ -4661,7 +4661,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 
 .pagination > li > a, .pagination > li > span {
     position: relative;
-    float: left;
+    /*float: left;*/
     padding: 6px 12px;
     margin-left: -1px;
     line-height: 1.42857143;

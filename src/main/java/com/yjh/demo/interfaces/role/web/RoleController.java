@@ -24,7 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -46,6 +48,11 @@ public class RoleController extends BaseController {
 
     @RequestMapping(value = "/create.htm", method = RequestMethod.GET)
     public ModelAndView create(@ModelAttribute("command") CreateRoleCommand command) {
+        List<String> data = new ArrayList<String>();
+        data.add("4028818253dacf800153dacfc4bd0000");
+        data.add("4028818253dacf800153dad7233d0001");
+        data.add("4028818253dbe87f0153dc70887f0000");
+        command.setPermissions(data);
         return new ModelAndView("/role/create", "command", command);
     }
 

@@ -44,7 +44,7 @@ public class PermissionService implements IPermissionService {
         if (!CoreStringUtils.isEmpty(command.getAppKey())) {
             criterionList.add(Restrictions.eq("appKey.id", command.getAppKey()));
         }
-        if (null != command.getStatus()) {
+        if (null != command.getStatus() && command.getStatus() != EnableStatus.ALL) {
             criterionList.add(Restrictions.eq("status", command.getStatus()));
         }
         List<Order> orderList = new ArrayList<Order>();

@@ -6,7 +6,7 @@
 
 [@override name="breadcrumb"]
 <ul class="breadcrumb">
-    <li><a href="index.html">首页</a></li>
+    <li><a href="/">首页</a></li>
     <li><a href="/permission/pagination.htm">权限管理</a></li>
     <li>AppKey查看</li>
 </ul>

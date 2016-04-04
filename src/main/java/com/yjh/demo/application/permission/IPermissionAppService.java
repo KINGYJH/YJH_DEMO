@@ -16,6 +16,8 @@ public interface IPermissionAppService {
 
     Pagination<PermissionRepresentation> pagination(ListPermissionCommand command);
 
+    Pagination<PermissionRepresentation> paginationJSON(ListPermissionCommand command);
+
     List<PermissionRepresentation> list(ListPermissionCommand command);
 
     PermissionRepresentation searchByID(String id);
@@ -27,4 +29,5 @@ public interface IPermissionAppService {
     PermissionRepresentation edit(EditPermissionCommand command);
 
     void updateStatus(SharedCommand command);
+
 }

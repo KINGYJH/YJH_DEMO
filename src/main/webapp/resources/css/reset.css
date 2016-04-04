@@ -1,61 +1,73 @@
-.overflow-auto td,.overflow-auto th{
+.overflow-auto td, .overflow-auto th {
     min-width: 150px;
 }
-td,th{
+
+td, th {
     text-align: center;
     margin-top: 10px;
 }
-.dataTables_info{
+
+.dataTables_info {
     margin-top: 30px;
 }
-.parsley-errors-list{
+
+.parsley-errors-list {
     padding-left: 0;
 }
 
-.contract-show li{
+.contract-show li {
     list-style: none;
     font-size: 16px;
     font-weight: bolder;
 }
-.contract-show span{
+
+.contract-show span {
     line-height: 60px;
     text-align: right;
 }
-.contract-box{
+
+.contract-box {
     min-height: 40px;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-    padding:10px;
-    margin:10px;
+    padding: 10px;
+    margin: 10px;
 }
-.contract-box img{
+
+.contract-box img {
     width: 220px;
     height: 220px;
 }
-.colorbox .colorbox-list{
-    padding:10px;
-    margin:10px;
+
+.colorbox .colorbox-list {
+    padding: 10px;
+    margin: 10px;
 }
-.check-td-modal{
+
+.check-td-modal {
     background-color: rgba(0, 0, 0, 0.1);
     padding: 10px;
     border-radius: 5px;
     margin-top: -18px;
 }
-.check-td-info{
+
+.check-td-info {
     background-color: rgba(255, 255, 255, 0.3);
     padding: 10px;
     border-radius: 5px;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
-.selector-box{
-    max-height:470px;
+
+.selector-box {
+    max-height: 470px;
     overflow: auto;
 }
-.selector-box .check-toggler{
+
+.selector-box .check-toggler {
     float: right;
     margin: 15px 10px 0 0;
 }
+
 .check-toggler:before {
     content: "\f00d";
     font-family: "FontAwesome";
@@ -66,4 +78,9 @@ td,th{
     -moz-osx-font-smoothing: grayscale;
     font-size: 14px;
     color: #ff4a43;
+}
+
+.data-list {
+    background: rgba(132, 132, 132, 0.27);
+    border-radius: 4px;
 }

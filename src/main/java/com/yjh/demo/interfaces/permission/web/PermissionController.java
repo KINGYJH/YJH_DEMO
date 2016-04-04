@@ -9,6 +9,7 @@ import com.yjh.demo.application.shared.command.SharedCommand;
 import com.yjh.demo.core.exception.ConcurrencyException;
 import com.yjh.demo.core.exception.ExistException;
 import com.yjh.demo.core.exception.NoFoundException;
+import com.yjh.demo.infrastructure.persistence.hibernate.generic.Pagination;
 import com.yjh.demo.interfaces.shared.web.AlertMessage;
 import com.yjh.demo.interfaces.shared.web.BaseController;
 import org.slf4j.Logger;
@@ -16,10 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -201,5 +199,11 @@ public class PermissionController extends BaseController {
         alertMessage = new AlertMessage(this.getMessage("default.edit.success.message", null, locale));
         redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         return new ModelAndView("redirect:/permission/pagination.htm");
+    }
+
+    @RequestMapping(value = "/list")
+    @ResponseBody
+    public Pagination<PermissionRepresentation> list(@RequestBody ListPermissionCommand command) {
+        return permissionAppService.paginationJSON(command);
     }
 }

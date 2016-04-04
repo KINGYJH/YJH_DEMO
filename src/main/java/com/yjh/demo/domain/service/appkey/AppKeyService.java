@@ -44,7 +44,7 @@ public class AppKeyService implements IAppKeyService {
         if (!CoreStringUtils.isEmpty(command.getName())) {
             criterionList.add(Restrictions.like("name", command.getName(), MatchMode.ANYWHERE));
         }
-        if (null != command.getStatus()) {
+        if (null != command.getStatus() && command.getStatus() != EnableStatus.ALL) {
             criterionList.add(Restrictions.eq("status", command.getStatus()));
         }
         List<Order> orderList = new ArrayList<Order>();
