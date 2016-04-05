@@ -1,6 +1,10 @@
 package com.yjh.demo.interfaces;
 
 import com.yjh.demo.core.Imagecaptcha.VerifyCodeUtils;
+import com.yjh.demo.core.common.GlobalConfig;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,9 +23,27 @@ import java.io.ByteArrayOutputStream;
 @Controller
 public class IndexController {
 
+    @Autowired
+    private GlobalConfig globalConfig;
+
     @RequestMapping("/")
     public ModelAndView index() {
-        return new ModelAndView("/index");
+        return new ModelAndView("redirect:/index");
+    }
+
+    @RequestMapping(value = "/index")
+    public ModelAndView index(HttpSession session) throws Exception {
+
+        if (null != session.getAttribute(globalConfig.getSessionUser())) {
+            Subject subject = SecurityUtils.getSubject();
+            if (subject.hasRole("Admin")) {
+                return new ModelAndView("redirect:/user/pagination.htm");
+            } else {
+                return new ModelAndView("redirect:/logout");
+            }
+        }
+
+        return new ModelAndView("redirect:/login.htm");
     }
 
 

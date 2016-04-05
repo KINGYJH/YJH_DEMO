@@ -27,4 +27,6 @@ public interface IRoleService {
     Role edit(EditRoleCommand command);
 
     void updateStatus(SharedCommand command);
+
+    List<Role> searchByIDs(List<String> ids);
 }

@@ -122,4 +122,17 @@ public class RoleService implements IRoleService {
         }
         roleRepository.update(role);
     }
+
+    @Override
+    public List<Role> searchByIDs(List<String> ids) {
+        List<Role> roleList = null;
+        if (null != ids && ids.size() > 0) {
+            roleList = new ArrayList<Role>();
+            for (String item : ids) {
+                Role role = this.searchByID(item);
+                roleList.add(role);
+            }
+        }
+        return roleList;
+    }
 }

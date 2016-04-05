@@ -21,7 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by YJH on 2016/3/30.
@@ -55,9 +57,17 @@ public class PermissionService implements IPermissionService {
     @Override
     public List<Permission> list(ListPermissionCommand command) {
         List<Criterion> criterionList = new ArrayList<Criterion>();
+        Map<String, String> alias = new HashMap<String, String>();
+        if (!CoreStringUtils.isEmpty(command.getAppKey())) {
+            criterionList.add(Restrictions.eq("appKey.name", command.getAppKey()));
+            alias.put("appKey", "appKey");
+        }
+        if (null != command.getStatus()) {
+            criterionList.add(Restrictions.eq("status", command.getStatus()));
+        }
         List<Order> orderList = new ArrayList<Order>();
         orderList.add(Order.desc("updateDate"));
-        return permissionRepository.list(criterionList, orderList);
+        return permissionRepository.list(criterionList, orderList, null, null, alias);
     }
 
     @Override

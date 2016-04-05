@@ -4,6 +4,8 @@ import com.yjh.demo.application.auth.IAuthAppService;
 import com.yjh.demo.application.auth.command.LoginCommand;
 import com.yjh.demo.interfaces.shared.web.AlertMessage;
 import com.yjh.demo.interfaces.shared.web.BaseController;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Locale;
 
@@ -52,5 +55,13 @@ public class AuthController extends BaseController {
         }
         alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("Login.verificationCode.Error.message", null, locale));
         return new ModelAndView("/login", "command", command).addObject(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
+    }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+
+        Subject subject = SecurityUtils.getSubject();
+
+        return new ModelAndView("redirect:/index");
     }
 }

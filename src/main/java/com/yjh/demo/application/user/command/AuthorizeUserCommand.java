@@ -1,21 +1,23 @@
 package com.yjh.demo.application.user.command;
 
 import com.yjh.demo.application.shared.command.SharedCommand;
-import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Created by YJH on 2016/3/30 0030.
  */
 public class AuthorizeUserCommand extends SharedCommand {
 
-    @NotBlank(message = "{user.role.NotBlank.message}")
-    private String role;
+    @NotNull(message = "{user.roles.NotNull.message}")
+    private List<String> roles;
 
-    public String getRole() {
-        return role;
+    public List<String> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }

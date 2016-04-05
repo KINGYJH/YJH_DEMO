@@ -4,6 +4,7 @@ import com.yjh.demo.core.enums.EnableStatus;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Created by YJH on 2016/3/30 0030.
@@ -17,7 +18,7 @@ public class CreateUserCommand {
     @NotBlank(message = "{user.confirmPassword.NotBlank.message}")
     private String confirmPassword; //确认密码
 
-    private String role;            //用户角色
+    private List<String> roles;            //用户角色
 
     @NotBlank(message = "{user.appKey.NotBlank.message}")
     private String appKey;          //应用标识
@@ -48,12 +49,12 @@ public class CreateUserCommand {
         this.confirmPassword = confirmPassword;
     }
 
-    public String getRole() {
-        return role;
+    public List<String> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     public String getAppKey() {

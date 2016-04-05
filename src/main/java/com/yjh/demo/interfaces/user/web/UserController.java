@@ -64,7 +64,7 @@ public class UserController extends BaseController {
                         this.getMessage("appKey.id.not.found.message", new Object[]{command.getAppKey()}, locale));
             } else {
                 alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING,
-                        this.getMessage("role.id.not.found.message", new Object[]{command.getRole()}, locale));
+                        this.getMessage("role.id.not.found.message", new Object[]{command.getRoles()}, locale));
             }
             return new ModelAndView("/user/create", "command", command)
                     .addObject(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
@@ -150,7 +150,7 @@ public class UserController extends BaseController {
             if (e.getMessage().indexOf("AppKey") != -1) {
                 alertMessage = new AlertMessage(this.getMessage("appKey.id.not.found.message", new Object[]{command.getAppKey()}, locale));
             } else if (e.getMessage().indexOf("Role") != -1) {
-                alertMessage = new AlertMessage(this.getMessage("role.id.not.found.message", new Object[]{command.getRole()}, locale));
+                alertMessage = new AlertMessage(this.getMessage("role.id.not.found.message", new Object[]{command.getRoles()}, locale));
             } else {
                 alertMessage = new AlertMessage(this.getMessage("user.id.not.found.message", new Object[]{command.getId()}, locale));
                 redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
@@ -299,7 +299,7 @@ public class UserController extends BaseController {
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
             if (e.getMessage().indexOf("Role") != -1) {
-                alertMessage = new AlertMessage(this.getMessage("role.id.not.found.message", new Object[]{command.getRole()}, locale));
+                alertMessage = new AlertMessage(this.getMessage("role.id.not.found.message", new Object[]{command.getRoles()}, locale));
                 redirectAttributes.addAttribute("id", command.getId());
                 redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
                 return new ModelAndView("redirect:/user/authorize.htm/{id}");

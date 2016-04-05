@@ -6,6 +6,7 @@ import com.yjh.demo.domain.mode.appkey.AppKey;
 import com.yjh.demo.domain.mode.role.Role;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by YJH on 2016/3/30.
@@ -19,7 +20,7 @@ public class User extends ConcurrencySafeEntity {
     private Date lastLoginDate;     //最后登录时间
     private String lastLoginPlatform;//最后登录平台
     private Date createDate;        //创建时间
-    private Role role;               //用户角色
+    private List<Role> roles;               //用户角色
     private AppKey appKey;          //应用标识
     private EnableStatus status;     //状态
 
@@ -47,8 +48,8 @@ public class User extends ConcurrencySafeEntity {
         this.lastLoginPlatform = lastLoginPlatform;
     }
 
-    public void changeRole(Role role) {
-        this.role = role;
+    public void changeRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public void changeAppKey(AppKey appKey) {
@@ -83,8 +84,8 @@ public class User extends ConcurrencySafeEntity {
         this.lastLoginPlatform = lastLoginPlatform;
     }
 
-    private void setRole(Role role) {
-        this.role = role;
+    private void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     private void setCreateDate(Date createDate) {
@@ -123,8 +124,8 @@ public class User extends ConcurrencySafeEntity {
         return lastLoginPlatform;
     }
 
-    public Role getRole() {
-        return role;
+    public List<Role> getRoles() {
+        return roles;
     }
 
     public Date getCreateDate() {
@@ -143,14 +144,14 @@ public class User extends ConcurrencySafeEntity {
         super();
     }
 
-    public User(String userName, String password, String salt, String lastLoginIP, Date lastLoginDate, String lastLoginPlatform, Role role, Date createDate, AppKey appKey, EnableStatus status) {
+    public User(String userName, String password, String salt, String lastLoginIP, Date lastLoginDate, String lastLoginPlatform, List<Role> roles, Date createDate, AppKey appKey, EnableStatus status) {
         this.userName = userName;
         this.password = password;
         this.salt = salt;
         this.lastLoginIP = lastLoginIP;
         this.lastLoginDate = lastLoginDate;
         this.lastLoginPlatform = lastLoginPlatform;
-        this.role = role;
+        this.roles = roles;
         this.createDate = createDate;
         this.appKey = appKey;
         this.status = status;

@@ -18,7 +18,7 @@
     </appender>
 
     <root>
-        <level value="debug"/>
+        <level value="verbose"/>
         <appender-ref ref="stdout"/>
         <appender-ref ref="file"/>
     </root>

@@ -32,16 +32,16 @@
                 </div>
             </div>
 
-            [@spring.bind "command.role"/]
+            [@spring.bind "command.roles"/]
             <div class="form-group">
                 <label for="description" class="col-md-3 control-label">角色*</label>
                 <div class="col-md-9">
                     <div class="col-md-10 div-input role-data">
-                        [#if user.role??]
-                            ${user.role.name!}-------${user.role.description!}
+                        [#if user.roles?size > 0]
+                            ${user.roles[0].name!}-------${user.roles[0].description!}
                         [/#if]
                     </div>
-                    <input type="hidden" name="role" value="${user.role.id!}" id="role"/>
+                    <input type="hidden" name="roles" value="${user.roles[0].id!}" id="role"/>
                     <button type="button" class="btn btn-primary col-md-2 modal-role-search-modal">点击选择角色</button>
                     [@spring.showErrors "role" "parsley-required"/]
                 </div>

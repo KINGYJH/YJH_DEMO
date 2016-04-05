@@ -95,7 +95,7 @@
                                     <td>[@mc.dateShow user.createDate/]</td>
                                     <td>${user.lastLoginIP!}</td>
                                     <td>[@mc.dateShow user.lastLoginDate/]</td>
-                                    <td>${user.role.name!}</td>
+                                    <td>${user.roles[0].name!}</td>
                                     <td>${user.appKey.name!}</td>
                                     <td>${(user.status.getName())!}</td>
                                     <td>

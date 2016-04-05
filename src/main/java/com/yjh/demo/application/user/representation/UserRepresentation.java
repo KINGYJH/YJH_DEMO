@@ -5,6 +5,7 @@ import com.yjh.demo.application.role.representation.RoleRepresentation;
 import com.yjh.demo.core.enums.EnableStatus;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by YJH on 2016/3/30 0030.
@@ -22,7 +23,7 @@ public class UserRepresentation {
     private Date lastLoginDate;     //最后登录时间
     private String lastLoginPlatform;//最后登录平台
     private Date createDate;        //创建时间
-    private RoleRepresentation role;               //用户角色
+    private List<RoleRepresentation> roles;               //用户角色
     private AppKeyRepresentation appKey;          //应用标识
     private EnableStatus status;     //状态
 
@@ -106,12 +107,12 @@ public class UserRepresentation {
         this.createDate = createDate;
     }
 
-    public RoleRepresentation getRole() {
-        return role;
+    public List<RoleRepresentation> getRoles() {
+        return roles;
     }
 
-    public void setRole(RoleRepresentation role) {
-        this.role = role;
+    public void setRoles(List<RoleRepresentation> roles) {
+        this.roles = roles;
     }
 
     public AppKeyRepresentation getAppKey() {

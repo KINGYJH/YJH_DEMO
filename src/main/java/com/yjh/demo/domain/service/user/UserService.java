@@ -82,14 +82,14 @@ public class UserService implements IUserService {
     @Override
     public User create(CreateUserCommand command) {
         AppKey appKey = appKeyService.searchByID(command.getAppKey());
-        Role role = CoreStringUtils.isEmpty(command.getRole()) ? null : roleService.searchByID(command.getRole());
+        List<Role> roleList = roleService.searchByIDs(command.getRoles());
         if (null != this.searchByName(command.getUserName(), command.getAppKey())) {
             throw new ExistException("userName[" + command.getUserName() + "]的User数据已存在");
         }
         String salt = PasswordHelper.getSalt();
         String password = PasswordHelper.encryptPassword(command.getPassword(), salt);
         User user = new User(command.getUserName(), password, salt, null, null, null,
-                role, new Date(), appKey, command.getStatus());
+                roleList, new Date(), appKey, command.getStatus());
         userRepository.save(user);
         return user;
     }
@@ -97,11 +97,11 @@ public class UserService implements IUserService {
     @Override
     public User edit(EditUserCommand command) {
         AppKey appKey = appKeyService.searchByID(command.getAppKey());
-        Role role = roleService.searchByID(command.getRole());
+        List<Role> roleList = roleService.searchByIDs(command.getRoles());
         User user = this.searchByID(command.getId());
         user.fainWhenConcurrencyViolation(command.getVersion());
         user.changeAppKey(appKey);
-        user.changeRole(role);
+        user.changeRoles(roleList);
         user.changeStatus(command.getStatus());
         userRepository.update(user);
         return user;
@@ -130,10 +130,10 @@ public class UserService implements IUserService {
 
     @Override
     public void authorized(AuthorizeUserCommand command) {
-        Role role = roleService.searchByID(command.getRole());
+        List<Role> roleList = roleService.searchByIDs(command.getRoles());
         User user = this.searchByID(command.getId());
         user.fainWhenConcurrencyViolation(command.getVersion());
-        user.changeRole(role);
+        user.changeRoles(roleList);
         userRepository.update(user);
     }
 

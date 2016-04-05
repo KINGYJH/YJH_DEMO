@@ -58,14 +58,14 @@
                 </div>
             </div>
 
-            [@spring.bind "command.role"/]
+            [@spring.bind "command.roles"/]
             <div class="form-group">
                 <label for="description" class="col-md-3 control-label">角色*</label>
                 <div class="col-md-9">
                     <div class="col-md-10 div-input role-data"></div>
-                    <input type="hidden" name="role" id="role"/>
+                    <input type="hidden" name="roles" id="role"/>
                     <button type="button" class="btn btn-primary col-md-2 modal-role-search-modal">点击选择角色</button>
-                    [@spring.showErrors "role" "parsley-required"/]
+                    [@spring.showErrors "roles" "parsley-required"/]
                 </div>
             </div>
 
@@ -84,7 +84,7 @@
 
             [@spring.bind "command.status"/]
             <div class="form-group">
-                <label for="status" class="col-md-3 control-label">角色状态*</label>
+                <label for="status" class="col-md-3 control-label">用户状态*</label>
                 <div class="col-md-9">
                     <select class="form-control" name="status" id="status"
                             data-parsley-required="true" data-parsley-required-message="请选择角色状态"

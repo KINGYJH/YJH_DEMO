@@ -21,7 +21,8 @@
 
     <import resource="spring-mvc.xml"/>
     <import resource="spring-persistence.xml"/>
-    <!--<import resource="spring-shiro.xml"/>-->
+    <import resource="spring-shiro.xml"/>
+    <import resource="spring-config.xml"/>
 
     <bean id="mappingService" class="com.yjh.demo.core.mapping.MappingService"/>
 </beans>

@@ -13,7 +13,9 @@ public class LoginCommand {
     private String password;
     @NotBlank(message = "{login.verificationCode.NotBlank.message}")
     private String verificationCode;
-    private String rememberMe;
+    private boolean rememberMe;
+
+    private String loginIP;
 
     public String getUserName() {
         return userName;
@@ -39,11 +41,19 @@ public class LoginCommand {
         this.verificationCode = verificationCode;
     }
 
-    public String getRememberMe() {
+    public boolean isRememberMe() {
         return rememberMe;
     }
 
-    public void setRememberMe(String rememberMe) {
+    public void setRememberMe(boolean rememberMe) {
         this.rememberMe = rememberMe;
+    }
+
+    public String getLoginIP() {
+        return loginIP;
+    }
+
+    public void setLoginIP(String loginIP) {
+        this.loginIP = loginIP;
     }
 }

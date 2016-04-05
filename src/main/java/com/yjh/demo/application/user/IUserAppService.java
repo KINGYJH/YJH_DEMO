@@ -1,5 +1,6 @@
 package com.yjh.demo.application.user;
 
+import com.yjh.demo.application.auth.command.LoginCommand;
 import com.yjh.demo.application.user.command.*;
 import com.yjh.demo.application.user.representation.UserRepresentation;
 import com.yjh.demo.application.shared.command.SharedCommand;
@@ -31,4 +32,6 @@ public interface IUserAppService {
     void authorized(AuthorizeUserCommand command);
 
     void updateAppKey(UpdateUserAppKeyCommand command);
+
+    UserRepresentation login(LoginCommand command);
 }

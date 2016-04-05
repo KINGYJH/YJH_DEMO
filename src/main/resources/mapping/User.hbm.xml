@@ -26,7 +26,10 @@
 
         <property name="createDate" column="create_date" type="java.util.Date"/>
 
-        <many-to-one name="role" column="role_id" class="com.yjh.demo.domain.mode.role.Role"/>
+        <bag name="roles" lazy="extra" table="t_user_role" cascade="save-update">
+            <key column="user_id"/>
+            <many-to-many class="com.yjh.demo.domain.mode.role.Role" column="role_id"/>
+        </bag>
 
         <many-to-one name="appKey" column="app_key_id" class="com.yjh.demo.domain.mode.appkey.AppKey"/>
 

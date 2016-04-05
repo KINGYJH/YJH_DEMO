@@ -10,6 +10,8 @@ import ma.glasnost.orika.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by YJH on 2016/3/30 0030.
  */
@@ -24,9 +26,9 @@ public class UserRepresentationMapper extends CustomMapper<User, UserRepresentat
             AppKeyRepresentation data = mappingService.map(user.getAppKey(), AppKeyRepresentation.class, false);
             representation.setAppKey(data);
         }
-        if (null != user.getRole()) {
-            RoleRepresentation data = mappingService.map(user.getRole(), RoleRepresentation.class, false);
-            representation.setRole(data);
+        if (null != user.getRoles()) {
+            List<RoleRepresentation> data = mappingService.mapAsList(user.getRoles(), RoleRepresentation.class);
+            representation.setRoles(data);
         }
     }
 

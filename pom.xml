@@ -44,6 +44,8 @@
         <version.freemarker>2.3.21</version.freemarker>
         <version.orika>1.4.5</version.orika>
         <version.shiro>1.2.3</version.shiro>
+        <version.httpclient>4.5.1</version.httpclient>
+
     </properties>
 
 
@@ -244,6 +246,27 @@
             <version>${version.shiro}</version>
         </dependency>
         <!-- End Shiro -->
+
+        <!-- Httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${version.httpclient}</version>
+            <exclusions>
+                <!-- Exclude commons-logging in favor of SLF4j -->
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>${version.httpclient}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- End httpcient -->
 
     </dependencies>
 </project>
