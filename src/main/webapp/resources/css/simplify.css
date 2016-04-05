@@ -4146,7 +4146,7 @@ input[type="text"].dial {
   -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.35);
 }
 .parsley-error {
-  border-color: #d02d2d !important;
+  border-color: #edbc6c !important;
   color: #d02d2d;
 }
 label.parsley-error {

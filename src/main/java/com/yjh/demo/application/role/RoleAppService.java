@@ -31,6 +31,16 @@ public class RoleAppService implements IRoleAppService {
 
     @Override
     @Transactional(readOnly = true)
+    public Pagination<RoleRepresentation> paginationJSON(ListRoleCommand command) {
+        command.verifyPage();
+        command.setName(command.getRoleName());
+        Pagination<Role> pagination = roleService.pagination(command);
+        List<RoleRepresentation> data = mappingService.mapAsList(pagination.getData(), RoleRepresentation.class);
+        return new Pagination<RoleRepresentation>(data, pagination.getCount(), pagination.getPage(), pagination.getPageSize());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public Pagination<RoleRepresentation> pagination(ListRoleCommand command) {
         command.verifyPage();
         command.verifyPageSize(15);

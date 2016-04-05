@@ -9,12 +9,14 @@ import com.yjh.demo.domain.mode.role.Role;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Created by YJH on 2016/3/30 0030.
  */
+@Component
 public class RoleRepresentationMapper extends CustomMapper<Permission, RoleRepresentation> {
 
     @Autowired

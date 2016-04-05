@@ -5,6 +5,7 @@ import com.yjh.demo.application.appkey.command.EditAppKeyCommand;
 import com.yjh.demo.application.appkey.command.ListAppKeyCommand;
 import com.yjh.demo.application.appkey.representation.AppKeyRepresentation;
 import com.yjh.demo.application.shared.command.SharedCommand;
+import com.yjh.demo.core.enums.EnableStatus;
 import com.yjh.demo.core.mapping.IMappingService;
 import com.yjh.demo.domain.mode.appkey.AppKey;
 import com.yjh.demo.domain.service.appkey.IAppKeyService;
@@ -32,7 +33,9 @@ public class AppKeyAppService implements IAppKeyAppService {
     @Override
     @Transactional(readOnly = true)
     public List<AppKeyRepresentation> allList() {
-        return mappingService.mapAsList(appKeyService.list(new ListAppKeyCommand()), AppKeyRepresentation.class);
+        ListAppKeyCommand command = new ListAppKeyCommand();
+        command.setStatus(EnableStatus.ENABLE);
+        return mappingService.mapAsList(appKeyService.list(command), AppKeyRepresentation.class);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.yjh.demo.core.common;
 
-import com.yjh.demo.domain.mode.baseuser.BaseUser;
+import com.yjh.demo.domain.mode.user.User;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -50,7 +50,7 @@ public class PasswordHelper {
      * @param password
      * @return
      */
-    public static boolean equalsPassword(BaseUser user, String password) {
+    public static boolean equalsPassword(User user, String password) {
         String newPassword = new SimpleHash(
                 algorithmName,
                 password,

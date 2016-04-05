@@ -76,8 +76,8 @@
             </div>
 
             <div class="text-center m-top-md">
-                <button type="reset" class="btn btn-info">重置</button>
-                <button type="submit" class="btn btn-info">修改</button>
+                <button type="reset" class="btn btn-default">重置</button>
+                <button type="submit" class="btn btn-success">修改</button>
             </div>
         </form>
     </div>

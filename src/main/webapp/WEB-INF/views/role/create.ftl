@@ -8,7 +8,7 @@
 <ul class="breadcrumb">
     <li><a href="/">首页</a></li>
     <li><a href="/role/pagination.htm">角色管理</a></li>
-    <li>权限创建</li>
+    <li>角色创建</li>
 </ul>
 [/@override]
 
@@ -107,7 +107,7 @@
     <div class="modal-content">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" class="red">&times;</span><span
                         class="sr-only">Close</span></button>
                 <p class="modal-title">权限列表--勾选添加到已选权限列表
                     <small class="text-muted"></small>
@@ -205,11 +205,11 @@
         });
         var modalSearch = new ModalSearch({
             url: "/permission/list",
-            pageSize: 2,
+            pageSize: 6,
             isSingle: false,
             id: "permission-modalSearch",
             openModalBtn: ".modal-permission-search-modal",
-            header: ['AppKey名称', 'AppKey描述', 'AppKey'],
+            header: ['权限名称', '权限描述', 'AppKey'],
             rowData: ["name", "description", "appKey.name"],
             selectorData: ["name"],
             hideModalHandler: function (jsonDataArr) {

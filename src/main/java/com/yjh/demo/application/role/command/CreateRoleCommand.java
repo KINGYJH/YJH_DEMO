@@ -17,7 +17,7 @@ public class CreateRoleCommand {
     private String name;                    //角色名称
     @NotBlank(message = "{role.description.NotBlank.message}")
     private String description;                //角色描述
-    @NotEmpty(message = "{role.permissions.NotEmpty.message}")
+
     private List<String> permissions;   //角色包含的权限集合
     @NotBlank(message = "{role.appKey.NotBlank.message}")
     private String appKey;                  //应用标识

@@ -49,7 +49,7 @@
             </ul>
 
             <a href="/" class="brand">
-                <i class="fa fa-database"></i><span class="brand-name">SIMPLIFY ADMIN</span>
+                <i class="fa fa-database"></i><span class="brand-name">YJH_DEMO ADMIN</span>
             </a>
         </div>
         <div class="nav-container">

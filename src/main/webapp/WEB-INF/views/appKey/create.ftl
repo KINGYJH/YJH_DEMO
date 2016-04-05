@@ -1,7 +1,6 @@
 [@override name="title"]AppKey管理 - AppKey创建[/@override]
 [@override name="topResources"]
     [@super /]
-
 [/@override]
 
 [@override name="breadcrumb"]
@@ -74,8 +73,8 @@ AppKey 创建
                 </div>
             </div>
             <div class="text-center m-top-md">
-                <button type="reset" class="btn btn-info">重置</button>
-                <button type="submit" class="btn btn-info">创建</button>
+                <button type="reset" class="btn btn-default">重置</button>
+                <button type="submit" class="btn btn-success">创建</button>
             </div>
         </form>
     </div>

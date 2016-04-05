@@ -16,7 +16,8 @@
                 [#break]
         [/#switch]
     <div class="alert ${alertClass} alert-custom alert-dismissible show-alert" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">关闭</span>
+        </button>
         <i class="fa fa-check-circle m-right-xs"></i><strong>${alertMessage.type.getName()}</strong> ${alertMessage.message}
         <i><span class="pull-right time-message">5秒后制动关闭</span></i>
     </div>
@@ -29,6 +30,19 @@
     selected="selected"
     [/#if]
 [/#macro]
+
+[#macro dateShow date]
+    [#if date??]
+    ${date?datetime}
+    [/#if]
+[/#macro]
+
+[#macro checked data]
+    [#if data == 'on']
+    checked
+    [/#if]
+[/#macro]
+
 
 [#--//TODO with parameters--]
 [#macro showPagination path]
@@ -44,7 +58,8 @@
 
         [#if pagination.data?size > 0]
             <div class="col-md-6">
-                <div class="dataTables_info">总计 ${pagination.count} 条数据, 每页显示${pagination.pageSize}条,总计 ${totalPage}页</div>
+                <div class="dataTables_info">总计 ${pagination.count} 条数据, 每页显示${pagination.pageSize}条,总计 ${totalPage}页
+                </div>
             </div>
             <div class="col-md-6">
                 <ul class="pagination pull-right">
@@ -88,7 +103,7 @@
 [/#macro]
 
 [#macro verificationCode id="verificationCode"]
-<img id="${id}" src="[@spring.url '/verificationCode'/]" title="点击可切换" class="verificationCode"/>
+<img id="${id}" src="[@spring.url '/verificationCode'/]" data-toggle="tooltip" data-placement="bottom" title="点击切换验证码"/>
 <script type="text/javascript">
     $(function () {
         $("#${id}").on('click', function (e) {
@@ -99,4 +114,19 @@
         });
     });
 </script>
+[/#macro]
+
+[#macro exShowErrors id classOrStyle=""]
+    [#if spring.status.errorMessages?size != 0]
+    <ul class="parsley-errors-list filled" id="parsley-id-${id}">
+        [#list status.errorMessages as error]
+            [#if classOrStyle == ""]
+                <li class="parsley-type">${error}</li>
+            [#else]
+                <li class="parsley-type ${classOrStyle}">${error}</li>
+            [/#if]
+            [#if error_has_next]${separator}[/#if]
+        [/#list]
+    </ul>
+    [/#if]
 [/#macro]

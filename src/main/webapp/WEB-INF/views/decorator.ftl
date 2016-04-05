@@ -31,7 +31,7 @@
     <link rel="shortcut icon" href="[@spring.url '/resources/images/favicon.ico' /]" type="image/x-icon"/>
 [/@block]
 
-    <title>Simplify Admin-[@block name="title"][/@block]</title>
+    <title>YJH_DEMO Admin-[@block name="title"][/@block]</title>
 
 [@block name="topResources"]
     <!-- Bootstrap core CSS -->
@@ -55,6 +55,9 @@
     <!-- Owl Carousel 旋转木马 -->
     <link href="[@spring.url '/resources/css/owl.carousel.min.css'/]" rel="stylesheet">
     <link href="[@spring.url '/resources/css/owl.theme.default.min.css'/]" rel="stylesheet">
+
+    <!-- parsley验证css -->
+    <link href="[@spring.url '/resources//js/parsley/parsley.css'/]" rel="stylesheet">
 
     <!-- 模板自定义css -->
     <link href="[@spring.url '/resources/css/simplify.css'/]" rel="stylesheet">

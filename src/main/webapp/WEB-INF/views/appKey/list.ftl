@@ -40,7 +40,7 @@ AppKey 管理
                 <label for="status" class="control-label">AppKey状态</label>
                 <select name="status" id class="form-control">
                     [#assign status = (command.status!)?default("") /]
-                    <option value="">全部</option>
+                    <option value="ALL" [@mc.selected status "ALL" /]>全部</option>
                     <option value="ENABLE" [@mc.selected status "ENABLE" /]>启用</option>
                     <option value="DISABLE" [@mc.selected status "DISABLE" /]>禁用</option>
                 </select>

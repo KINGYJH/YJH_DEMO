@@ -1,15 +1,23 @@
 <aside class="sidebar-menu fixed">
     <div class="sidebar-inner scrollable-sidebar">
         <div class="main-menu">
-            <ul class="accordion">
+            <ul class="accordion" id="sidebar">
                 <li class="menu-header">
                     Main Menu
                 </li>
-                <li class="bg-palette1 active">
+                <li class="bg-palette1">
                     <a href="/">
                         <span class="menu-content block">
                             <span class="menu-icon"><i class="block fa fa-home fa-lg"></i></span>
                             <span class="text m-left-sm">首页</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="bg-palette1">
+                    <a href="[@spring.url '/user/pagination.htm'/]">
+                        <span class="menu-content block">
+                            <span class="menu-icon"><i class="block fa fa-users fa-lg"></i></span>
+                            <span class="text m-left-sm">用户管理</span>
                         </span>
                     </a>
                 </li>
@@ -21,7 +29,7 @@
                             <span class="submenu-icon"></span></span>
                         <span class="menu-content-hover block">Menu</span>
                     </a>
-                    <ul class="submenu" >
+                    <ul class="submenu">
                         <li>
                             <a href="[@spring.url '/app_key/pagination.htm'/]">
                                 <span class="submenu-label">AppKey管理</span>

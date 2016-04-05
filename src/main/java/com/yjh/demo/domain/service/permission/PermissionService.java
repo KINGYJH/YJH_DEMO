@@ -62,8 +62,9 @@ public class PermissionService implements IPermissionService {
 
     @Override
     public List<Permission> searchByIDs(List<String> ids) {
-        List<Permission> permissionList = new ArrayList<Permission>();
-        if (ids.size() > 0) {
+        List<Permission> permissionList = null;
+        if (null != ids && ids.size() > 0) {
+            permissionList = new ArrayList<Permission>();
             for (String item : ids) {
                 Permission permission = this.searchByID(item);
                 permissionList.add(permission);

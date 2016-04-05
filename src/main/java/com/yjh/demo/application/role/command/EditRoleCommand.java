@@ -21,8 +21,6 @@ public class EditRoleCommand extends SharedCommand {
     private List<String> permissions;   //角色包含的权限集合
     @NotBlank(message = "{role.appKey.NotBlank.message}")
     private String appKey;                  //应用标识
-    @NotNull(message = "{role.status.NotNull.message}")
-    private EnableStatus status;            //状态
 
     public String getName() {
         return name;
@@ -54,13 +52,5 @@ public class EditRoleCommand extends SharedCommand {
 
     public void setAppKey(String appKey) {
         this.appKey = appKey;
-    }
-
-    public EnableStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(EnableStatus status) {
-        this.status = status;
     }
 }

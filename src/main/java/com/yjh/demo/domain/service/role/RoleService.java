@@ -7,6 +7,7 @@ import com.yjh.demo.application.shared.command.SharedCommand;
 import com.yjh.demo.core.enums.EnableStatus;
 import com.yjh.demo.core.exception.ExistException;
 import com.yjh.demo.core.exception.NoFoundException;
+import com.yjh.demo.core.util.CoreStringUtils;
 import com.yjh.demo.domain.mode.appkey.AppKey;
 import com.yjh.demo.domain.mode.permission.Permission;
 import com.yjh.demo.domain.mode.role.IRoleRepository;
@@ -15,7 +16,9 @@ import com.yjh.demo.domain.service.appkey.IAppKeyService;
 import com.yjh.demo.domain.service.permission.IPermissionService;
 import com.yjh.demo.infrastructure.persistence.hibernate.generic.Pagination;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +43,15 @@ public class RoleService implements IRoleService {
     @Override
     public Pagination<Role> pagination(ListRoleCommand command) {
         List<Criterion> criterionList = new ArrayList<Criterion>();
+        if (!CoreStringUtils.isEmpty(command.getName())) {
+            criterionList.add(Restrictions.like("name", command.getName(), MatchMode.ANYWHERE));
+        }
+        if (!CoreStringUtils.isEmpty(command.getAppKey())) {
+            criterionList.add(Restrictions.eq("appKey.id", command.getAppKey()));
+        }
+        if (null != command.getStatus() && command.getStatus() != EnableStatus.ALL) {
+            criterionList.add(Restrictions.eq("status", command.getStatus()));
+        }
         List<Order> orderList = new ArrayList<Order>();
         orderList.add(Order.desc("updateDate"));
         return roleRepository.pagination(command.getPage(), command.getPageSize(), criterionList, orderList);
@@ -90,7 +102,6 @@ public class RoleService implements IRoleService {
                 throw new ExistException("name[" + command.getName() + "]的Role数据已存在");
             }
         }
-        //循环获取权限
         List<Permission> permissionList = permissionService.searchByIDs(command.getPermissions());
         role.changeName(command.getName());
         role.changeDescription(command.getDescription());

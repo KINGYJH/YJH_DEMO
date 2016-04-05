@@ -1,5 +1,4 @@
-[#--[#assign shiro = JspTaglibs["/WEB-INF/shiro.tld"]]--]
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
                    _ooOoo_
                   o8888888o
@@ -25,68 +24,108 @@
 <html lang="zh_cn">
 <head>
 [@block name="Meta"]
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content=""/>
-    <meta name="author" content="pengyi"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="yjh">
+    <link rel="shortcut icon" href="[@spring.url '/resources/images/favicon.ico' /]" type="image/x-icon"/>
 [/@block]
-    <title>AmazeUIAdmin-[@block name="title"][/@block]</title>
-    <style>
-        .header {
-            text-align: center;
-        }
-        .header h1 {
-            font-size: 200%;
-            color: #333;
-            margin-top: 30px;
-        }
-        .header p {
-            font-size: 14px;
-        }
-    </style>
-[@block name="topResources"]
-    <link rel="shortcut icon" href="[@spring.url '/resources/assets/i/favicon.png' /]" type="image/x-icon"/>
-    <link rel="stylesheet" href="[@spring.url '/resources/assets/css/amazeui.min.css'/]"/>
-[/@block]
+
+    <title>YJH_DEMO Admin - 登录</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="[@spring.url '/resources/bootstrap/css/bootstrap.min.css'/]" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="[@spring.url '/resources/css/font-awesome.min.css'/]" rel="stylesheet">
+
+    <!-- ionicons -->
+    <link href="[@spring.url '/resources/css/ionicons.min.css'/]" rel="stylesheet">
+
+    <!-- Simplify -->
+    <link href="[@spring.url '/resources/css/simplify.min.css'/]" rel="stylesheet">
+
+    <link href="[@spring.url '/resources/app/login/login.css'/]" rel="stylesheet">
+
+    <link href="[@spring.url '/resources//js/parsley/parsley.css'/]" rel="stylesheet">
+
+    <!-- Jquery -->
+    <script src="[@spring.url '/resources/js/jquery-1.11.1.min.js'/]"></script>
 </head>
-[@block name="content"]
-<div class="header">
-    <div class="am-g">
-        <h1>AmazeUIMode</h1>
-        <p>...........................<br/>..............................</p>
-    </div>
-    <hr />
-</div>
-<div class="am-g">
-    <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
-        <h3>登录</h3>
-        <hr>
 
-        <form method="post" class="am-form">
-            <label for="email">用户名:</label>
-            <input type="email" name="" id="email" value="">
-            <br>
-            <label for="password">密码:</label>
-            <input type="password" name="" id="password" value="">
-            <br>
-            <label for="remember-me">
-                <input id="remember-me" type="checkbox">
-                记住密码
-            </label>
-            <br />
-            <div class="am-cf">
-                <input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
+<body class="overflow-hidden light-background">
+<div class="wrapper no-navigation preload">
+    <div class="sign-in-wrapper">
+        <div class="sign-in-inner">
+            <div class="login-brand text-center">
+                <i class="fa fa-lock m-right-xs"></i> YJH_DEMO <strong class="text-skin">Admin</strong>
             </div>
-        </form>
-        <hr>
-        <p>© 2016 ...............................</p>
-    </div>
-</div>
-[/@block]
 
-[@block name="bottomResources"]
+            <form action="[@spring.url '/login.htm'/]" method="post" data-parsley-validate>
+            [@mc.showAlert /]
 
-[/@block]
+            [@spring.bind 'command.userName'/]
+                <div class="form-group m-bottom-md">
+                    <input type="text" class="form-control" value="${command.userName!}" name="userName" placeholder="用户名"
+                           data-parsley-required="true" data-parsley-required-message="请输入用户名"
+                           data-parsley-trigger="change"/>
+                [@spring.showErrors 'userName' 'parsley-required'/]
+                </div>
+            [@spring.bind 'command.password'/]
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="密码"
+                           data-parsley-required="true" data-parsley-required-message="请输入密码"
+                           data-parsley-trigger="change"/>
+                [@spring.showErrors 'password' 'parsley-required'/]
+                </div>
+            [@spring.bind 'command.verificationCode'/]
+                <div class="form-group loginVerification">
+                [@mc.verificationCode /]
+                    <input type="text" class="form-control" name="verificationCode" placeholder="验证码"
+                           data-parsley-required="true" data-parsley-required-message="请输入验证码"
+                           data-parsley-trigger="change"/>
+                [@spring.showErrors 'verificationCode' 'parsley-required'/]
+                </div>
+
+                <div class="form-group">
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="chkRemember" [@mc.checked command.rememberMe/] name="rememberMe">
+                        <label for="chkRemember"></label>
+                    </div>
+                    记住我
+                </div>
+
+                <div class="m-top-md p-top-sm">
+                    <button type="submit" class="btn btn-success block col-xs-12">登录</button>
+                </div>
+
+            </form>
+        </div><!-- ./sign-in-inner -->
+    </div><!-- ./sign-in-wrapper -->
+</div><!-- /wrapper -->
+
+<a href="" id="scroll-to-top" class="hidden-print"><i class="icon-chevron-up"></i></a>
+
+<!-- Le javascript
+================================================== -->
+
+<!--验证表单-->
+<script src="[@spring.url '/resources/js/parsley/parsley.js' /]" type="text/javascript"></script>
+<!-- Bootstrap -->
+<script src="[@spring.url '/resources/bootstrap/js/bootstrap.min.js'/]"></script>
+
+<!-- Slimscroll -->
+<script src="[@spring.url '/resources/js/jquery.slimscroll.min.js'/]"></script>
+
+<!-- Popup Overlay -->
+<script src="[@spring.url '/resources/js/jquery.popupoverlay.min.js'/]"></script>
+
+<!-- Modernizr -->
+<script src="[@spring.url '/resources/js/modernizr.min.js'/]"></script>
+
+<!-- Simplify -->
+<script src="[@spring.url '/resources/js/simplify/simplify.js'/]"></script>
+
+<script src="[@spring.url '/resources/js/common.js'/]"></script>
 </body>
 </html>

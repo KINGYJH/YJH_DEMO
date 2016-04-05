@@ -111,7 +111,7 @@
  *
  * @param path : the path (string value) of the value required to bind to.
  *   Spring defaults to a command name of "command" but this can be overridden
- *   by baseuser config.
+ *   by user config.
  -->
 <#macro bind path>
     <#if htmlEscape?exists>
@@ -236,7 +236,7 @@ kind of variable. This temp value is only used in this macro lib -->
 <#--
  * formMultiSelect
  *
- * Show a listbox of options allowing the baseuser to make 0 or more choices from
+ * Show a listbox of options allowing the user to make 0 or more choices from
  * the list of options.
  *
  * @param path the name of the field to bind to
@@ -335,12 +335,14 @@ kind of variable. This temp value is only used in this macro lib -->
 -->
 <#macro showErrors id classOrStyle="">
     <#if spring.status.errorMessages?size != 0>
-    <ul class="parsley-errors-list filled" id="parsley-id-${id}">
+    <ul class="parsley-errors-list error-div filled" id="parsley-id-${id}">
+        <em></em>
+        <span></span>
         <#list status.errorMessages as error>
             <#if classOrStyle == "">
             <li class="parsley-type">${error}</li>
             <#else>
-            <li class="parsley-type ${classOrStyle}">${error}</li>
+            <li class="${classOrStyle} parsley-type">${error}</li>
             </#if>
             <#if error_has_next>${separator}</#if>
         </#list>
@@ -354,7 +356,7 @@ kind of variable. This temp value is only used in this macro lib -->
  * Check a value in a list to see if it is the currently selected value.
  * If so, add the 'selected="selected"' text to the output.
  * Handles values of numeric and string types.
- * This function is used internally but can be accessed by baseuser code if required.
+ * This function is used internally but can be accessed by user code if required.
  *
  * @param value the current value in a list iteration
 -->
@@ -368,7 +370,7 @@ kind of variable. This temp value is only used in this macro lib -->
  *
  * Macro to return true if the list contains the scalar, false if not.
  * Surprisingly not a FreeMarker builtin.
- * This function is used internally but can be accessed by baseuser code if required.
+ * This function is used internally but can be accessed by user code if required.
  *
  * @param list the list to search for the item
  * @param item the item to search for in the list

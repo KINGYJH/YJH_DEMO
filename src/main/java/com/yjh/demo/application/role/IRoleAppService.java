@@ -14,6 +14,8 @@ import java.util.List;
  */
 public interface IRoleAppService {
 
+    Pagination<RoleRepresentation> paginationJSON(ListRoleCommand command);
+
     Pagination<RoleRepresentation> pagination(ListRoleCommand command);
 
     List<RoleRepresentation> list(ListRoleCommand command);
@@ -27,5 +29,4 @@ public interface IRoleAppService {
     RoleRepresentation edit(EditRoleCommand command);
 
     void updateStatus(SharedCommand command);
-
 }

@@ -180,6 +180,23 @@ StringBuilder.prototype = {
 
 $(document).ready(function () {
 
+    //当前菜单样式
+    var windowUrl = window.location.pathname;
+    var dropdownUrl = $('#sidebar').find('a');
+    $.each(dropdownUrl, function(a, b){
+        var dropdownUrlAttr = $(b).attr('href');
+        console.log(dropdownUrlAttr);
+        if(dropdownUrlAttr !== '#'){
+            for(var i = 0; i < $(b).length; i++ ){
+                if($($(b)[i]).attr('href') == windowUrl){
+                    $($(b)[i]).parents('.submenu').parent('li').addClass('open');
+                    $($(b)[i]).parents('li').addClass('active');
+                    $($(b)[i]).parents('.submenu').css('display','block');
+                };
+            };
+        };
+    });
+
     //showAlert自动隐藏
     var _showAlert = $(".show-alert");
     var _showAlert_timeOut = 5;
