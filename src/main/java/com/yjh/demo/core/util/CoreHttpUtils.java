@@ -1,5 +1,7 @@
 package com.yjh.demo.core.util;
 
+import com.yjh.demo.application.auth.command.LoginCommand;
+import com.yjh.demo.core.common.GlobalConfig;
 import com.yjh.demo.core.util.httpclient.CustomHttpClient;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
@@ -18,9 +20,12 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -115,13 +120,14 @@ public class CoreHttpUtils {
         return post(url, null, localContext, null, headerMap, null, params);
     }
 
-    public static String post(String url,  Map<String, String> headerMap, HttpContext localContext,
+    public static String post(String url, Map<String, String> headerMap, HttpContext localContext,
                               String requestBody) throws IOException {
         return post(url, null, localContext, null, headerMap, requestBody);
     }
 
     /**
      * Post方法302直接返回Location地址
+     *
      * @param url
      * @param charset
      * @param localContext
@@ -193,6 +199,7 @@ public class CoreHttpUtils {
                                          HttpContext localContext) throws IOException {
         return getImage(url, null, headerMap, localContext);
     }
+
     public static BufferedImage getImage(String url, RequestConfig requestConfig, Map<String, String> headerMap,
                                          HttpContext localContext) throws IOException {
 
@@ -290,6 +297,45 @@ public class CoreHttpUtils {
         }
 
         return postString;
+    }
+
+    /**
+     * 保存用户cookie
+     *
+     * @param command
+     * @param request
+     * @param response
+     * @param globalConfig
+     */
+    public static void writeCookie(LoginCommand command, HttpServletRequest request, HttpServletResponse response, GlobalConfig globalConfig) {
+        if (command.isRememberMe()) {
+            String encryptStr = command.getUserName() + "," + command.getPassword();
+            Cookie cookie = new Cookie(globalConfig.getCookieUser(), CoreRc4Utils.encry_RC4_string(encryptStr, globalConfig.getPasswordEncryptKey()));
+            cookie.setMaxAge(604800);
+            response.addCookie(cookie);
+        } else {
+            clearCookie(request, response, globalConfig);
+        }
+    }
+
+    /**
+     * 移除用户保存的cookie
+     *
+     * @param request
+     * @param response
+     * @param globalConfig 配置信息
+     */
+    public static void clearCookie(HttpServletRequest request, HttpServletResponse response, GlobalConfig globalConfig) {
+        Cookie[] cookies = request.getCookies();
+        if (null != cookies && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(globalConfig.getCookieUser())) {
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                    break;
+                }
+            }
+        }
     }
 
 }

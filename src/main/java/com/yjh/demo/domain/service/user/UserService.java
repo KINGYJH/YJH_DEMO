@@ -1,11 +1,14 @@
 package com.yjh.demo.domain.service.user;
 
+import com.yjh.demo.application.auth.command.LoginCommand;
 import com.yjh.demo.application.user.command.*;
 import com.yjh.demo.application.shared.command.SharedCommand;
+import com.yjh.demo.core.common.GlobalConfig;
 import com.yjh.demo.core.common.PasswordHelper;
 import com.yjh.demo.core.enums.EnableStatus;
 import com.yjh.demo.core.exception.ExistException;
 import com.yjh.demo.core.exception.NoFoundException;
+import com.yjh.demo.core.shiro.UsernamePasswordAppKeyToken;
 import com.yjh.demo.core.util.CoreStringUtils;
 import com.yjh.demo.domain.mode.appkey.AppKey;
 import com.yjh.demo.domain.mode.user.User;
@@ -14,6 +17,10 @@ import com.yjh.demo.domain.mode.role.Role;
 import com.yjh.demo.domain.service.appkey.IAppKeyService;
 import com.yjh.demo.domain.service.role.IRoleService;
 import com.yjh.demo.infrastructure.persistence.hibernate.generic.Pagination;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
@@ -39,6 +46,9 @@ public class UserService implements IUserService {
 
     @Autowired
     private IAppKeyService appKeyService;
+
+    @Autowired
+    private GlobalConfig globalConfig;
 
     @Override
     public Pagination<User> pagination(ListUserCommand command) {
@@ -144,5 +154,27 @@ public class UserService implements IUserService {
         user.fainWhenConcurrencyViolation(command.getVersion());
         user.changeAppKey(appKey);
         userRepository.update(user);
+    }
+
+    @Override
+    public User login(LoginCommand command) {
+        User user = this.searchByName(command.getUserName(), globalConfig.getAppKey());
+        if (null == user) {
+            throw new UnknownAccountException();
+        }
+
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordAppKeyToken token = new UsernamePasswordAppKeyToken(
+                command.getUserName(),
+                command.getPassword(),
+                globalConfig.getAppKey());
+        subject.login(token);
+
+        user.changeLastLoginIP(command.getLoginIP());
+        user.changeLastLoginPlatform(command.getLoginPlatform());
+        user.changeLastLoginDate(new Date());
+        userRepository.update(user);
+
+        return user;
     }
 }

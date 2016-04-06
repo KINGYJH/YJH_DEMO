@@ -88,6 +88,6 @@ public class UserAppService implements IUserAppService {
 
     @Override
     public UserRepresentation login(LoginCommand command) {
-        return null;
+        return mappingService.map(userService.login(command), UserRepresentation.class, false);
     }
 }

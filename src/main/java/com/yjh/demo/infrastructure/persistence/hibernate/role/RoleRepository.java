@@ -17,7 +17,8 @@ public class RoleRepository extends AbstractHibernateGenericRepository<Role, Str
     public Role searchByName(String name, String appKey) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.add(Restrictions.eq("name", name));
-        criteria.add(Restrictions.eq("appKey.id", appKey));
+        criteria.add(Restrictions.eq("appKey.name", appKey));
+        criteria.createAlias("appKey", "appKey");
         return (Role) criteria.uniqueResult();
     }
 }

@@ -35,7 +35,7 @@
             </li>
             <li>
                 <span class="col-md-3">角色</span>
-                <div class="col-md-8 contract-box">${user.role.name!}</div>
+                <div class="col-md-8 contract-box">${user.roles[0].name!}</div>
             </li>
             <li>
                 <span class="col-md-3">最后登录IP</span>

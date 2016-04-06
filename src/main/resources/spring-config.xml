@@ -8,5 +8,6 @@
         <property name="appKey" value="${project.appKey}"/>
         <property name="sessionUser" value="${project.sessionUser}"/>
         <property name="cookieUser" value="${project.cookieUser}"/>
+        <property name="passwordEncryptKey" value="${project.passwordEncryptKey}"/>
     </bean>
 </beans>

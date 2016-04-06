@@ -13,17 +13,17 @@
                     <span class="badge badge-danger bounceIn">1</span>
                     <ul class="dropdown-menu dropdown-sm pull-right user-dropdown">
                         <li class="user-avatar">
-                            <img src="[@spring.url '/resources/images/profile/profile1.jpg'/]" alt="" class="img-circle">
+                            <img src="[@spring.url '/resources/images/favicon.ico'/]" alt="" class="img-circle">
                             <div class="user-content">
-                                <h5 class="no-m-bottom">Jane Doe</h5>
+                                <h5 class="no-m-bottom">${Session["sessionUser"].userName!}</h5>
                                 <div class="m-top-xs">
-                                    <a href="profile.html" class="m-right-sm">Profile</a>
-                                    <a href="signin.html">Log out</a>
+                                    <a href="#" class="m-right-sm">个人资料</a>
+                                    <a href="[@spring.url '/logout'/]">注销</a>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <a href="inbox.html">
+                            <a href="#">
                                 Inbox
                                 <span class="badge badge-danger bounceIn animation-delay2 pull-right">1</span>
                             </a>
@@ -71,10 +71,10 @@
             <div class="pull-right m-right-sm">
                 <div class="user-block hidden-xs">
                     <a href="#" id="userToggle" data-toggle="dropdown">
-                        <img src="[@spring.url '/resources/images/profile/profile1.jpg'/]" alt=""
+                        <img src="[@spring.url '/resources/images/favicon.ico'/]" alt=""
                              class="img-circle inline-block user-profile-pic">
                         <div class="user-detail inline-block">
-                            Jane Doe
+                        ${Session["sessionUser"].userName!}
                             <i class="fa fa-angle-down"></i>
                         </div>
                     </a>
@@ -82,19 +82,19 @@
                         <div class="panel-body paddingTB-sm">
                             <ul>
                                 <li>
-                                    <a href="profile.html">
-                                        <i class="fa fa-edit fa-lg"></i><span class="m-left-xs">My Profile</span>
+                                    <a href="#">
+                                        <i class="fa fa-edit fa-lg"></i><span class="m-left-xs">我的资料</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="inbox.html">
+                                    <a href="#">
                                         <i class="fa fa-inbox fa-lg"></i><span class="m-left-xs">Inboxes</span>
                                         <span class="badge badge-danger bounceIn animation-delay3">2</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="signin.html">
-                                        <i class="fa fa-power-off fa-lg"></i><span class="m-left-xs">Sign out</span>
+                                    <a href="[@spring.url '/logout'/]">
+                                        <i class="fa fa-power-off fa-lg"></i><span class="m-left-xs">注销</span>
                                     </a>
                                 </li>
                             </ul>

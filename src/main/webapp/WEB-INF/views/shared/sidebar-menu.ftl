@@ -5,7 +5,7 @@
                 <li class="menu-header">
                     Main Menu
                 </li>
-                <li class="bg-palette1">
+                <li class="bg-palette1 active">
                     <a href="/">
                         <span class="menu-content block">
                             <span class="menu-icon"><i class="block fa fa-home fa-lg"></i></span>
@@ -55,7 +55,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="inbox.html">
+                        <a href="#">
                             Inbox
                             <span class="badge badge-danger bounceIn animation-delay2 pull-right">1</span>
                         </a>

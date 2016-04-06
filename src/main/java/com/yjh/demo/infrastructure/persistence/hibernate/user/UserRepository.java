@@ -17,7 +17,8 @@ public class UserRepository extends AbstractHibernateGenericRepository<User, Str
     public User searchByName(String userName, String appKey) {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.add(Restrictions.eq("userName", userName));
-        criteria.add(Restrictions.eq("appKey.id", appKey));
+        criteria.add(Restrictions.eq("appKey.name", appKey));
+        criteria.createAlias("appKey", "appKey");
         return (User) criteria.uniqueResult();
     }
 }

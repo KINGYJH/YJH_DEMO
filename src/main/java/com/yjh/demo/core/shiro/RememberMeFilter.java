@@ -39,7 +39,6 @@ public class RememberMeFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         Cookie[] cookies = request.getCookies();
-
         HttpSession session = request.getSession();
         if (null == session.getAttribute(globalConfig.getSessionUser())) {
             if (null != cookies && cookies.length > 0) {
@@ -62,55 +61,20 @@ public class RememberMeFilter implements Filter {
                         UserRepresentation user = authAppService.login(command);
                         session = request.getSession(false);
                         session.setAttribute(globalConfig.getSessionUser(), user);
-                        writeCookie(command, request, response);
+                        CoreHttpUtils.writeCookie(command, request, response, globalConfig);
                     } catch (ExcessiveAttemptsException e) {
-                        clearCookie(request, response);
+                        CoreHttpUtils.clearCookie(request, response, globalConfig);
                         response.sendRedirect("/");
                     }
                 }
             }
         }
+
+        filterChain.doFilter(request, response);
     }
 
     @Override
     public void destroy() {
 
-    }
-
-    /**
-     * 保存用户cookie
-     *
-     * @param command
-     * @param request
-     * @param response
-     */
-    private void writeCookie(LoginCommand command, HttpServletRequest request, HttpServletResponse response) {
-        if (command.isRememberMe()) {
-            String encryptStr = command.getUserName() + "," + command.getPassword();
-            Cookie cookie = new Cookie(globalConfig.getCookieUser(), CoreRc4Utils.encry_RC4_string(encryptStr, globalConfig.getPasswordEncryptKey()));
-            cookie.setMaxAge(604800);
-            response.addCookie(cookie);
-        } else {
-            clearCookie(request, response);
-        }
-    }
-
-    /**
-     * 移除用户保存的cookie
-     *
-     * @param request
-     * @param response
-     */
-    private void clearCookie(HttpServletRequest request, HttpServletResponse response) {
-        Cookie[] cookies = request.getCookies();
-        if (null != cookies && cookies.length > 0) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(globalConfig.getCookieUser())) {
-                    cookie.setMaxAge(0);
-                    response.addCookie(cookie);
-                    break;
-                }
-            }
-        }
     }
 }

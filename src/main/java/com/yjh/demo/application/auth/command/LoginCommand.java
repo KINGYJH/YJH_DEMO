@@ -16,6 +16,7 @@ public class LoginCommand {
     private boolean rememberMe;
 
     private String loginIP;
+    private String loginPlatform;
 
     public String getUserName() {
         return userName;
@@ -55,5 +56,13 @@ public class LoginCommand {
 
     public void setLoginIP(String loginIP) {
         this.loginIP = loginIP;
+    }
+
+    public String getLoginPlatform() {
+        return loginPlatform;
+    }
+
+    public void setLoginPlatform(String loginPlatform) {
+        this.loginPlatform = loginPlatform;
     }
 }

@@ -10,12 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 
 /**
  * Created by YJH on 2016/3/30.
@@ -27,17 +24,20 @@ public class IndexController {
     private GlobalConfig globalConfig;
 
     @RequestMapping("/")
-    public ModelAndView index() {
-        return new ModelAndView("redirect:/index");
+    public ModelAndView index(HttpSession session) {
+        if (null != session.getAttribute(globalConfig.getSessionUser())) {
+            return new ModelAndView("redirect:/logged");
+        }
+        return new ModelAndView("redirect:/login.htm");
     }
 
-    @RequestMapping(value = "/index")
-    public ModelAndView index(HttpSession session) throws Exception {
+    @RequestMapping(value = "/logged")
+    public ModelAndView logged(HttpSession session) throws Exception {
 
         if (null != session.getAttribute(globalConfig.getSessionUser())) {
             Subject subject = SecurityUtils.getSubject();
-            if (subject.hasRole("Admin")) {
-                return new ModelAndView("redirect:/user/pagination.htm");
+            if (subject.hasRole("admin") || subject.hasRole("mini-admin")) {
+                return new ModelAndView("/index");
             } else {
                 return new ModelAndView("redirect:/logout");
             }
@@ -51,9 +51,9 @@ public class IndexController {
     @ResponseBody
     public void verificationCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
-        //生成思维随机验证码
+        //生成4位随机验证码
         String verifyCode = VerifyCodeUtils.generateVerifyCode(4).toLowerCase();
-        session.setAttribute("code",verifyCode);
+        session.setAttribute("code", verifyCode);
 
         // 禁止图像缓存。
         response.setHeader("Pragma", "no-cache");

@@ -1,55 +1,74 @@
-<!doctype html>
-<html class="no-js">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amaze UI Admin - permission denied</title>
-    <meta name="description" content="这是一个404页面">
-    <meta name="keywords" content="404">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="icon" type="image/png" href="[@spring.url '/resources/assets/i/favicon.png'/]">
-    <link rel="apple-touch-icon-precomposed" href="[@spring.url '/resources/assets/i/app-icon72x72@2x.png'/]">
-    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
-    <link rel="stylesheet" href="[@spring.url '/resources/assets/css/amazeui.min.css'/]"/>
-    <link rel="stylesheet" href="[@spring.url '/resources/assets/css/admin.css'/]">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="yjh">
+    <link rel="shortcut icon" href="[@spring.url '/resources/images/favicon.ico' /]" type="image/x-icon"/>
+
+    <title>Simplify Admin - denied</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="[@spring.url '/resources/bootstrap/css/bootstrap.min.css'/]" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="[@spring.url '/resources/css/font-awesome.min.css'/]" rel="stylesheet">
+
+    <!-- ionicons -->
+    <link href="[@spring.url '/resources/css/ionicons.min.css'/]" rel="stylesheet">
+
+    <!-- Simplify -->
+    <link href="[@spring.url '/resources/css/simplify.min.css'/]" rel="stylesheet">
+
 </head>
-<body>
 
-<div class="am-cf admin-main">
-    <!-- content start -->
-    <div class="admin-content">
-
-        <div class="am-g">
-            <div class="am-u-sm-12">
-                <h2 class="am-text-center am-text-xxxl am-margin-top-lg">warning : permission denied</h2>
-                <p class="am-text-center">你没有访问权限偶</p>
-        <pre class="page-404">
-          .----.
-       _.'__    `.
-   .--($)($$)---/#\
- .' @          /###\
- :         ,   #####
-  `-..__.-' _.-\###/
-        `;_:    `"'
-      .'"""""`.
-     /,  ya ,\\
-    //  404!  \\
-    `-._______.-'
-    ___`. | .'___
-   (______|______)
-        </pre>
+<body class="overflow-hidden light-background">
+<div class="wrapper no-navigation preload">
+    <div class="error-wrapper">
+        <div class="error-inner">
+            <div class="error-type">NO</div>
+            <h2>抱歉! 您没有足够的权限访问此页面!</h2>
+            <p>可联系管理员提升您的权限</p>
+            <div class="m-top-md">
+                <a href="javascript:history.go(-1);" class="btn btn-default btn-lg text-upper">返回上一页</a>
+                <a href="/" class="btn btn-default btn-lg text-upper">返回首页</a>
             </div>
-        </div>
-        <div class="am-u-sm-12 am-text-center">
-            <a href="#">刷新</a>
-            <a href="/">返回首页</a>
-        </div>
-    </div>
-    <!-- content end -->
+        </div><!-- ./error-inner -->
+    </div><!-- ./error-wrapper -->
+</div><!-- /wrapper -->
 
-</div>
+<a href="" id="scroll-to-top" class="hidden-print"><i class="icon-chevron-up"></i></a>
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<!-- Jquery -->
+<script src="[@spring.url '/resources/js/jquery-1.11.1.min.js'/]"></script>
+
+<!-- Bootstrap -->
+<script src="[@spring.url '/resources/bootstrap/js/bootstrap.min.js'/]"></script>
+
+<!-- Slimscroll -->
+<script src="[@spring.url '/resources/js/jquery.slimscroll.min.js'/]"></script>
+
+<!-- Popup Overlay -->
+<script src="[@spring.url '/resources/js/jquery.popupoverlay.min.js'/]"></script>
+
+<!-- Modernizr -->
+<script src="[@spring.url '/resources/js/modernizr.min.js'/]"></script>
+
+<!-- Simplify -->
+<script src="[@spring.url '/resources/js/simplify/simplify.js'/]"></script>
+
+<script>
+    $(function()	{
+        setTimeout(function() {
+            $('.error-type').addClass('animated');
+        },100);
+    });
+</script>
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.yjh.demo.domain.service.user;
 
+import com.yjh.demo.application.auth.command.LoginCommand;
 import com.yjh.demo.application.user.command.*;
 import com.yjh.demo.application.shared.command.SharedCommand;
 import com.yjh.demo.domain.mode.user.User;
@@ -31,4 +32,6 @@ public interface IUserService {
     void authorized(AuthorizeUserCommand command);
 
     void updateAppKey(UpdateUserAppKeyCommand command);
+
+    User login(LoginCommand command);
 }
