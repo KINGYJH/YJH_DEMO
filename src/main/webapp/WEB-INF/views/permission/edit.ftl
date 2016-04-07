@@ -31,7 +31,7 @@
                 <div class="col-md-9">
                     <input class="form-control" id="name" name="name"
                            value="${permission.name!command.name}" placeholder="输入权限名称"
-                           data-parsley-required="true" data-parsley-required-message="权限名称不能为空"
+                           data-parsley-required="true" data-parsley-required-messages="权限名称不能为空"
                            data-parsley-trigger="change"/>
                     [@spring.showErrors "name" "parsley-required"/]
                 </div>
@@ -43,7 +43,7 @@
                 <div class="col-md-9">
                     <input class="form-control" id="value" name="value"
                            value="${permission.value!command.value}" placeholder="输入权限值"
-                           data-parsley-required="true" data-parsley-required-message="权限值不能为空"
+                           data-parsley-required="true" data-parsley-required-messages="权限值不能为空"
                            data-parsley-trigger="change"/>
                     [@spring.showErrors "value" "parsley-required"/]
                 </div>
@@ -55,7 +55,7 @@
                 <div class="col-md-9">
                     <input class="form-control" id="description" name="description"
                            value="${permission.description!command.description}" placeholder="输入权限描述"
-                           data-parsley-required="true" data-parsley-required-message="权限描述不能为空"
+                           data-parsley-required="true" data-parsley-required-messages="权限描述不能为空"
                            data-parsley-trigger="change"/>
                     [@spring.showErrors "name" "parsley-required"/]
                 </div>
@@ -67,7 +67,7 @@
                 <div class="col-md-9">
                     <select class="form-control" id="appKey" name="appKey"
                             data="${permission.appKey.id!command.appKey!}"
-                            data-parsley-required="true" data-parsley-required-message="请选择AppKey"
+                            data-parsley-required="true" data-parsley-required-messages="请选择AppKey"
                             data-parsley-trigger="change">
 
                     </select>

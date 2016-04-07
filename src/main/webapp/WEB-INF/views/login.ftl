@@ -67,14 +67,14 @@
             [@spring.bind 'command.userName'/]
                 <div class="form-group m-bottom-md">
                     <input type="text" class="form-control" value="${command.userName!}" name="userName" placeholder="用户名"
-                           data-parsley-required="true" data-parsley-required-message="请输入用户名"
+                           data-parsley-required="true" data-parsley-required-messages="请输入用户名"
                            data-parsley-trigger="change"/>
                 [@spring.showErrors 'userName' 'parsley-required'/]
                 </div>
             [@spring.bind 'command.password'/]
                 <div class="form-group">
                     <input type="password" class="form-control" name="password" placeholder="密码"
-                           data-parsley-required="true" data-parsley-required-message="请输入密码"
+                           data-parsley-required="true" data-parsley-required-messages="请输入密码"
                            data-parsley-trigger="change"/>
                 [@spring.showErrors 'password' 'parsley-required'/]
                 </div>
@@ -82,7 +82,7 @@
                 <div class="form-group loginVerification">
                 [@mc.verificationCode /]
                     <input type="text" class="form-control" name="verificationCode" placeholder="验证码"
-                           data-parsley-required="true" data-parsley-required-message="请输入验证码"
+                           data-parsley-required="true" data-parsley-required-messages="请输入验证码"
                            data-parsley-trigger="change"/>
                 [@spring.showErrors 'verificationCode' 'parsley-required'/]
                 </div>

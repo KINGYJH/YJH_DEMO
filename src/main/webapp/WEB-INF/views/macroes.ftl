@@ -18,8 +18,8 @@
     <div class="alert ${alertClass} alert-custom alert-dismissible show-alert" role="alert">
         <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">关闭</span>
         </button>
-        <i class="fa fa-check-circle m-right-xs"></i><strong>${alertMessage.type.getName()}</strong> ${alertMessage.message}
-        <i><span class="pull-right time-message">5秒后制动关闭</span></i>
+        <i class="fa fa-check-circle m-right-xs"></i><strong>${alertMessage.type.getName()}</strong> ${alertMessage.messages}
+        <i><span class="pull-right time-messages">5秒后制动关闭</span></i>
     </div>
     [/#if]
 [/#macro]

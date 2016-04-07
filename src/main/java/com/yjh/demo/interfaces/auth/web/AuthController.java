@@ -2,7 +2,7 @@ package com.yjh.demo.interfaces.auth.web;
 
 import com.yjh.demo.application.auth.IAuthAppService;
 import com.yjh.demo.application.auth.command.LoginCommand;
-import com.yjh.demo.application.user.representation.UserRepresentation;
+import com.yjh.demo.application.account.representation.AccountRepresentation;
 import com.yjh.demo.core.common.GlobalConfig;
 import com.yjh.demo.core.util.CoreHttpUtils;
 import com.yjh.demo.interfaces.shared.web.AlertMessage;
@@ -66,7 +66,7 @@ public class AuthController extends BaseController {
                 String loginPlatform = CoreHttpUtils.getLoginPlatform(request);
                 command.setLoginIP(loginIP);
                 command.setLoginPlatform(loginPlatform);
-                UserRepresentation user = authAppService.login(command);
+                AccountRepresentation user = authAppService.login(command);
                 Subject subject = SecurityUtils.getSubject();
                 if (subject.hasRole("admin") || subject.hasRole("mini-admin")) {
 
@@ -76,27 +76,27 @@ public class AuthController extends BaseController {
                     session.setAttribute(globalConfig.getSessionUser(), user);
                     return new ModelAndView("redirect:/logged");
                 } else {//用户没有对应角色 不让登录
-                    alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("login.account.NotPermission.message", null, locale));
+                    alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("login.account.NotPermission.messages", null, locale));
                     redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
                     return new ModelAndView("redirect:/logout");
                 }
             } catch (UnknownAccountException ue) {
                 alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING,
-                        this.getMessage("login.account.NotExists.message", null, locale));
+                        this.getMessage("login.account.NotExists.messages", null, locale));
             } catch (IncorrectCredentialsException ie) {
                 alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING,
-                        this.getMessage("login.account.Error.message", null, locale));
+                        this.getMessage("login.account.Error.messages", null, locale));
             } catch (LockedAccountException le) {
                 alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING,
-                        this.getMessage("login.account.Disable.message", null, locale));
+                        this.getMessage("login.account.Disable.messages", null, locale));
             } catch (Exception e) {
                 alertMessage = new AlertMessage(AlertMessage.MessageType.DANGER,
-                        this.getMessage("login.login.Failure.message", null, locale));
+                        this.getMessage("login.login.Failure.messages", null, locale));
             }
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/login.htm");
         }
-        alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("login.verificationCode.Error.message", null, locale));
+        alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("login.verificationCode.Error.messages", null, locale));
         return new ModelAndView("/login", "command", command).addObject(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
     }
 

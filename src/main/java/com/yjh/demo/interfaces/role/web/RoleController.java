@@ -65,17 +65,17 @@ public class RoleController extends BaseController {
             logger.warn(e.getMessage());
             if (e.getMessage().indexOf("AppKey") != -1) {
                 alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING,
-                        this.getMessage("appKey.id.not.found.message", new Object[]{command.getAppKey()}, locale));
+                        this.getMessage("appKey.id.not.found.messages", new Object[]{command.getAppKey()}, locale));
             } else {
                 alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING,
-                        this.getMessage("permission.id.not.found.message", new Object[]{command.getPermissions()}, locale));
+                        this.getMessage("permission.id.not.found.messages", new Object[]{command.getPermissions()}, locale));
             }
             return new ModelAndView("/role/create", "command", command)
                     .addObject(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         } catch (ExistException e) {
             logger.warn(e.getMessage());
             alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING,
-                    this.getMessage("role.name.Exist.message", new Object[]{command.getName()}, locale));
+                    this.getMessage("role.name.Exist.messages", new Object[]{command.getName()}, locale));
             return new ModelAndView("/role/create", "command", command)
                     .addObject(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         } catch (Exception e) {
@@ -86,7 +86,7 @@ public class RoleController extends BaseController {
         }
 
         logger.info("创建Role[" + role.getName() + "]信息成功,时间:" + new Date());
-        alertMessage = new AlertMessage(this.getMessage("default.create.success.message", null, locale));
+        alertMessage = new AlertMessage(this.getMessage("default.create.success.messages", null, locale));
         redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         redirectAttributes.addAttribute("id", role.getId());
         return new ModelAndView("redirect:/role/info.htm/{id}");
@@ -100,7 +100,7 @@ public class RoleController extends BaseController {
             role = roleAppService.searchByID(id);
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(this.getMessage("role.id.not.found.message", new Object[]{id}, locale));
+            alertMessage = new AlertMessage(this.getMessage("role.id.not.found.messages", new Object[]{id}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/role/pagination.htm");
         } catch (Exception e) {
@@ -121,7 +121,7 @@ public class RoleController extends BaseController {
             role = roleAppService.searchByID(id);
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(this.getMessage("role.id.not.found.message", new Object[]{id}, locale));
+            alertMessage = new AlertMessage(this.getMessage("role.id.not.found.messages", new Object[]{id}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/role/pagination.htm");
         } catch (Exception e) {
@@ -153,17 +153,17 @@ public class RoleController extends BaseController {
         } catch (ExistException e) {
             logger.warn(e.getMessage());
             alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING,
-                    this.getMessage("role.name.Exist.message", new Object[]{command.getName()}, locale));
+                    this.getMessage("role.name.Exist.messages", new Object[]{command.getName()}, locale));
             return new ModelAndView("/role/edit", "command", command)
                     .addObject(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
             if (e.getMessage().indexOf("AppKey") != -1) {
-                alertMessage = new AlertMessage(this.getMessage("appKey.id.not.found.message", new Object[]{command.getAppKey()}, locale));
+                alertMessage = new AlertMessage(this.getMessage("appKey.id.not.found.messages", new Object[]{command.getAppKey()}, locale));
             } else if (e.getMessage().indexOf("Permission") != -1) {
-                alertMessage = new AlertMessage(this.getMessage("permission.id.not.found.message", new Object[]{command.getPermissions()}, locale));
+                alertMessage = new AlertMessage(this.getMessage("permission.id.not.found.messages", new Object[]{command.getPermissions()}, locale));
             } else {
-                alertMessage = new AlertMessage(this.getMessage("role.id.not.found.message", new Object[]{command.getId()}, locale));
+                alertMessage = new AlertMessage(this.getMessage("role.id.not.found.messages", new Object[]{command.getId()}, locale));
                 redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
                 return new ModelAndView("redirect:/role/pagination.htm");
             }
@@ -176,7 +176,7 @@ public class RoleController extends BaseController {
         }
 
         logger.info("修改Role[" + role.getName() + "]信息成功,时间:" + new Date());
-        alertMessage = new AlertMessage(this.getMessage("default.edit.success.message", null, locale));
+        alertMessage = new AlertMessage(this.getMessage("default.edit.success.messages", null, locale));
         redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         redirectAttributes.addAttribute("id", role.getId());
         return new ModelAndView("redirect:/role/info.htm/{id}");
@@ -196,7 +196,7 @@ public class RoleController extends BaseController {
             return new ModelAndView("redirect:/role/pagination.htm");
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(this.getMessage("role.id.not.found.message", new Object[]{command.getId()}, locale));
+            alertMessage = new AlertMessage(this.getMessage("role.id.not.found.messages", new Object[]{command.getId()}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/role/pagination.htm");
         } catch (Exception e) {
@@ -207,7 +207,7 @@ public class RoleController extends BaseController {
         }
 
         logger.info("修改Role[" + command.getId() + "]状态成功,时间:" + new Date());
-        alertMessage = new AlertMessage(this.getMessage("default.edit.success.message", null, locale));
+        alertMessage = new AlertMessage(this.getMessage("default.edit.success.messages", null, locale));
         redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         return new ModelAndView("redirect:/role/pagination.htm");
     }

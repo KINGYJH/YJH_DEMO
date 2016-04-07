@@ -13,15 +13,15 @@ import java.util.List;
  */
 public class CreateRoleCommand {
 
-    @NotBlank(message = "{role.name.NotBlank.message}")
+    @NotBlank(message = "{role.name.NotBlank.Messages}")
     private String name;                    //角色名称
-    @NotBlank(message = "{role.description.NotBlank.message}")
+    @NotBlank(message = "{role.description.NotBlank.Messages}")
     private String description;                //角色描述
 
     private List<String> permissions;   //角色包含的权限集合
-    @NotBlank(message = "{role.appKey.NotBlank.message}")
+    @NotBlank(message = "{role.appKey.NotBlank.Messages}")
     private String appKey;                  //应用标识
-    @NotNull(message = "{role.status.NotNull.message}")
+    @NotNull(message = "{role.status.NotNull.Messages}")
     private EnableStatus status;            //状态
     public String getName() {
         return name;

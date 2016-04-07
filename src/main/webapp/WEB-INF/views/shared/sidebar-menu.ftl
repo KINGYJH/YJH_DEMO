@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li class="bg-palette1">
-                    <a href="[@spring.url '/user/pagination.htm'/]">
+                    <a href="[@spring.url '/account/pagination.htm'/]">
                         <span class="menu-content block">
                             <span class="menu-icon"><i class="block fa fa-users fa-lg"></i></span>
                             <span class="text m-left-sm">用户管理</span>

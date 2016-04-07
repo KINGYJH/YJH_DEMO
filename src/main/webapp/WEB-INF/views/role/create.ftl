@@ -28,7 +28,7 @@
                 <div class="col-md-9">
                     <input class="form-control" id="name" name="name"
                            value="${command.name!}" placeholder="输入角色名称"
-                           data-parsley-required="true" data-parsley-required-message="角色名称不能为空"
+                           data-parsley-required="true" data-parsley-required-messages="角色名称不能为空"
                            data-parsley-trigger="change"/>
                     [@spring.showErrors "name" "parsley-required"/]
                 </div>
@@ -40,7 +40,7 @@
                 <div class="col-md-9">
                     <input class="form-control" id="description" name="description"
                            value="${command.description!}" placeholder="输入角色描述"
-                           data-parsley-required="true" data-parsley-required-message="角色描述不能为空"
+                           data-parsley-required="true" data-parsley-required-messages="角色描述不能为空"
                            data-parsley-trigger="change"/>
                     [@spring.showErrors "name" "parsley-required"/]
                 </div>
@@ -51,7 +51,7 @@
                 <label for="appKey" class="col-md-3 control-label">AppKey*</label>
                 <div class="col-md-9">
                     <select class="form-control" id="appKey" name="appKey" data="${command.appKey!}"
-                            data-parsley-required="true" data-parsley-required-message="请选择AppKey"
+                            data-parsley-required="true" data-parsley-required-messages="请选择AppKey"
                             data-parsley-trigger="change">
 
                     </select>
@@ -64,7 +64,7 @@
                 <label for="status" class="col-md-3 control-label">角色状态*</label>
                 <div class="col-md-9">
                     <select class="form-control" name="status" id="status"
-                            data-parsley-required="true" data-parsley-required-message="请选择角色状态"
+                            data-parsley-required="true" data-parsley-required-messages="请选择角色状态"
                             data-parsley-trigger="change">
                         [#assign status = (command.status!)?default("") /]
                         <option value="">请选择</option>

@@ -62,7 +62,7 @@ public class AppKeyController extends BaseController {
         } catch (ExistException e) {
             logger.warn(e.getMessage());
             alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING,
-                    this.getMessage("appKey.name.Exist.message", new Object[]{command.getName()}, locale));
+                    this.getMessage("appKey.name.Exist.messages", new Object[]{command.getName()}, locale));
             return new ModelAndView("/appKey/create", "command", command)
                     .addObject(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class AppKeyController extends BaseController {
         }
 
         logger.info("创建AppKey[" + appKey.getName() + "]信息成功,时间:" + new Date());
-        alertMessage = new AlertMessage(this.getMessage("default.create.success.message", null, locale));
+        alertMessage = new AlertMessage(this.getMessage("default.create.success.messages", null, locale));
         redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         redirectAttributes.addAttribute("id", appKey.getId());
         return new ModelAndView("redirect:/app_key/info.htm/{id}");
@@ -87,7 +87,7 @@ public class AppKeyController extends BaseController {
             appKey = appKeyAppService.searchByID(id);
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.message", new Object[]{id}, locale));
+            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.messages", new Object[]{id}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/app_key/pagination.htm");
         } catch (Exception e) {
@@ -108,7 +108,7 @@ public class AppKeyController extends BaseController {
             appKey = appKeyAppService.searchByID(id);
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.message", new Object[]{id}, locale));
+            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.messages", new Object[]{id}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/app_key/pagination.htm");
         } catch (Exception e) {
@@ -138,12 +138,12 @@ public class AppKeyController extends BaseController {
         } catch (ExistException e) {
             logger.warn(e.getMessage());
             alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING,
-                    this.getMessage("appKey.name.Exist.message", new Object[]{command.getName()}, locale));
+                    this.getMessage("appKey.name.Exist.messages", new Object[]{command.getName()}, locale));
             return new ModelAndView("/appKey/edit", "command", command)
                     .addObject(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.message", new Object[]{command.getId()}, locale));
+            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.messages", new Object[]{command.getId()}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/app_key/pagination.htm");
         } catch (Exception e) {
@@ -154,7 +154,7 @@ public class AppKeyController extends BaseController {
         }
 
         logger.info("修改AppKey[" + appKey.getName() + "]信息成功,时间:" + new Date());
-        alertMessage = new AlertMessage(this.getMessage("default.edit.success.message", null, locale));
+        alertMessage = new AlertMessage(this.getMessage("default.edit.success.messages", null, locale));
         redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         redirectAttributes.addAttribute("id", appKey.getId());
         return new ModelAndView("redirect:/app_key/info.htm/{id}");
@@ -174,7 +174,7 @@ public class AppKeyController extends BaseController {
             return new ModelAndView("redirect:/app_key/pagination.htm");
         } catch (NoFoundException e) {
             logger.warn(e.getMessage());
-            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.message", new Object[]{command.getId()}, locale));
+            alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("appKey.id.not.found.messages", new Object[]{command.getId()}, locale));
             redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
             return new ModelAndView("redirect:/app_key/pagination.htm");
         } catch (Exception e) {
@@ -185,7 +185,7 @@ public class AppKeyController extends BaseController {
         }
 
         logger.info("修改AppKey[" + command.getId() + "]状态成功,时间:" + new Date());
-        alertMessage = new AlertMessage(this.getMessage("default.edit.success.message", null, locale));
+        alertMessage = new AlertMessage(this.getMessage("default.edit.success.messages", null, locale));
         redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         return new ModelAndView("redirect:/app_key/pagination.htm");
     }

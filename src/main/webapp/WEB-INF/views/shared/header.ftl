@@ -105,7 +105,7 @@
                     <li>
                         <a href="#" data-toggle="dropdown"><i class="fa fa-envelope fa-lg"></i></a>
                         <span class="badge badge-purple bounceIn animation-delay5 active">2</span>
-                        <ul class="dropdown-menu message pull-right">
+                        <ul class="dropdown-menu messages pull-right">
                             <li><a>You have 4 new unread messages</a></li>
                             <li>
                                 <a class="clearfix" href="#">
@@ -179,7 +179,7 @@
 												<span class="notification-icon bg-success">
 													<i class="fa fa-plus"></i>
 												</span>
-                                    <span class="m-left-xs">New user registration.</span>
+                                    <span class="m-left-xs">New account registration.</span>
                                     <span class="time text-muted">2m ago</span>
                                 </a>
                             </li>
@@ -206,7 +206,7 @@
 												<span class="notification-icon bg-success">
 													<i class="fa fa-plus"></i>
 												</span>
-                                    <span class="m-left-xs">New user registration.</span>
+                                    <span class="m-left-xs">New account registration.</span>
                                     <span class="time text-muted">1hr ago</span>
                                 </a>
                             </li>

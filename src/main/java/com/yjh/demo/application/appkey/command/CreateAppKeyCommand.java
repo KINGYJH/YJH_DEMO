@@ -11,13 +11,13 @@ import javax.validation.constraints.NotNull;
  */
 public class CreateAppKeyCommand {
 
-    @NotBlank(message = "{appKey.name.NotBlank.message}")
+    @NotBlank(message = "{appKey.name.NotBlank.Messages}")
     private String name;        //应用标识名称
-    @NotBlank(message = "{appKey.description.NotBlank.message}")
+    @NotBlank(message = "{appKey.description.NotBlank.Messages}")
     private String description;    //用用标识描述
-    @NotBlank(message = "{appKey.projectName.NotBlank.message}")
+    @NotBlank(message = "{appKey.projectName.NotBlank.Messages}")
     private String projectName; //应用标识项目名
-    @NotNull(message = "{appKey.status.NotNull.message}")
+    @NotNull(message = "{appKey.status.NotNull.Messages}")
     private EnableStatus status;    //状态
 
     public String getName() {

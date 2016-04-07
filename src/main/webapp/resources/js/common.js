@@ -208,7 +208,7 @@ $(document).ready(function () {
     var _showAlert_timeOut = 5;
     if (_showAlert[0]) {
         function doWork() {
-            _showAlert.find(".time-message").text(_showAlert_timeOut + "秒后自动关闭");
+            _showAlert.find(".time-messages").text(_showAlert_timeOut + "秒后自动关闭");
             if (_showAlert_timeOut > 0) {
                 setTimeout(doWork, 1000);
             } else {

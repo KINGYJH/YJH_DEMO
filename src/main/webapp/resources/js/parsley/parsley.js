@@ -141,7 +141,7 @@
     errorsContainer: function (ParsleyField) {},
     // ul elem that would receive errors' list
     errorsWrapper: '<ul class="parsley-errors-list error-div"><em></em><span></span></ul>',
-    // li elem that would receive error message
+    // li elem that would receive error messages
     errorTemplate: '<li></li>'
   };
 
@@ -895,7 +895,7 @@ var Validator = ( function ( ) {
         return this.setLocale(locale);
       return this;
     },
-    // Add a specific message for a given constraint in a given locale
+    // Add a specific messages for a given constraint in a given locale
     addMessage: function (locale, name, message) {
       if ('undefined' === typeof this.catalog[locale])
         this.catalog[locale] = {};
@@ -924,7 +924,7 @@ var Validator = ( function ( ) {
     },
     getErrorMessage: function (constraint) {
       var message;
-      // Type constraints are a bit different, we have to match their requirements too to find right error message
+      // Type constraints are a bit different, we have to match their requirements too to find right error messages
       if ('type' === constraint.name)
         message = this.catalog[this.locale][constraint.name][constraint.requirements];
       else
@@ -1102,9 +1102,9 @@ var Validator = ( function ( ) {
       if ((diff.kept.length || diff.added.length) && 'undefined' === typeof fieldInstance._ui.failedOnce)
         this.manageFailingFieldTrigger(fieldInstance);
     },
-    // Returns an array of field's error message(s)
+    // Returns an array of field's error messages(s)
     getErrorsMessages: function (fieldInstance) {
-      // No error message, field is valid
+      // No error messages, field is valid
       if (true === fieldInstance.validationResult)
         return [];
       var messages = [];
@@ -1123,23 +1123,23 @@ var Validator = ( function ( ) {
     manageErrorsMessages: function (fieldInstance, diff) {
       if ('undefined' !== typeof fieldInstance.options.errorsMessagesDisabled)
         return;
-      // Case where we have errorMessage option that configure an unique field error message, regardless failing validators
+      // Case where we have errorMessage option that configure an unique field error messages, regardless failing validators
       if ('undefined' !== typeof fieldInstance.options.errorMessage) {
         if ((diff.added.length || diff.kept.length)) {
-          if (0 === fieldInstance._ui.$errorsWrapper.find('.parsley-custom-error-message').length)
+          if (0 === fieldInstance._ui.$errorsWrapper.find('.parsley-custom-error-messages').length)
             fieldInstance._ui.$errorsWrapper
               .append(
                 $(fieldInstance.options.errorTemplate)
-                .addClass('parsley-custom-error-message')
+                .addClass('parsley-custom-error-messages')
               );
           return fieldInstance._ui.$errorsWrapper
             .addClass('filled')
-            .find('.parsley-custom-error-message')
+            .find('.parsley-custom-error-messages')
             .html(fieldInstance.options.errorMessage);
         }
         return fieldInstance._ui.$errorsWrapper
           .removeClass('filled')
-          .find('.parsley-custom-error-message')
+          .find('.parsley-custom-error-messages')
           .remove();
       }
       // Show, hide, update failing constraints messages

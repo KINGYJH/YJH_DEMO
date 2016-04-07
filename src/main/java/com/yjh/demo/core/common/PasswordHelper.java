@@ -1,6 +1,6 @@
 package com.yjh.demo.core.common;
 
-import com.yjh.demo.domain.mode.user.User;
+import com.yjh.demo.domain.mode.account.Account;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -46,18 +46,18 @@ public class PasswordHelper {
     /**
      * 验证密码是否相等
      *
-     * @param user
+     * @param account
      * @param password
      * @return
      */
-    public static boolean equalsPassword(User user, String password) {
+    public static boolean equalsPassword(Account account, String password) {
         String newPassword = new SimpleHash(
                 algorithmName,
                 password,
-                ByteSource.Util.bytes(user.getSalt()),
+                ByteSource.Util.bytes(account.getSalt()),
                 hashIterations).toHex();
 
-        return user.getPassword().equals(newPassword);
+        return account.getPassword().equals(newPassword);
     }
 
 }

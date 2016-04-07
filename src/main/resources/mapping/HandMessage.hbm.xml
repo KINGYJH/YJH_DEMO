@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field" default-cascade="all">
+    <class name="com.yjh.demo.domain.mode.message.HandMessages" table="t_hand_message" lazy="true">
+        <id name="id" type="java.lang.String" column="id" unsaved-value="null" length="32">
+            <generator class="uuid"/>
+        </id>
+
+        <version column="version" name="version" type="java.lang.Integer"/>
+
+        <property name="updateDate" column="update_date" type="java.util.Date"/>
+
+        <many-to-one name="senderAccount" column="send_account_id" class="com.yjh.demo.domain.mode.account.Account"/>
+        <many-to-one name="receiveAccount" column="receive_account_id"
+                     class="com.yjh.demo.domain.mode.account.Account"/>
+        <many-to-one name="messages" column="messages_id" class="com.yjh.demo.domain.mode.message.Messages"
+                     cascade="save-update"/>
+
+        <property name="sendStatus" column="send_status">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.yjh.demo.core.enums.MessageStatus</param>
+                <param name="type">4</param>
+            </type>
+        </property>
+        <property name="receiveStatus" column="receive_status">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.yjh.demo.core.enums.MessageStatus</param>
+                <param name="type">4</param>
+            </type>
+        </property>
+        <property name="readStatus" column="read_status">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.yjh.demo.core.enums.ReadStatus</param>
+                <param name="type">4</param>
+            </type>
+        </property>
+    </class>
+</hibernate-mapping>

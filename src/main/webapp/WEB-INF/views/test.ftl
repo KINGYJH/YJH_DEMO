@@ -64,7 +64,7 @@
 
             <form action="[@spring.url '/login.htm'/]" method="post" data-parsley-validate>
                 <div class="form-group m-bottom-md">
-                    <input type="text" class="form-control" name="userName" placeholder="用户名" data-parsley-required="true" data-parsley-required-message="AppKey名称不能为空"
+                    <input type="text" class="form-control" name="userName" placeholder="用户名" data-parsley-required="true" data-parsley-required-messages="AppKey名称不能为空"
                            data-parsley-trigger="change"/>
                 </div>
                 <div class="form-group">

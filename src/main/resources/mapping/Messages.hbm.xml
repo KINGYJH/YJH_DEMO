@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field" default-cascade="all">
+    <class name="com.yjh.demo.domain.mode.message.Messages" table="t_messages" lazy="true">
+        <id name="id" type="java.lang.String" column="id" unsaved-value="null" length="32">
+            <generator class="uuid"/>
+        </id>
+
+        <version column="version" name="version" type="java.lang.Integer"/>
+
+        <property name="updateDate" column="update_date" type="java.util.Date"/>
+
+        <property name="title" column="title" type="java.lang.String"/>
+
+        <property name="content" column="content" type="java.lang.String"/>
+
+        <property name="sendDate" column="send_date" type="java.util.Date"/>
+    </class>
+</hibernate-mapping>

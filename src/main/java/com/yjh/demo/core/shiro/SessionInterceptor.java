@@ -1,6 +1,6 @@
 package com.yjh.demo.core.shiro;
 
-import com.yjh.demo.application.user.representation.UserRepresentation;
+import com.yjh.demo.application.account.representation.AccountRepresentation;
 import com.yjh.demo.core.common.GlobalConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,7 +30,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
             }
         }
         if (!flag) {
-            UserRepresentation user = (UserRepresentation) request.getSession().getAttribute(globalConfig.getSessionUser());
+            AccountRepresentation user = (AccountRepresentation) request.getSession().getAttribute(globalConfig.getSessionUser());
             if (user != null) {
                 flag = true;
             }

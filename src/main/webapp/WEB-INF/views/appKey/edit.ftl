@@ -31,7 +31,7 @@ AppKey 修改
                 <div class="col-md-9">
                     <input class="form-control" id="name" name="name"
                            value="${appKey.name!command.name}" placeholder="输入AppKey名称"
-                           data-parsley-required="true" data-parsley-required-message="AppKey名称不能为空"
+                           data-parsley-required="true" data-parsley-required-messages="AppKey名称不能为空"
                            data-parsley-trigger="change"/>
                     [@spring.showErrors "name" "parsley-required"/]
                 </div>
@@ -43,7 +43,7 @@ AppKey 修改
                 <div class="col-md-9">
                     <input class="form-control" id="projectName" name="projectName"
                            value="${appKey.projectName!command.projectName}" placeholder="AppKey项目名称"
-                           data-parsley-required="true" data-parsley-required-message="AppKey项目名不能为空"
+                           data-parsley-required="true" data-parsley-required-messages="AppKey项目名不能为空"
                            data-parsley-trigger="change"/>
                     [@spring.showErrors "projectName" "parsley-required"/]
                 </div>
@@ -55,7 +55,7 @@ AppKey 修改
                 <div class="col-md-9">
                     <input class="form-control" id="description" name="description"
                            value="${appKey.description!command.description}" placeholder="AppKey描述"
-                           data-parsley-required="true" data-parsley-required-message="AppKey描述不能为空"
+                           data-parsley-required="true" data-parsley-required-messages="AppKey描述不能为空"
                            data-parsley-trigger="change"/>
                     [@spring.showErrors "description" "parsley-required"/]
                 </div>

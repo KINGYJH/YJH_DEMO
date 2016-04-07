@@ -1,11 +1,11 @@
 package com.yjh.demo.application.auth;
 
+import com.yjh.demo.application.account.IAccountAppService;
+import com.yjh.demo.application.account.representation.AccountRepresentation;
 import com.yjh.demo.application.auth.command.LoginCommand;
 import com.yjh.demo.application.permission.IPermissionAppService;
 import com.yjh.demo.application.permission.command.ListPermissionCommand;
 import com.yjh.demo.application.permission.representation.PermissionRepresentation;
-import com.yjh.demo.application.user.IUserAppService;
-import com.yjh.demo.application.user.representation.UserRepresentation;
 import com.yjh.demo.core.common.GlobalConfig;
 import com.yjh.demo.core.enums.EnableStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.List;
 public class AuthAppService implements IAuthAppService {
 
     @Autowired
-    private IUserAppService userAppService;
+    private IAccountAppService accountAppService;
 
     @Autowired
     private IPermissionAppService permissionAppService;
@@ -29,8 +29,8 @@ public class AuthAppService implements IAuthAppService {
     private GlobalConfig globalConfig;
 
     @Override
-    public UserRepresentation searchByName(String userName, String appKey) {
-        return userAppService.searchByName(userName, appKey);
+    public AccountRepresentation searchByAccountName(String userName, String appKey) {
+        return accountAppService.searchByAccountName(userName, appKey);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class AuthAppService implements IAuthAppService {
     }
 
     @Override
-    public UserRepresentation login(LoginCommand command) {
-        return userAppService.login(command);
+    public AccountRepresentation login(LoginCommand command) {
+        return accountAppService.login(command);
     }
 }

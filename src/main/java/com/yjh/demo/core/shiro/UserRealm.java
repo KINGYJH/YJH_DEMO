@@ -3,7 +3,7 @@ package com.yjh.demo.core.shiro;
 import com.yjh.demo.application.auth.IAuthAppService;
 import com.yjh.demo.application.permission.representation.PermissionRepresentation;
 import com.yjh.demo.application.role.representation.RoleRepresentation;
-import com.yjh.demo.application.user.representation.UserRepresentation;
+import com.yjh.demo.application.account.representation.AccountRepresentation;
 import com.yjh.demo.core.common.GlobalConfig;
 import com.yjh.demo.core.enums.EnableStatus;
 import org.apache.shiro.authc.*;
@@ -39,7 +39,7 @@ public class UserRealm extends AuthorizingRealm {
         ExtendSimplePrincipalCollection principalCollection = (ExtendSimplePrincipalCollection) principals;
         String userName = (String) principalCollection.getPrimaryPrincipal();
         String appKey = principalCollection.getAppKey();
-        UserRepresentation user = authAppService.searchByName(userName, appKey);
+        AccountRepresentation user = authAppService.searchByAccountName(userName, appKey);
         SimpleAuthorizationInfo authenticationInfo = new SimpleAuthorizationInfo();
         authenticationInfo.setRoles(this.getAllRoles(user));
         authenticationInfo.setStringPermissions(this.getAllPermissions(user));
@@ -52,7 +52,7 @@ public class UserRealm extends AuthorizingRealm {
      * @param user
      * @return
      */
-    private Set<String> getAllRoles(UserRepresentation user) {
+    private Set<String> getAllRoles(AccountRepresentation user) {
         Set<String> roles = new HashSet<String>();
         List<RoleRepresentation> roleList = user.getRoles();
         if (!roleList.isEmpty()) {
@@ -71,7 +71,7 @@ public class UserRealm extends AuthorizingRealm {
      * @param user
      * @return
      */
-    private Set<String> getAllPermissions(UserRepresentation user) {
+    private Set<String> getAllPermissions(AccountRepresentation user) {
         Set<String> permissions = new HashSet<String>();
         List<RoleRepresentation> roleList = user.getRoles();
         if (!roleList.isEmpty()) {
@@ -100,7 +100,7 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        UserRepresentation user = authAppService.searchByName(token.getPrincipal().toString(), ((UsernamePasswordAppKeyToken) token).getAppKey());
+        AccountRepresentation user = authAppService.searchByAccountName(token.getPrincipal().toString(), ((UsernamePasswordAppKeyToken) token).getAppKey());
 
         if (null == user) {
             throw new UnknownAccountException(); //用户不存在

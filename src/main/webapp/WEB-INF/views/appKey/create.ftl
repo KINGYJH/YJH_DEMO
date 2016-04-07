@@ -27,7 +27,7 @@ AppKey 创建
                 <div class="col-md-9">
                     <input class="form-control" id="name" name="name"
                            value="${command.name!}" placeholder="输入AppKey名称"
-                           data-parsley-required="true" data-parsley-required-message="AppKey名称不能为空"
+                           data-parsley-required="true" data-parsley-required-messages="AppKey名称不能为空"
                            data-parsley-trigger="change"/>
                     [@spring.showErrors "name" "parsley-required"/]
                 </div>
@@ -39,7 +39,7 @@ AppKey 创建
                 <div class="col-md-9">
                     <input class="form-control" id="projectName" name="projectName"
                            value="${command.projectName!}" placeholder="AppKey项目名称"
-                           data-parsley-required="true" data-parsley-required-message="AppKey项目名不能为空"
+                           data-parsley-required="true" data-parsley-required-messages="AppKey项目名不能为空"
                            data-parsley-trigger="change"/>
                     [@spring.showErrors "projectName" "parsley-required"/]
                 </div>
@@ -51,7 +51,7 @@ AppKey 创建
                 <div class="col-md-9">
                     <input class="form-control" id="description" name="description"
                            value="${command.description!}" placeholder="AppKey描述"
-                           data-parsley-required="true" data-parsley-required-message="AppKey描述不能为空"
+                           data-parsley-required="true" data-parsley-required-messages="AppKey描述不能为空"
                            data-parsley-trigger="change"/>
                     [@spring.showErrors "description" "parsley-required"/]
                 </div>
@@ -62,7 +62,7 @@ AppKey 创建
                 <label for="status" class="col-md-3 control-label">AppKey状态*</label>
                 <div class="col-md-9">
                     <select class="form-control" name="status"
-                            data-parsley-required="true" data-parsley-required-message="请选择AppKey状态"
+                            data-parsley-required="true" data-parsley-required-messages="请选择AppKey状态"
                             data-parsley-trigger="change">
                         [#assign status = (command.status!)?default("") /]
                         <option value="">请选择</option>

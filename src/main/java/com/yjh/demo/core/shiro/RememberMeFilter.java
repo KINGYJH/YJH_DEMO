@@ -2,7 +2,7 @@ package com.yjh.demo.core.shiro;
 
 import com.yjh.demo.application.auth.IAuthAppService;
 import com.yjh.demo.application.auth.command.LoginCommand;
-import com.yjh.demo.application.user.representation.UserRepresentation;
+import com.yjh.demo.application.account.representation.AccountRepresentation;
 import com.yjh.demo.core.common.GlobalConfig;
 import com.yjh.demo.core.util.CoreHttpUtils;
 import com.yjh.demo.core.util.CoreRc4Utils;
@@ -58,7 +58,7 @@ public class RememberMeFilter implements Filter {
                     command.setPassword(arr[1]);
                     command.setRememberMe(true);
                     try {
-                        UserRepresentation user = authAppService.login(command);
+                        AccountRepresentation user = authAppService.login(command);
                         session = request.getSession(false);
                         session.setAttribute(globalConfig.getSessionUser(), user);
                         CoreHttpUtils.writeCookie(command, request, response, globalConfig);
