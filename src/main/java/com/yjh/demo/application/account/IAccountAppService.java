@@ -34,4 +34,6 @@ public interface IAccountAppService {
     void updateAppKey(UpdateUserAppKeyCommand command);
 
     AccountRepresentation login(LoginCommand command);
+
+    Pagination<AccountRepresentation> paginationJSON(ListAccountCommand command);
 }

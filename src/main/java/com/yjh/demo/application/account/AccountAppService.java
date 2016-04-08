@@ -90,4 +90,13 @@ public class AccountAppService implements IAccountAppService {
     public AccountRepresentation login(LoginCommand command) {
         return mappingService.map(accountService.login(command), AccountRepresentation.class, false);
     }
+
+    @Override
+    public Pagination<AccountRepresentation> paginationJSON(ListAccountCommand command) {
+        command.verifyPage();
+        command.setUserName(command.getAccountUserName());
+        Pagination<Account> pagination = accountService.pagination(command);
+        List<AccountRepresentation> data = mappingService.mapAsList(pagination.getData(), AccountRepresentation.class);
+        return new Pagination<AccountRepresentation>(data, pagination.getCount(), pagination.getPage(), pagination.getPageSize());
+    }
 }

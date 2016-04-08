@@ -7,6 +7,7 @@ import com.yjh.demo.application.shared.command.SharedCommand;
 import com.yjh.demo.core.exception.ConcurrencyException;
 import com.yjh.demo.core.exception.ExistException;
 import com.yjh.demo.core.exception.NoFoundException;
+import com.yjh.demo.infrastructure.persistence.hibernate.generic.Pagination;
 import com.yjh.demo.interfaces.shared.web.AlertMessage;
 import com.yjh.demo.interfaces.shared.web.BaseController;
 import org.slf4j.Logger;
@@ -14,10 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -40,6 +38,12 @@ public class AccountController extends BaseController {
     @RequestMapping(value = "/pagination.htm")
     public ModelAndView pagination(ListAccountCommand command) {
         return new ModelAndView("/account/list", "pagination", accountAppService.pagination(command)).addObject("command", command);
+    }
+
+    @RequestMapping(value = "/list")
+    @ResponseBody
+    public Pagination<AccountRepresentation> list(@RequestBody ListAccountCommand command) {
+        return accountAppService.paginationJSON(command);
     }
 
     @RequestMapping(value = "/create.htm", method = RequestMethod.GET)

@@ -12,6 +12,8 @@ public class ListAccountCommand extends BasicPaginationCommand {
     private String appKey;
     private EnableStatus status;
 
+    private String accountUserName;
+
     public String getUserName() {
         return userName;
     }
@@ -34,5 +36,13 @@ public class ListAccountCommand extends BasicPaginationCommand {
 
     public void setStatus(EnableStatus status) {
         this.status = status;
+    }
+
+    public String getAccountUserName() {
+        return accountUserName;
+    }
+
+    public void setAccountUserName(String accountUserName) {
+        this.accountUserName = accountUserName;
     }
 }

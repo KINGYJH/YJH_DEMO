@@ -1,5 +1,7 @@
 package com.yjh.demo.application.messages.command;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.List;
 
 /**
@@ -9,7 +11,9 @@ public class CreateMessagesCommand {
 
     private List<String> roles;
     private List<String> receiveAccounts;
+    @NotBlank(message = "{messages.title,NotBlank.message}")
     private String title;
+    @NotBlank(message = "{messages.content,NotBlank.message}")
     private String content;
     private String sendAccount;
 
