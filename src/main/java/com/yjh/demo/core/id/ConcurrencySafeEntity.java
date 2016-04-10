@@ -11,7 +11,7 @@ public class ConcurrencySafeEntity extends Entity {
 
     private Integer version;
 
-    private Date updateDate;    //数据更新时间
+    private Date createDate;    //数据更新时间
 
     protected ConcurrencySafeEntity() {
         super();
@@ -21,22 +21,21 @@ public class ConcurrencySafeEntity extends Entity {
         return version;
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    protected void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
     public void setVersion(Integer version) {
         this.version = version;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
     }
 
     public void fainWhenConcurrencyViolation(Integer version) {
         if (!version.equals(this.getVersion())) {
             throw new ConcurrencyException("记录在提交之前已发生改变[id=" + this.getId() + "],请重新提交.");
         }
-        this.updateDate = new Date();
     }
 }

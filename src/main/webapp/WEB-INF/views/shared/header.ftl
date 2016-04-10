@@ -104,12 +104,13 @@
                 <ul class="nav-notification">
                     <li>
                         <a href="#" data-toggle="dropdown"><i class="fa fa-envelope fa-lg"></i></a>
-                        <span class="badge badge-purple bounceIn animation-delay5 active">2</span>
-                        <ul class="dropdown-menu messages pull-right">
-                            <li><a>You have 4 new unread messages</a></li>
+                        <span class="badge badge-purple bounceIn animation-delay5 active">1</span>
+                        <ul class="dropdown-menu message pull-right">
+                            <li><a>您有<span>1</span>个新的未读邮件</a></li>
                             <li>
                                 <a class="clearfix" href="#">
-                                    <img src="[@spring.url '/resources/images/profile/profile2.jpg'/]" alt="User Avatar">
+                                    <img src="[@spring.url '/resources/images/profile/profile2.jpg'/]"
+                                         alt="User Avatar">
                                     <div class="detail">
                                         <strong>John Doe</strong>
                                         <p class="no-margin">
@@ -120,97 +121,22 @@
                                     </div>
                                 </a>
                             </li>
-                            <li>
-                                <a class="clearfix" href="#">
-                                    <img src="[@spring.url '/resources/images/profile/profile3.jpg'/]" alt="User Avatar">
-                                    <div class="detail">
-                                        <strong>Jane Doe</strong>
-                                        <p class="no-margin">
-                                            Lorem ipsum dolor sit amet...
-                                        </p>
-                                        <small class="text-muted"><i class="fa fa-check text-success"></i> 5hr ago
-                                        </small>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="clearfix" href="#">
-                                    <img src="[@spring.url '/resources/images/profile/profile4.jpg'/]" alt="User Avatar">
-                                    <div class="detail m-left-sm">
-                                        <strong>Bill Doe</strong>
-                                        <p class="no-margin">
-                                            Lorem ipsum dolor sit amet...
-                                        </p>
-                                        <small class="text-muted"><i class="fa fa-reply"></i> Yesterday</small>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="clearfix" href="#">
-                                    <img src="[@spring.url '/resources/images/profile/profile5.jpg'/]" alt="User Avatar">
-                                    <div class="detail">
-                                        <strong>Baby Doe</strong>
-                                        <p class="no-margin">
-                                            Lorem ipsum dolor sit amet...
-                                        </p>
-                                        <small class="text-muted"><i class="fa fa-reply"></i> 9 Feb 2013</small>
-                                    </div>
-                                </a>
-                            </li>
-                            <li><a href="#">View all messages</a></li>
+                            <li><a href="[@spring.url '/messages/pagination.htm'/]">查看所有邮件</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="#" data-toggle="dropdown"><i class="fa fa-bell fa-lg"></i></a>
-                        <span class="badge badge-info bounceIn animation-delay6 active">4</span>
+                        <span class="badge badge-info bounceIn animation-delay6 active">1</span>
                         <ul class="dropdown-menu notification dropdown-3 pull-right">
-                            <li><a href="#">You have 5 new notifications</a></li>
+                            <li><a>您有<span>1</span>个新的通知</a></li>
                             <li>
                                 <a href="#">
-												<span class="notification-icon bg-warning">
-													<i class="fa fa-warning"></i>
-												</span>
+                                    <span class="notification-icon bg-warning"><i class="fa fa-warning"></i></span>
                                     <span class="m-left-xs">Server #2 not responding.</span>
                                     <span class="time text-muted">Just now</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-												<span class="notification-icon bg-success">
-													<i class="fa fa-plus"></i>
-												</span>
-                                    <span class="m-left-xs">New account registration.</span>
-                                    <span class="time text-muted">2m ago</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-												<span class="notification-icon bg-danger">
-													<i class="fa fa-bolt"></i>
-												</span>
-                                    <span class="m-left-xs">Application error.</span>
-                                    <span class="time text-muted">5m ago</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-												<span class="notification-icon bg-success">
-													<i class="fa fa-usd"></i>
-												</span>
-                                    <span class="m-left-xs">2 items sold.</span>
-                                    <span class="time text-muted">1hr ago</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-												<span class="notification-icon bg-success">
-													<i class="fa fa-plus"></i>
-												</span>
-                                    <span class="m-left-xs">New account registration.</span>
-                                    <span class="time text-muted">1hr ago</span>
-                                </a>
-                            </li>
-                            <li><a href="#">View all notifications</a></li>
+                            <li><a href="#">查看所有通知</a></li>
                         </ul>
                     </li>
                     <li class="chat-notification">

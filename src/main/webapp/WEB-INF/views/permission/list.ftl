@@ -81,7 +81,7 @@
                             <th>权限值</th>
                             <th>权限描述</th>
                             <th>appKey</th>
-                            <th>权限最近更新时间</th>
+                            <th>权限创建时间</th>
                             <th>权限状态</th>
                             <th>操作</th>
                         </tr>
@@ -94,7 +94,7 @@
                                     <td>${permission.value!}</td>
                                     <td>${permission.description!}</td>
                                     <td>${permission.appKey.name!}</td>
-                                    <td>${permission.updateDate?datetime}</td>
+                                    <td>[@mc.dateShow permission.createDate/]</td>
                                     <td>${(permission.status.getName())!}</td>
                                     <td>
                                         <a href="[@spring.url '/permission/info.htm/${permission.id!}'/]"

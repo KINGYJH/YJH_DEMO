@@ -12,11 +12,11 @@ import java.util.List;
  */
 public class EditAccountCommand extends SharedCommand {
 
-    @NotNull(message = "{user.roles.NotNull.Messages}")
+    @NotNull(message = "{user.roles.NotNull.messages}")
     private List<String> roles;            //用户角色
-    @NotBlank(message = "{user.appKey.NotBlank.Messages}")
+    @NotBlank(message = "{user.appKey.NotBlank.messages}")
     private String appKey;          //应用标识
-    @NotNull(message = "{user.status.NotNull.Messages}")
+    @NotNull(message = "{user.status.NotNull.messages}")
     private EnableStatus status;     //状态
 
     public List<String> getRoles() {

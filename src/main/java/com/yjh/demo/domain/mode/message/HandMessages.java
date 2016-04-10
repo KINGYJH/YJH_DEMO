@@ -5,6 +5,8 @@ import com.yjh.demo.core.enums.ReadStatus;
 import com.yjh.demo.core.id.ConcurrencySafeEntity;
 import com.yjh.demo.domain.mode.account.Account;
 
+import java.util.Date;
+
 /**
  * Created by YJH on 2016/4/7.
  */
@@ -100,5 +102,6 @@ public class HandMessages extends ConcurrencySafeEntity {
         this.sendStatus = sendStatus;
         this.receiveStatus = receiveStatus;
         this.readStatus = readStatus;
+        this.setCreateDate(new Date());
     }
 }

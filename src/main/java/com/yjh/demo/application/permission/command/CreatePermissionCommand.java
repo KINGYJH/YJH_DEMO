@@ -11,15 +11,15 @@ import javax.validation.constraints.NotNull;
  */
 public class CreatePermissionCommand {
 
-    @NotBlank(message = "{permission.name.NotBlank.Messages}")
+    @NotBlank(message = "{permission.name.NotBlank.messages}")
     private String name;            //权限名称
-    @NotBlank(message = "{permission.description.NotBlank.Messages}")
+    @NotBlank(message = "{permission.description.NotBlank.messages}")
     private String description;        //权限描述
-    @NotBlank(message = "{permission.value.NotBlank.Messages}")
+    @NotBlank(message = "{permission.value.NotBlank.messages}")
     private String value;           //权限默认值
-    @NotBlank(message = "{permission.appKey.NotBlank.Messages}")
+    @NotBlank(message = "{permission.appKey.NotBlank.messages}")
     private String appKey;          //应用标识ID
-    @NotNull(message = "{permission.status.NotNull.Messages}")
+    @NotNull(message = "{permission.status.NotNull.messages}")
     private EnableStatus status;    //状态
 
     public String getName() {

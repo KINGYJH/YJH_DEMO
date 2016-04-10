@@ -74,7 +74,7 @@ AppKey 管理
                             <th>AppKey名称</th>
                             <th>AppKey项目名</th>
                             <th>AppKey描述</th>
-                            <th>AppKey最近更新时间</th>
+                            <th>AppKey创建时间</th>
                             <th>AppKey状态</th>
                             <th>操作</th>
                         </tr>
@@ -86,7 +86,7 @@ AppKey 管理
                                     <td>${appKey.name!}</td>
                                     <td>${appKey.projectName!}</td>
                                     <td>${appKey.description!}</td>
-                                    <td>${appKey.updateDate?datetime}</td>
+                                    <td>[@mc.dateShow appKey.createDate/]</td>
                                     <td>${(appKey.status.getName())!}</td>
                                     <td>
                                         <a href="[@spring.url '/app_key/info.htm/${appKey.id!}'/]" data-toggle="tooltip"

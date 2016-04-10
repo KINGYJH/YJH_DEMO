@@ -3,11 +3,5 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
-    <bean id="globalConfig" class="com.yjh.demo.core.common.GlobalConfig">
-        <property name="appKey" value="${project.appKey}"/>
-        <property name="sessionUser" value="${project.sessionUser}"/>
-        <property name="cookieUser" value="${project.cookieUser}"/>
-        <property name="passwordEncryptKey" value="${project.passwordEncryptKey}"/>
-    </bean>
+    <bean id="mappingService" class="com.yjh.demo.core.mapping.MappingService"/>
 </beans>

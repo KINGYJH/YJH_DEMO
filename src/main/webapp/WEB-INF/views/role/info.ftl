@@ -34,8 +34,8 @@
                 <div class="col-md-8 contract-box">${role.appKey.name!}</div>
             </li>
             <li>
-                <span class="col-md-3">角色最近更新时间</span>
-                <div class="col-md-8 contract-box">${role.updateDate?datetime!}</div>
+                <span class="col-md-3">角色创建时间</span>
+                <div class="col-md-8 contract-box">[@mc.dateShow role.createDate/]</div>
             </li>
             <li>
                 <span class="col-md-3">角色状态</span>
@@ -45,16 +45,16 @@
                 <span class="col-md-3">角色权限</span>
                 <div class="col-md-8 margin-md">
                     <div class="data-list">
-                    <ul class="contract-show margin-sm">
-                        [#if role.permissions??]
-                            [#list role.permissions as permission]
-                                <li>
-                                    <div class="col-md-12 contract-box">${permission.name!}
-                                        -----${permission.description!}</div>
-                                </li>
-                            [/#list]
-                        [/#if]
-                    </ul>
+                        <ul class="contract-show margin-sm">
+                            [#if role.permissions??]
+                                [#list role.permissions as permission]
+                                    <li>
+                                        <div class="col-md-12 contract-box">${permission.name!}
+                                            -----${permission.description!}</div>
+                                    </li>
+                                [/#list]
+                            [/#if]
+                        </ul>
                     </div>
                 </div>
             </li>

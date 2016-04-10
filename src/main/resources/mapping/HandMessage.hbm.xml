@@ -10,7 +10,7 @@
 
         <version column="version" name="version" type="java.lang.Integer"/>
 
-        <property name="updateDate" column="update_date" type="java.util.Date"/>
+        <property name="createDate" column="create_date" type="java.util.Date"/>
 
         <many-to-one name="senderAccount" column="send_account_id" class="com.yjh.demo.domain.mode.account.Account"/>
         <many-to-one name="receiveAccount" column="receive_account_id"

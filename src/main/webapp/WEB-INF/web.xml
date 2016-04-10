@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xmlns="http://java.sun.com/xml/ns/javaee"
  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
- id="pengyi" version="3.0">
+ id="YJH_DEMO" version="3.0">
 
 
     <!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
@@ -27,6 +27,7 @@
             <param-name>forceEncoding</param-name>
             <param-value>true</param-value>
         </init-param>
+        <async-supported>true</async-supported>
     </filter>
     <filter-mapping>
         <filter-name>encoding</filter-name>
@@ -41,13 +42,14 @@
             <param-value>classpath*:spring-mvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!--The filter-name matches name of a 'shiroFilter' bean inside applicationContext.xml-->
+    <!--The filter-name matches name of a 'shiroFilter' WebSocketClient inside applicationContext.xml-->
     <filter>
         <filter-name>shiroFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -56,6 +58,7 @@
             <param-name>targetFilterLifecycle</param-name>
             <param-value>true</param-value>
         </init-param>
+        <async-supported>true</async-supported>
     </filter>
 
     <!--Make sure any request you want accessible to Shiro is filtered. /* catches all -->
@@ -74,6 +77,7 @@
             <param-name>targetFilterLifecycle</param-name>
             <param-value>true</param-value>
         </init-param>
+        <async-supported>true</async-supported>
     </filter>
 
     <filter-mapping>

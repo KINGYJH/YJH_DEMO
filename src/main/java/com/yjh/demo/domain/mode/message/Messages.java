@@ -45,6 +45,7 @@ public class Messages extends ConcurrencySafeEntity {
         this.title = title;
         this.content = content;
         this.sendDate = sendDate;
+        this.setCreateDate(new Date());
     }
 
 }

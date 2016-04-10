@@ -1,7 +1,7 @@
 package com.yjh.demo.core.util;
 
 import com.yjh.demo.application.auth.command.LoginCommand;
-import com.yjh.demo.core.common.GlobalConfig;
+import com.yjh.demo.core.common.Constants;
 import com.yjh.demo.core.util.httpclient.CustomHttpClient;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
@@ -20,7 +20,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
@@ -305,16 +304,15 @@ public class CoreHttpUtils {
      * @param command
      * @param request
      * @param response
-     * @param globalConfig
      */
-    public static void writeCookie(LoginCommand command, HttpServletRequest request, HttpServletResponse response, GlobalConfig globalConfig) {
+    public static void writeCookie(LoginCommand command, HttpServletRequest request, HttpServletResponse response) {
         if (command.isRememberMe()) {
             String encryptStr = command.getUserName() + "," + command.getPassword();
-            Cookie cookie = new Cookie(globalConfig.getCookieUser(), CoreRc4Utils.encry_RC4_string(encryptStr, globalConfig.getPasswordEncryptKey()));
+            Cookie cookie = new Cookie(Constants.COOKIE_USER, CoreRc4Utils.encry_RC4_string(encryptStr, Constants.PASSWORD_ENCRYP_KEY));
             cookie.setMaxAge(604800);
             response.addCookie(cookie);
         } else {
-            clearCookie(request, response, globalConfig);
+            clearCookie(request, response);
         }
     }
 
@@ -323,13 +321,12 @@ public class CoreHttpUtils {
      *
      * @param request
      * @param response
-     * @param globalConfig 配置信息
      */
-    public static void clearCookie(HttpServletRequest request, HttpServletResponse response, GlobalConfig globalConfig) {
+    public static void clearCookie(HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
         if (null != cookies && cookies.length > 0) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(globalConfig.getCookieUser())) {
+                if (cookie.getName().equals(Constants.COOKIE_USER)) {
                     cookie.setMaxAge(0);
                     response.addCookie(cookie);
                     break;

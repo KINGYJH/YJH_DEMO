@@ -1,7 +1,7 @@
 package com.yjh.demo.core.shiro;
 
 import com.yjh.demo.application.account.representation.AccountRepresentation;
-import com.yjh.demo.core.common.GlobalConfig;
+import com.yjh.demo.core.common.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -16,9 +16,6 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 
     private static final String[] IGNORE_URI = {"/", "/login.htm", "resources/"};
 
-    @Autowired
-    private GlobalConfig globalConfig;
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         boolean flag = false;
@@ -30,7 +27,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
             }
         }
         if (!flag) {
-            AccountRepresentation user = (AccountRepresentation) request.getSession().getAttribute(globalConfig.getSessionUser());
+            AccountRepresentation user = (AccountRepresentation) request.getSession().getAttribute(Constants.SESSION_USER);
             if (user != null) {
                 flag = true;
             }

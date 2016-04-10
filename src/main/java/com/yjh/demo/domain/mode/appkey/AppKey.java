@@ -72,6 +72,6 @@ public class AppKey extends ConcurrencySafeEntity {
         this.description = description;
         this.projectName = projectName;
         this.status = status;
-        this.setUpdateDate(new Date());
+        this.setCreateDate(new Date());
     }
 }

@@ -9,7 +9,7 @@ public class MessagesRepresentation {
 
     private String id;
     private Integer version;
-    private Date updateDate;
+    private Date createDate;
 
     private String title;   //标题
     private String content; //内容
@@ -31,12 +31,12 @@ public class MessagesRepresentation {
         this.version = version;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public String getTitle() {

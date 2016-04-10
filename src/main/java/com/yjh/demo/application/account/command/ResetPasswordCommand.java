@@ -8,10 +8,10 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class ResetPasswordCommand extends SharedCommand {
 
-    @NotBlank(message = "{user.password.NotBlank.Messages}")
+    @NotBlank(message = "{user.password.NotBlank.messages}")
     private String password;
 
-    @NotBlank(message = "{user.confirmPassword.NotBlank.Messages}")
+    @NotBlank(message = "{user.confirmPassword.NotBlank.messages}")
     private String confirmPassword; //确认密码
 
     public String getPassword() {

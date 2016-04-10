@@ -81,12 +81,12 @@ public class Permission extends ConcurrencySafeEntity {
         super();
     }
 
-    public Permission(String name, String description, String value, AppKey appKey,EnableStatus status) {
+    public Permission(String name, String description, String value, AppKey appKey, EnableStatus status) {
         this.name = name;
         this.description = description;
         this.value = value;
         this.appKey = appKey;
         this.status = status;
-        this.setUpdateDate(new Date());
+        this.setCreateDate(new Date());
     }
 }

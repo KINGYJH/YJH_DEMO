@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+
+    <!-- websocket消息处理bean -->
+    <bean id="messagesHandler" class="com.yjh.demo.core.websocket.messages.MessagesHandler"/>
+    <websocket:handlers>
+        <!-- 配置消息处理bean和路径的映射关系 -->
+        <websocket:mapping path="/messages_webSocket" handler="messagesHandler"/>
+        <!-- 配置握手拦截器 -->
+        <websocket:handshake-interceptors>
+            <bean class="com.yjh.demo.core.websocket.messages.MessagesHandShakeInterceptor"/>
+        </websocket:handshake-interceptors>
+        <!-- 开启sockjs，去掉则关闭sockjs -->
+        <websocket:sockjs/>
+    </websocket:handlers>
+    <!-- 配置websocket消息的最大缓冲区长度 -->
+    <bean class="org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean">
+        <property name="maxTextMessageBufferSize" value="8192"/>
+        <property name="maxBinaryMessageBufferSize" value="8192"/>
+    </bean>
+
+</beans>

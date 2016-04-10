@@ -40,6 +40,9 @@ public class PermissionService implements IPermissionService {
     @Override
     public Pagination<Permission> pagination(ListPermissionCommand command) {
         List<Criterion> criterionList = new ArrayList<Criterion>();
+        if (null != command.getIds() && command.getIds().size() > 0) {
+            criterionList.add(Restrictions.in("id", command.getIds()));
+        }
         if (!CoreStringUtils.isEmpty(command.getName())) {
             criterionList.add(Restrictions.like("name", command.getName(), MatchMode.ANYWHERE));
         }
@@ -50,7 +53,7 @@ public class PermissionService implements IPermissionService {
             criterionList.add(Restrictions.eq("status", command.getStatus()));
         }
         List<Order> orderList = new ArrayList<Order>();
-        orderList.add(Order.desc("updateDate"));
+        orderList.add(Order.desc("createDate"));
         return permissionRepository.pagination(command.getPage(), command.getPageSize(), criterionList, orderList);
     }
 
@@ -66,7 +69,7 @@ public class PermissionService implements IPermissionService {
             criterionList.add(Restrictions.eq("status", command.getStatus()));
         }
         List<Order> orderList = new ArrayList<Order>();
-        orderList.add(Order.desc("updateDate"));
+        orderList.add(Order.desc("createDate"));
         return permissionRepository.list(criterionList, orderList, null, null, alias);
     }
 

@@ -3,7 +3,7 @@ package com.yjh.demo.domain.service.account;
 import com.yjh.demo.application.account.command.*;
 import com.yjh.demo.application.auth.command.LoginCommand;
 import com.yjh.demo.application.shared.command.SharedCommand;
-import com.yjh.demo.core.common.GlobalConfig;
+import com.yjh.demo.core.common.Constants;
 import com.yjh.demo.core.common.PasswordHelper;
 import com.yjh.demo.core.enums.EnableStatus;
 import com.yjh.demo.core.exception.ExistException;
@@ -27,9 +27,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by YJH on 2016/3/30.
@@ -45,9 +43,6 @@ public class AccountService implements IAccountService {
 
     @Autowired
     private IAppKeyService appKeyService;
-
-    @Autowired
-    private GlobalConfig globalConfig;
 
     @Override
     public Pagination<Account> pagination(ListAccountCommand command) {
@@ -70,7 +65,7 @@ public class AccountService implements IAccountService {
     public List<Account> list(ListAccountCommand command) {
         List<Criterion> criterionList = new ArrayList<Criterion>();
         List<Order> orderList = new ArrayList<Order>();
-        orderList.add(Order.desc("updateDate"));
+        orderList.add(Order.desc("createDate"));
         return accountRepository.list(criterionList, orderList);
     }
 
@@ -98,7 +93,7 @@ public class AccountService implements IAccountService {
         String salt = PasswordHelper.getSalt();
         String password = PasswordHelper.encryptPassword(command.getPassword(), salt);
         Account account = new Account(command.getUserName(), password, salt, null, null, null,
-                roleList, new Date(), appKey, command.getStatus());
+                roleList, appKey, command.getStatus());
         accountRepository.save(account);
         return account;
     }
@@ -157,7 +152,7 @@ public class AccountService implements IAccountService {
 
     @Override
     public Account login(LoginCommand command) {
-        Account account = this.searchByAccountName(command.getUserName(), globalConfig.getAppKey());
+        Account account = this.searchByAccountName(command.getUserName(), Constants.APP_KRY);
         if (null == account) {
             throw new UnknownAccountException();
         }
@@ -166,7 +161,7 @@ public class AccountService implements IAccountService {
         UsernamePasswordAppKeyToken token = new UsernamePasswordAppKeyToken(
                 command.getUserName(),
                 command.getPassword(),
-                globalConfig.getAppKey());
+                Constants.APP_KRY);
         subject.login(token);
 
         account.changeLastLoginIP(command.getLoginIP());
@@ -189,7 +184,9 @@ public class AccountService implements IAccountService {
     @Override
     public List<Account> searchByRoleIDs(List<String> ids) {
         List<Criterion> criterionList = new ArrayList<Criterion>();
-        criterionList.add(Restrictions.in("roles.id", ids));
-        return accountRepository.list(criterionList, null);
+        criterionList.add(Restrictions.in("role.id", ids));
+        Map<String, String> alias = new HashMap<String, String>();
+        alias.put("roles", "role");
+        return accountRepository.list(criterionList, null, null, null, alias);
     }
 }

@@ -28,7 +28,7 @@
             <div class="form-group">
                 <label for="name" class="col-md-3 control-label">用户名*</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" value="${account.userName!}"  disabled/>
+                    <input type="text" class="form-control" value="${account.userName!}" disabled/>
                 </div>
             </div>
 
@@ -38,11 +38,11 @@
                 <div class="col-md-9">
                     <div class="col-md-10 div-input role-data">
                         [#if account.roles?size > 0]
-                            ${account.roles[0].name!}-------${account.roles[0].description!}
+                        ${account.roles[0].name!}-------${account.roles[0].description!}
                         [/#if]
                     </div>
                     <input type="hidden" name="roles" value="${account.roles[0].id!}" id="role"/>
-                    <button type="button" class="btn btn-primary col-md-2 modal-role-search-modal">点击选择角色</button>
+                    <button type="button" class="btn btn-primary col-md-2 role-modal-search-modal">点击选择角色</button>
                     [@spring.showErrors "role" "parsley-required"/]
                 </div>
             </div>
@@ -133,8 +133,9 @@
                             <h3><strong>已选</strong>列表</h3>
                         </div>
                         <div class="tile-body selector-box modal-search-selector">
-                            <button class="btn margin-top-15 btn-success modal-search-hide-modal">确定</button>
-                            <button class="btn margin-top-15 btn-danger selector-remove-all">删除全部</button>
+                            <button class="btn margin-top-15 btn-success role-modal-search-hide-modal">确定</button>
+                            <button class="btn margin-top-15 btn-danger role-selector-remove-all">删除全部</button>
+                            <div class="role-selector-box-data"></div>
                         </div>
                     </div>
                 </div>
@@ -142,36 +143,41 @@
 
         </div>
     </div>
-
 </div>
 [/@override]
 
 [@override name="bottomResources"]
     [@super /]
 <script src="[@spring.url '/resources/js/ajax.js'/]"></script>
-<script src="[@spring.url '/resources/js/modal-search-optimize.js'/]"></script>
+<script src="[@spring.url '/resources/js/modal-search-yjh.js'/]"></script>
 <script type="text/javascript">
     //加载appKey数据
     $("#appKey-modal").selectAjaxData({url: "/app_key/all_list"});
 
     var _roleName = $(".role-data");
     var _roleData = $("#role");
-    var modalSearch = new ModalSearch({
+    var _oldRoleIds = [];
+    _oldRoleIds.push(_roleData.val());
+    var _roleModal = new ModalSearch({
         url: "/role/list",
         pageSize: 6,
         isSingle: true,
         id: "role-modalSearch",
-        openModalBtn: ".modal-role-search-modal",
-        header: ['角色名称', '角色描述', 'AppKey'],
-        rowData: ["name", "description", "appKey.name"],
-        selectorData: ["name"],
+        openModalClass: ".role-modal-search-modal",
+        hideModalClass: ".role-modal-search-hide-modal",
+        removeAllClass: ".role-selector-remove-all",
+        selectorBoxClass: ".role-selector-box-data",
+        headers: ['角色名称', '角色描述', 'AppKey'],
+        rowDataName: ["name", "description", "appKey.name"],
+        selectorDateName: ["name"],
+        oldDataIds: _oldRoleIds,
         hideModalHandler: function (jsonDataArr) {
             _roleName.text("");
             _roleData.val("");
-            for (var key in jsonDataArr) {
-                _roleName.text(jsonDataArr[key].name + "-------" + jsonDataArr[key].description);
-                _roleData.val(jsonDataArr[key].id);
-            }
+            $.each(jsonDataArr, function (a, b) {
+                _roleName.text(b.name + "-------" + b.description);
+                _roleData.val(b.id);
+            })
         }
     });
 </script>

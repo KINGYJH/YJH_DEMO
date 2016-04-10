@@ -15,8 +15,10 @@
             isSingle: false,                           //是否单选
             openModalClass: ".modal-search-modal",      //打开弹窗的class
             hideModalClass: ".modal-search-hide-modal", //关闭弹窗的class
-            selectorRemoveAllClass: ".selector-remove-all",//移除所有选择class
-            pageSize: 10        //分页大小
+            removeAllClass: ".selector-remove-all",//移除所有选择class
+            selectorBoxClass: ".selector-box-data",//数据选择后放的容器
+            pageSize: 10,        //分页大小
+            oldDataIds: []       //之前数据ids
         };
         this.config = $.extend(defaultConfig, config || {});
         this.modal = $("#" + this.config.id);//弹窗容器
@@ -33,9 +35,10 @@
         init: function () {
             this._bind();
             this._tableHeaderRender();
+            this._loadOldDate();
         },
-
-        search: function () {
+        //数据请求
+        _search: function () {
             var _this = this;
             _this._updateSearchData();
             $.ajax({
@@ -51,25 +54,27 @@
                 }
             })
         },
-
+        //绑定事件
         _bind: function () {
             var _this = this;
             //点击查询
             this._form.find("button").on("click", function () {
-                _this.search();
+                _this._search();
             });
             //点击打开弹窗
             $(this.config.openModalClass).on("click", function () {
                 _this.modal.modal("show");
-                _this.search();
+                _this._search();
             });
             //点击确定
             $(this.config.hideModalClass).on("click", function () {
                 _this.modal.modal("hide");
                 _this.config.hideModalHandler(_this.allSelectedData);
             });
+            $(this.config.removeAllClass).on("click", function () {
+                _this._removeAll();
+            })
         },
-
         //加载table内容信息
         _tableBodyRender: function () {
             var _this = this;
@@ -77,7 +82,7 @@
             var _tbody = this._table.find('tbody');
             _tbody.empty();
             $(this.searchPaginationDate.data).each(function (index, data) {
-                _this._addAllData(data);
+                _this._addToAllData(data);
                 if (_this.config.isSingle) {
                     var dom_tr = $('<tr><td class="vertical-middle"><div class=\"radio modal-search-radio radio-transparent\"><input class=\"modal_input\" name="optionsRadios" type=\"radio\" vaule="' + data.id + '" id="' + data.id + '"  ><label for="' + data.id + '"></label>' + '</div></td></tr>');
                 } else {
@@ -113,20 +118,21 @@
                     _this._remove($(this).attr("vaule"));
                 }
             });
+            _this._loadCheckedStatus();
+            _this._loadSelectedData();
         },
-
         //加载table头部信息
         _tableHeaderRender: function () {
             var _thead = this._table.find("thead");
-            var sb = new StringBuilder("<th>请选择</th>")
+            var sb = new StringBuilder("<tr><th>请选择</th>")
             $.each(this.config.headers, function (index, element) {
                 sb.append("<th>")
                     .append(element)
                     .append("</th>");
             });
+            sb.append("</tr>");
             _thead.append(sb.toString());
         },
-
         //加载分页页码信息
         _paginationRender: function () {
             var count = this.searchPaginationDate.count;
@@ -177,7 +183,7 @@
             $(".pagination").find("li[class!='disabled']").on("click", function () {
                 _this._updateSearchData();
                 _this.searchCommand["page"] = $(this).find("a").attr("href");
-                _this.search();
+                _this._search();
                 return false;
             });
         },
@@ -190,7 +196,7 @@
             _that.searchCommand['pageSize'] = _that.config.pageSize;
         },
         //把新数据加入到所有数据中
-        _addAllData: function (data) {
+        _addToAllData: function (data) {
             var eq = true;
             $.each(this.allData, function (a, b) {
                 if (data.id == b.id) {
@@ -202,7 +208,7 @@
                 this.allData.push(data);
             }
         },
-
+        //添加已选
         _add: function (id) {
             var data;
             $.each(this.allData, function (a, b) {
@@ -220,6 +226,7 @@
                 this._loadSelectedData();
             }
         },
+        //移除已选
         _remove: function (id) {
             for (var j in this.allSelectedData) {
                 if (this.allSelectedData[j].id == id) {
@@ -228,13 +235,14 @@
             }
             this._loadSelectedData();
         },
+        //加载选中的数据
         _loadSelectedData: function () {
             var _this = this;
-            $('.selector-box-data').empty();
+            $(_this.config.selectorBoxClass).empty();
             $.each(_this.allSelectedData, function (index, element) {
                 if (typeof element != 'undefined') {
                     var togglerId = 'modalSearchSelector' + element.id;
-                    $('.selector-box-data').append("<div class='checkbox check-transparent'><a href='javascript:;' data-id='" + element.id + "' id='" + togglerId + "' class='check-toggler'></a></div>")
+                    $(_this.config.selectorBoxClass).append("<div class='checkbox check-transparent'><a href='javascript:;' data-id='" + element.id + "' id='" + togglerId + "' class='check-toggler'></a></div>")
                         .append('<div class="check-td-modal">' + element[_this.config.selectorDateName[0]] + '</div>');
                 }
             })
@@ -242,7 +250,7 @@
             $(".check-toggler").on("click", function () {
                 var removeId = $(this).attr("data-id");
                 _this._remove(removeId);
-                $(_this._table).find("input").each(function (index, element) {
+                $(_this._table).find("input").each(function (a, b) {
                     if ($(this).attr("vaule") == removeId) {
                         $(this).prop('checked', false)
                     }
@@ -250,6 +258,47 @@
                 $(this).parent(".checkbox").next("div").remove();
                 $(this).parent(".checkbox").remove();
             });
+        },
+        //加载数据选中input的状态
+        _loadCheckedStatus: function () {
+            var _this = this;
+            $(_this._table).find("input").each(function (index, element) {
+                $(element).prop('checked', false);
+                $.each(_this.allSelectedData, function (a, b) {
+                    if ($(element).attr("vaule") == b.id) {
+                        $(element).prop('checked', true);
+                    }
+                })
+            })
+        },
+        //移除全部
+        _removeAll: function () {
+            for (var j in this.allSelectedData) {
+                this.allSelectedData.splice(j, 1);
+            }
+            this._loadSelectedData();
+            this._loadCheckedStatus();
+        },
+        //加载之前数据
+        _loadOldDate: function () {
+            var _this = this;
+            if (this.config.oldDataIds.length > 0) {
+                _this.searchCommand["ids"] = this.config.oldDataIds;
+                _this.searchCommand["pageSize"] = 1000000;
+                $.ajax({
+                    url: _this.config.url,
+                    contentType: "application/json",
+                    type: "post",
+                    dataType: "json",
+                    data: JSON.stringify(_this.searchCommand),
+                    success: function (pagination) {
+                        $.each(pagination.data, function (a, b) {
+                            _this.allSelectedData.push(b);
+                        })
+                        _this.searchCommand["ids"] = [];
+                    }
+                })
+            }
         }
     };
 })();

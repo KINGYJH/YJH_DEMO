@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class UpdateUserAppKeyCommand extends SharedCommand {
 
-    @NotBlank(message = "{user.appKey.NotBlank.Messages}")
+    @NotBlank(message = "{user.appKey.NotBlank.messages}")
     private String appKey;
 
     public String getAppKey() {

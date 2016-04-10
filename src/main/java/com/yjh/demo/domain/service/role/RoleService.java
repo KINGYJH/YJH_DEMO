@@ -43,6 +43,9 @@ public class RoleService implements IRoleService {
     @Override
     public Pagination<Role> pagination(ListRoleCommand command) {
         List<Criterion> criterionList = new ArrayList<Criterion>();
+        if (null != command.getIds() && command.getIds().size() > 0) {
+            criterionList.add(Restrictions.in("id", command.getIds()));
+        }
         if (!CoreStringUtils.isEmpty(command.getName())) {
             criterionList.add(Restrictions.like("name", command.getName(), MatchMode.ANYWHERE));
         }
@@ -53,7 +56,7 @@ public class RoleService implements IRoleService {
             criterionList.add(Restrictions.eq("status", command.getStatus()));
         }
         List<Order> orderList = new ArrayList<Order>();
-        orderList.add(Order.desc("updateDate"));
+        orderList.add(Order.desc("createDate"));
         return roleRepository.pagination(command.getPage(), command.getPageSize(), criterionList, orderList);
     }
 
@@ -61,7 +64,7 @@ public class RoleService implements IRoleService {
     public List<Role> list(ListRoleCommand command) {
         List<Criterion> criterionList = new ArrayList<Criterion>();
         List<Order> orderList = new ArrayList<Order>();
-        orderList.add(Order.desc("updateDate"));
+        orderList.add(Order.desc("createDate"));
         return roleRepository.list(criterionList, orderList);
     }
 

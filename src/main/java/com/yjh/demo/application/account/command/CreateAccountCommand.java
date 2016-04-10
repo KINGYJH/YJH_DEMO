@@ -11,18 +11,18 @@ import java.util.List;
  */
 public class CreateAccountCommand {
 
-    @NotBlank(message = "{user.userName.NotBlank.Messages}")
+    @NotBlank(message = "{user.userName.NotBlank.messages}")
     private String userName;        //用户名
-    @NotBlank(message = "{user.password.NotBlank.Messages}")
+    @NotBlank(message = "{user.password.NotBlank.messages}")
     private String password;        //密码
-    @NotBlank(message = "{user.confirmPassword.NotBlank.Messages}")
+    @NotBlank(message = "{user.confirmPassword.NotBlank.messages}")
     private String confirmPassword; //确认密码
 
     private List<String> roles;            //用户角色
 
-    @NotBlank(message = "{user.appKey.NotBlank.Messages}")
+    @NotBlank(message = "{user.appKey.NotBlank.messages}")
     private String appKey;          //应用标识
-    @NotNull(message = "{user.status.NotNull.Messages}")
+    @NotNull(message = "{user.status.NotNull.messages}")
     private EnableStatus status;     //状态
 
     public String getUserName() {

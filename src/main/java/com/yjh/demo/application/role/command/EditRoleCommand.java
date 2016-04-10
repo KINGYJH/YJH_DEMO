@@ -13,13 +13,13 @@ import java.util.List;
  */
 public class EditRoleCommand extends SharedCommand {
 
-    @NotBlank(message = "{role.name.NotBlank.Messages}")
+    @NotBlank(message = "{role.name.NotBlank.messages}")
     private String name;                    //角色名称
-    @NotBlank(message = "{role.description.NotBlank.Messages}")
+    @NotBlank(message = "{role.description.NotBlank.messages}")
     private String description;                //角色描述
-    @NotEmpty(message = "{role.permissions.NotEmpty.Messages}")
+    @NotEmpty(message = "{role.permissions.NotEmpty.messages}")
     private List<String> permissions;   //角色包含的权限集合
-    @NotBlank(message = "{role.appKey.NotBlank.Messages}")
+    @NotBlank(message = "{role.appKey.NotBlank.messages}")
     private String appKey;                  //应用标识
 
     public String getName() {

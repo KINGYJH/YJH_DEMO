@@ -80,8 +80,8 @@
                             <th>角色名称</th>
                             <th>角色描述</th>
                             <th>appKey</th>
-                            <th>权限最近更新时间</th>
-                            <th>权限状态</th>
+                            <th>角色创建时间</th>
+                            <th>角色状态</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -92,7 +92,7 @@
                                     <td>${role.name!}</td>
                                     <td>${role.description!}</td>
                                     <td>${role.appKey.name!}</td>
-                                    <td>${role.updateDate?datetime}</td>
+                                    <td>[@mc.dateShow role.createDate/]</td>
                                     <td>${(role.status.getName())!}</td>
                                     <td>
                                         <a href="[@spring.url '/role/info.htm/${role.id!}'/]"

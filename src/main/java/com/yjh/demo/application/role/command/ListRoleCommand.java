@@ -3,6 +3,8 @@ package com.yjh.demo.application.role.command;
 import com.yjh.demo.core.common.BasicPaginationCommand;
 import com.yjh.demo.core.enums.EnableStatus;
 
+import java.util.List;
+
 /**
  * Created by YJH on 2016/3/30.
  */
@@ -11,6 +13,7 @@ public class ListRoleCommand extends BasicPaginationCommand {
     private String name;
     private String appKey;
     private EnableStatus status;
+    private List<String> ids;
 
     private String roleName;
 
@@ -44,5 +47,13 @@ public class ListRoleCommand extends BasicPaginationCommand {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public List<String> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<String> ids) {
+        this.ids = ids;
     }
 }

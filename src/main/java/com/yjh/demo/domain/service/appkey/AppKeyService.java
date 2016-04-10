@@ -34,7 +34,7 @@ public class AppKeyService implements IAppKeyService {
     public List<AppKey> list(ListAppKeyCommand command) {
         List<Criterion> criterionList = new ArrayList<Criterion>();
         List<Order> orderList = new ArrayList<Order>();
-        orderList.add(Order.desc("updateDate"));
+        orderList.add(Order.desc("createDate"));
         return appKeyRepository.list(criterionList, orderList);
     }
 
@@ -48,7 +48,7 @@ public class AppKeyService implements IAppKeyService {
             criterionList.add(Restrictions.eq("status", command.getStatus()));
         }
         List<Order> orderList = new ArrayList<Order>();
-        orderList.add(Order.desc("updateDate"));
+        orderList.add(Order.desc("createDate"));
         return appKeyRepository.pagination(command.getPage(), command.getPageSize(), criterionList, orderList);
     }
 

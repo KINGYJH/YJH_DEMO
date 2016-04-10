@@ -13,7 +13,7 @@ public class HandMessagesRepresentation {
 
     private String id;
     private Integer version;
-    private Date updateDate;
+    private Date createDate;
 
     private AccountRepresentation senderAccount;          //发送人
     private AccountRepresentation receiveAccount;         //收信人
@@ -38,12 +38,12 @@ public class HandMessagesRepresentation {
         this.version = version;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public AccountRepresentation getSenderAccount() {

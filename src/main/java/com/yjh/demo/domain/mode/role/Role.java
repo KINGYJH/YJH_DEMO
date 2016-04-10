@@ -89,31 +89,6 @@ public class Role extends ConcurrencySafeEntity {
         this.permissions = permissions;
         this.appKey = appKey;
         this.status = status;
-        this.setUpdateDate(new Date());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Role role = (Role) o;
-
-        if (name != null ? !name.equals(role.name) : role.name != null) return false;
-        if (description != null ? !description.equals(role.description) : role.description != null) return false;
-        if (permissions != null ? !permissions.equals(role.permissions) : role.permissions != null) return false;
-        if (appKey != null ? !appKey.equals(role.appKey) : role.appKey != null) return false;
-        return status == role.status;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (permissions != null ? permissions.hashCode() : 0);
-        result = 31 * result + (appKey != null ? appKey.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        return result;
+        this.setCreateDate(new Date());
     }
 }

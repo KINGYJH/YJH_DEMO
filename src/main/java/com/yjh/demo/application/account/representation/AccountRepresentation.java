@@ -14,7 +14,7 @@ public class AccountRepresentation {
 
     private String id;
     private Integer version;
-    private Date updateDate;
+    private Date createDate;
 
     private String userName;        //用户名
     private String password;        //密码
@@ -22,7 +22,6 @@ public class AccountRepresentation {
     private String lastLoginIP;     //最后登录ip
     private Date lastLoginDate;     //最后登录时间
     private String lastLoginPlatform;//最后登录平台
-    private Date createDate;        //创建时间
     private List<RoleRepresentation> roles;               //用户角色
     private AppKeyRepresentation appKey;          //应用标识
     private EnableStatus status;     //状态
@@ -41,14 +40,6 @@ public class AccountRepresentation {
 
     public void setVersion(Integer version) {
         this.version = version;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
     }
 
     public String getUserName() {

@@ -22,8 +22,8 @@
     <div class="col-lg-8">
         <form class="form-horizontal" action="/role/edit.htm" method="post" data-parsley-validate>
 
-            <input type="hidden" name="id" value="${role.id!command.id}" />
-            <input type="hidden" name="version" value="${role.version!command.version}" />
+            <input type="hidden" name="id" value="${role.id!command.id}"/>
+            <input type="hidden" name="version" value="${role.version!command.version}"/>
 
             [@spring.bind "command.name"/]
             <div class="form-group">
@@ -66,18 +66,23 @@
                 <label class="col-md-3 control-label">角色权限</label>
                 <div class="col-md-9">
                     <div class="col-sm- pull-left margin-sm">
-                        <button type="button" class="btn btn-primary modal-permission-search-modal" data-toggle="modal">
+                        <button type="button" class="btn btn-primary permission-modal-search-modal" data-toggle="modal">
                             点击添加或删除权限
                         </button>
                     </div>
-                    <div class="data-list margin-sm">
+                    <div class="data-list permission-list margin-sm">
                         <ul class="col-sm-11 contract-show margin-sm">
                             [#if role.permissions??]
                                 [#list role.permissions as permission]
                                     <li>
-                                        <div class="col-md-12 contract-box">${permission.name!}-----${permission.description!}</div>
+                                        <div class="col-md-12 contract-box">${permission.name!}
+                                            -----${permission.description!}</div>
                                         <input type="hidden" name="permissions" value="${permission.id!}"/>
                                     </li>
+                                [/#list]
+                            [#elseif command.permissions??]
+                                [#list command.permissions as id]
+                                    <input type="hidden" name="permissions" value="${id!}"/>
                                 [/#list]
                             [/#if]
                         </ul>
@@ -118,25 +123,23 @@
                                 <label class="control-label col-md-5" for="permissionName">权限名称</label>
                                 <div class="col-md-7">
                                     <input type="text" class="form-control" id="permissionName"
-                                           name="permissionName" value="${command.permissionName}">
+                                           name="permissionName" value="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-6" for="status">权限状态</label>
                                 <div class="col-md-6">
                                     <select name="status" id="status" class="form-control">
-                                        [#assign status = (command.status!)?default("") /]
                                         <option value="ALL">全部</option>
-                                        <option value="ENABLE" [@mc.selected status "ENABLE" /]>启用</option>
-                                        <option value="DISABLE" [@mc.selected status "DISABLE" /]>禁用</option>
+                                        <option value="ENABLE">启用</option>
+                                        <option value="DISABLE">禁用</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-5" for="appKey-modal">AppKey</label>
                                 <div class="col-md-7">
-                                    <select class="form-control" id="appKey-modal" name="appKey"
-                                            data="${command.appKey!}">
+                                    <select class="form-control" id="appKey-modal" name="appKey" data="">
 
                                     </select>
                                 </div>
@@ -170,8 +173,9 @@
                             <h3><strong>已选</strong>列表</h3>
                         </div>
                         <div class="tile-body selector-box modal-search-selector">
-                            <button class="btn margin-top-15 btn-success modal-search-hide-modal">确定</button>
-                            <button class="btn margin-top-15 btn-danger selector-remove-all">删除全部</button>
+                            <button class="btn margin-top-15 btn-success permission-modal-search-hide-modal">确定</button>
+                            <button class="btn margin-top-15 btn-danger permission-selector-remove-all">删除全部</button>
+                            <div class="permission-selector-box-data"></div>
                         </div>
                     </div>
                 </div>
@@ -186,7 +190,7 @@
 [@override name="bottomResources"]
     [@super /]
 <script src="[@spring.url '/resources/js/ajax.js'/]"></script>
-<script src="[@spring.url '/resources/js/modal-search-optimize.js'/]"></script>
+<script src="[@spring.url '/resources/js/modal-search-yjh.js'/]"></script>
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -195,26 +199,34 @@
         $("#appKey-modal").selectAjaxData({url: "/app_key/all_list"});
 
         //选权限弹窗
-        var data_list = $(".data-list");
+        //选权限弹窗
+        var data_list = $(".permission-list");
         data_list.slimScroll({
             height: '300px'
         });
+        var _oldPermissionIds = [];
+        $(data_list).find("input").each(function (a, b) {
+            _oldPermissionIds.push($(b).val());
+        })
         var modalSearch = new ModalSearch({
             url: "/permission/list",
             pageSize: 6,
             isSingle: false,
             id: "permission-modalSearch",
-            openModalBtn: ".modal-permission-search-modal",
-            header: ['AppKey名称', 'AppKey描述', 'AppKey'],
-            rowData: ["name", "description", "appKey.name"],
-            selectorData: ["name"],
+            openModalClass: ".permission-modal-search-modal",
+            hideModalClass: ".permission-modal-search-hide-modal",
+            removeAllClass: ".permission-selector-remove-all",
+            selectorBoxClass: ".permission-selector-box-data",
+            headers: ['权限名称', '权限描述', 'AppKey'],
+            rowDataName: ["name", "description", "appKey.name"],
+            selectorDateName: ["name"],
+            oldDataIds: _oldPermissionIds,
             hideModalHandler: function (jsonDataArr) {
                 var ul_list = data_list.find("ul");
                 ul_list.empty();
-                for (var key in jsonDataArr) {
-                    logger.info(jsonDataArr[key]);
-                    ul_list.append("<li><div class=\"col-md-12 contract-box\">" + jsonDataArr[key].name + "-----" + jsonDataArr[key].description + "</div><input type=\"hidden\" name=\"permissions\" value=\"" + jsonDataArr[key].id + "\"/></li>");
-                }
+                $(jsonDataArr).each(function (a, b) {
+                    ul_list.append("<li><div class=\"col-md-12 contract-box\">" + b.name + "-----" + b.description + "</div><input type=\"hidden\" name=\"permissions\" value=\"" + b.id + "\"/></li>");
+                })
             }
         });
     })

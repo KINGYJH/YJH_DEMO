@@ -56,41 +56,10 @@
 
 <body class="overflow-hidden light-background">
 <div class="wrapper no-navigation preload">
-    <div class="sign-in-wrapper">
-        <div class="sign-in-inner">
-            <div class="login-brand text-center">
-                <i class="fa fa-lock m-right-xs"></i> YJH_DEMO <strong class="text-skin">Admin</strong>
-            </div>
-
-            <form action="[@spring.url '/login.htm'/]" method="post" data-parsley-validate>
-                <div class="form-group m-bottom-md">
-                    <input type="text" class="form-control" name="userName" placeholder="用户名" data-parsley-required="true" data-parsley-required-messages="AppKey名称不能为空"
-                           data-parsley-trigger="change"/>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="密码"required/>
-                </div>
-                <div class="form-group loginVerification">
-                [@mc.verificationCode /]
-                    <input type="text" class="form-control" name="verificationCode" placeholder="验证码" required/>
-
-                </div>
-
-                <div class="form-group">
-                    <div class="custom-checkbox">
-                        <input type="checkbox" id="chkRemember" name="rememberMe">
-                        <label for="chkRemember"></label>
-                    </div>
-                    记住我
-                </div>
-
-                <div class="m-top-md p-top-sm">
-                    <button type="submit" class="btn btn-success block col-xs-12">登录</button>
-                </div>
-
-            </form>
-        </div><!-- ./sign-in-inner -->
-    </div><!-- ./sign-in-wrapper -->
+    <button class="socket_close" id="socket_close">关闭连接</button>
+    <button class="socket_open" id="socket_open">打开连接</button>
+    <input id="status"/>
+    <button class="socket_send" id="socket_send">发送</button>
 </div><!-- /wrapper -->
 
 <a href="" id="scroll-to-top" class="hidden-print"><i class="icon-chevron-up"></i></a>
@@ -111,6 +80,9 @@
 
 <!-- Simplify -->
 <script src="[@spring.url '/resources/js/simplify/simplify.js'/]"></script>
+
+<script src="[@spring.url '/resources/js/sockjs-0.3.4.min.js'/]"></script>
+<script src="[@spring.url '/resources/js/messages-webSocket.js'/]"></script>
 
 </body>
 </html>

@@ -40,9 +40,6 @@ public class MessagesService implements IMessagesService {
     private IMessagesRepository<Messages, String> messagesRepository;
 
     @Autowired
-    private IRoleService roleService;
-
-    @Autowired
     private IAccountService accountService;
 
     @Override
@@ -52,16 +49,20 @@ public class MessagesService implements IMessagesService {
         if (null != command.getRoles() && command.getRoles().size() > 0) {
             List<Account> accountList = accountService.searchByRoleIDs(command.getRoles());
             for (Account item : accountList) {
-                HandMessages handMessages = new HandMessages(sendAccount, item, messages, MessageStatus.ORDINARY,
-                        MessageStatus.ORDINARY, ReadStatus.UNREAD);
-                handMessagesRepository.save(handMessages);
+                if (!sendAccount.getId().equals(item.getId())) {
+                    HandMessages handMessages = new HandMessages(sendAccount, item, messages, MessageStatus.ORDINARY,
+                            MessageStatus.ORDINARY, ReadStatus.UNREAD);
+                    handMessagesRepository.save(handMessages);
+                }
             }
         } else if (null != command.getReceiveAccounts() && command.getReceiveAccounts().size() > 0) {
             List<Account> accountList = accountService.searchByIDs(command.getReceiveAccounts());
             for (Account item : accountList) {
-                HandMessages handMessages = new HandMessages(sendAccount, item, messages, MessageStatus.ORDINARY,
-                        MessageStatus.ORDINARY, ReadStatus.UNREAD);
-                handMessagesRepository.save(handMessages);
+                if (!sendAccount.getId().equals(item.getId())) {
+                    HandMessages handMessages = new HandMessages(sendAccount, item, messages, MessageStatus.ORDINARY,
+                            MessageStatus.ORDINARY, ReadStatus.UNREAD);
+                    handMessagesRepository.save(handMessages);
+                }
             }
         }
         return messages;
@@ -110,7 +111,7 @@ public class MessagesService implements IMessagesService {
     @Override
     public Pagination<Messages> paginationMessages(ListMessagesCommand command) {
         List<Criterion> criterionList = new ArrayList<Criterion>();
-        if (CoreStringUtils.isEmpty(command.getSendAccount())) {
+        if (!CoreStringUtils.isEmpty(command.getSendAccount())) {
             ListHandMessagesCommand handMessagesCommand = new ListHandMessagesCommand();
             handMessagesCommand.setSendAccount(command.getSendAccount());
             List<HandMessages> handMessagesList = this.listHandMessages(handMessagesCommand);

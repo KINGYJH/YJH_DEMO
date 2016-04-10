@@ -4,7 +4,7 @@ import com.yjh.demo.application.auth.IAuthAppService;
 import com.yjh.demo.application.permission.representation.PermissionRepresentation;
 import com.yjh.demo.application.role.representation.RoleRepresentation;
 import com.yjh.demo.application.account.representation.AccountRepresentation;
-import com.yjh.demo.core.common.GlobalConfig;
+import com.yjh.demo.core.common.Constants;
 import com.yjh.demo.core.enums.EnableStatus;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -24,9 +24,6 @@ public class UserRealm extends AuthorizingRealm {
 
     @Autowired
     private IAuthAppService authAppService;
-
-    @Autowired
-    private GlobalConfig globalConfig;
 
     /**
      * 权限验证
@@ -80,7 +77,7 @@ public class UserRealm extends AuthorizingRealm {
                     List<PermissionRepresentation> permissionList = role.getPermissions();
                     if (!permissionList.isEmpty()) {
                         for (PermissionRepresentation permission : permissionList) {
-                            if (permission.getStatus() == EnableStatus.ENABLE && permission.getAppKey().getName().equals(globalConfig.getAppKey())) {
+                            if (permission.getStatus() == EnableStatus.ENABLE && permission.getAppKey().getName().equals(Constants.APP_KRY)) {
                                 permissions.add(permission.getName());
                             }
                         }

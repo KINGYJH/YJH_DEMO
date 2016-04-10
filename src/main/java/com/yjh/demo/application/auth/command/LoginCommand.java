@@ -7,11 +7,11 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class LoginCommand {
 
-    @NotBlank(message = "{login.userName.NotBlank.Messages}")
+    @NotBlank(message = "{login.userName.NotBlank.messages}")
     private String userName;
-    @NotBlank(message = "{login.password.NotBlank.Messages}")
+    @NotBlank(message = "{login.password.NotBlank.messages}")
     private String password;
-    @NotBlank(message = "{login.verificationCode.NotBlank.Messages}")
+    @NotBlank(message = "{login.verificationCode.NotBlank.messages}")
     private String verificationCode;
     private boolean rememberMe;
 

@@ -19,7 +19,6 @@ public class Account extends ConcurrencySafeEntity {
     private String lastLoginIP;     //最后登录ip
     private Date lastLoginDate;     //最后登录时间
     private String lastLoginPlatform;//最后登录平台
-    private Date createDate;        //创建时间
     private List<Role> roles;               //用户角色
     private AppKey appKey;          //应用标识
     private EnableStatus status;     //状态
@@ -84,14 +83,6 @@ public class Account extends ConcurrencySafeEntity {
         this.lastLoginPlatform = lastLoginPlatform;
     }
 
-    private void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    private void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
     private void setAppKey(AppKey appKey) {
         this.appKey = appKey;
     }
@@ -128,10 +119,6 @@ public class Account extends ConcurrencySafeEntity {
         return roles;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
     public AppKey getAppKey() {
         return appKey;
     }
@@ -144,7 +131,7 @@ public class Account extends ConcurrencySafeEntity {
         super();
     }
 
-    public Account(String userName, String password, String salt, String lastLoginIP, Date lastLoginDate, String lastLoginPlatform, List<Role> roles, Date createDate, AppKey appKey, EnableStatus status) {
+    public Account(String userName, String password, String salt, String lastLoginIP, Date lastLoginDate, String lastLoginPlatform, List<Role> roles, AppKey appKey, EnableStatus status) {
         this.userName = userName;
         this.password = password;
         this.salt = salt;
@@ -152,9 +139,8 @@ public class Account extends ConcurrencySafeEntity {
         this.lastLoginDate = lastLoginDate;
         this.lastLoginPlatform = lastLoginPlatform;
         this.roles = roles;
-        this.createDate = createDate;
         this.appKey = appKey;
         this.status = status;
-        this.setUpdateDate(new Date());
+        this.setCreateDate(new Date());
     }
 }

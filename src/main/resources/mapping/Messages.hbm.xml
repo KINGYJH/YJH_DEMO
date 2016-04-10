@@ -10,7 +10,7 @@
 
         <version column="version" name="version" type="java.lang.Integer"/>
 
-        <property name="updateDate" column="update_date" type="java.util.Date"/>
+        <property name="createDate" column="create_date" type="java.util.Date"/>
 
         <property name="title" column="title" type="java.lang.String"/>
 

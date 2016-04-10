@@ -1,7 +1,7 @@
 package com.yjh.demo.interfaces;
 
 import com.yjh.demo.core.Imagecaptcha.VerifyCodeUtils;
-import com.yjh.demo.core.common.GlobalConfig;
+import com.yjh.demo.core.common.Constants;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,9 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class IndexController {
 
-    @Autowired
-    private GlobalConfig globalConfig;
-
     @RequestMapping("/")
     public ModelAndView index(HttpSession session) {
-        if (null != session.getAttribute(globalConfig.getSessionUser())) {
+        if (null != session.getAttribute(Constants.SESSION_USER)) {
             return new ModelAndView("redirect:/logged");
         }
         return new ModelAndView("redirect:/login.htm");
@@ -34,7 +31,7 @@ public class IndexController {
     @RequestMapping(value = "/logged")
     public ModelAndView logged(HttpSession session) throws Exception {
 
-        if (null != session.getAttribute(globalConfig.getSessionUser())) {
+        if (null != session.getAttribute(Constants.SESSION_USER)) {
             Subject subject = SecurityUtils.getSubject();
             if (subject.hasRole("admin") || subject.hasRole("mini-admin")) {
                 return new ModelAndView("/index");

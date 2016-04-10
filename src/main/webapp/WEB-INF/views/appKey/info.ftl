@@ -34,8 +34,8 @@ AppKey 查看
                 <div class="col-md-8 contract-box">${appKey.description!}</div>
             </li>
             <li>
-                <span class="col-md-3">AppKey最近更新时间</span>
-                <div class="col-md-8 contract-box">${appKey.updateDate?datetime!}</div>
+                <span class="col-md-3">AppKey创建时间</span>
+                <div class="col-md-8 contract-box">[@mc.dateShow appKey.createDate/]</div>
             </li>
             <li>
                 <span class="col-md-3">AppKey状态</span>

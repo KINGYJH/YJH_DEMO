@@ -1602,7 +1602,6 @@ a.list-group-item.active:focus {
 }
 .dropdown-menu.notification li a {
   padding: 10px;
-  cursor: pointer;
   position: relative;
 }
 .dropdown-menu.notification li a:hover,
@@ -3441,7 +3440,6 @@ table tbody td.text-right {
   -webkit-border-radius: 3px;
   margin-bottom: 20px;
   border-color: #e4e4e4;
-  border-top-width: 4px;
   background-color: #fff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);

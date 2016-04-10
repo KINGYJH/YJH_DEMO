@@ -10,7 +10,7 @@
 
         <version column="version" name="version" type="java.lang.Integer"/>
 
-        <property name="updateDate" column="update_date" type="java.util.Date"/>
+        <property name="createDate" column="create_date" type="java.util.Date"/>
 
         <property name="userName" column="user_name" type="java.lang.String"/>
 
@@ -23,8 +23,6 @@
         <property name="lastLoginDate" column="last_login_date" type="java.util.Date"/>
 
         <property name="lastLoginPlatform" column="last_login_platform" type="java.lang.String"/>
-
-        <property name="createDate" column="create_date" type="java.util.Date"/>
 
         <bag name="roles" lazy="extra" table="t_account_role" cascade="save-update">
             <key column="account_id"/>

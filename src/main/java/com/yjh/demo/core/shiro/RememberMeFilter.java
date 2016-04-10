@@ -3,7 +3,7 @@ package com.yjh.demo.core.shiro;
 import com.yjh.demo.application.auth.IAuthAppService;
 import com.yjh.demo.application.auth.command.LoginCommand;
 import com.yjh.demo.application.account.representation.AccountRepresentation;
-import com.yjh.demo.core.common.GlobalConfig;
+import com.yjh.demo.core.common.Constants;
 import com.yjh.demo.core.util.CoreHttpUtils;
 import com.yjh.demo.core.util.CoreRc4Utils;
 import com.yjh.demo.core.util.CoreStringUtils;
@@ -25,9 +25,6 @@ public class RememberMeFilter implements Filter {
     @Autowired
     private IAuthAppService authAppService;
 
-    @Autowired
-    private GlobalConfig globalConfig;
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -40,13 +37,13 @@ public class RememberMeFilter implements Filter {
 
         Cookie[] cookies = request.getCookies();
         HttpSession session = request.getSession();
-        if (null == session.getAttribute(globalConfig.getSessionUser())) {
+        if (null == session.getAttribute(Constants.SESSION_USER)) {
             if (null != cookies && cookies.length > 0) {
                 String cookieStr = CoreStringUtils.EMPTY;
 
                 for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals(globalConfig.getCookieUser())) {
-                        cookieStr = CoreRc4Utils.decry_RC4(cookie.getValue(), globalConfig.getPasswordEncryptKey());
+                    if (cookie.getName().equals(Constants.COOKIE_USER)) {
+                        cookieStr = CoreRc4Utils.decry_RC4(cookie.getValue(), Constants.PASSWORD_ENCRYP_KEY);
                         break;
                     }
                 }
@@ -60,10 +57,10 @@ public class RememberMeFilter implements Filter {
                     try {
                         AccountRepresentation user = authAppService.login(command);
                         session = request.getSession(false);
-                        session.setAttribute(globalConfig.getSessionUser(), user);
-                        CoreHttpUtils.writeCookie(command, request, response, globalConfig);
+                        session.setAttribute(Constants.SESSION_USER, user);
+                        CoreHttpUtils.writeCookie(command, request, response);
                     } catch (ExcessiveAttemptsException e) {
-                        CoreHttpUtils.clearCookie(request, response, globalConfig);
+                        CoreHttpUtils.clearCookie(request, response);
                         response.sendRedirect("/");
                     }
                 }

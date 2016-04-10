@@ -69,7 +69,7 @@
         <!--</property>-->
     </bean>
 
-    <!--<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />-->
+    <!--<WebSocketClient id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />-->
 
     <bean id="freemarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />

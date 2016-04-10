@@ -159,6 +159,9 @@
 <script src="[@spring.url '/resources/js/common.js'/]"></script>
 <script src="[@spring.url '/resources/js/ArrayPrototype.js'/]"></script>
 <script src="[@spring.url '/resources/js/StringUtil.js'/]"></script>
+
+[#--<script src="[@spring.url '/resources/js/sockjs-0.3.4.min.js'/]"></script>--]
+[#--<script src="[@spring.url '/resources/js/messages-webSocket.js'/]"></script>--]
 [/@block]
 </body>
 </html>

@@ -3,7 +3,7 @@ package com.yjh.demo.interfaces.auth.web;
 import com.yjh.demo.application.auth.IAuthAppService;
 import com.yjh.demo.application.auth.command.LoginCommand;
 import com.yjh.demo.application.account.representation.AccountRepresentation;
-import com.yjh.demo.core.common.GlobalConfig;
+import com.yjh.demo.core.common.Constants;
 import com.yjh.demo.core.util.CoreHttpUtils;
 import com.yjh.demo.interfaces.shared.web.AlertMessage;
 import com.yjh.demo.interfaces.shared.web.BaseController;
@@ -41,9 +41,6 @@ public class AuthController extends BaseController {
     @Autowired
     public IAuthAppService authAppService;
 
-    @Autowired
-    private GlobalConfig globalConfig;
-
     @RequestMapping(value = "/login.htm", method = RequestMethod.GET)
     public ModelAndView login(@ModelAttribute("command") LoginCommand command) {
         return new ModelAndView("/login", "command", command);
@@ -70,15 +67,15 @@ public class AuthController extends BaseController {
                 Subject subject = SecurityUtils.getSubject();
                 if (subject.hasRole("admin") || subject.hasRole("mini-admin")) {
 
-                    CoreHttpUtils.writeCookie(command, request, response, globalConfig);
+                    CoreHttpUtils.writeCookie(command, request, response);
 
                     logger.info(subject.getPrincipal() + "登录成功！时间:" + new Date());
-                    session.setAttribute(globalConfig.getSessionUser(), user);
+                    session.setAttribute(Constants.SESSION_USER, user);
                     return new ModelAndView("redirect:/logged");
                 } else {//用户没有对应角色 不让登录
                     alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING, this.getMessage("login.account.NotPermission.messages", null, locale));
                     redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
-                    return new ModelAndView("redirect:/logout");
+                    return new ModelAndView("redirect:/login.htm");
                 }
             } catch (UnknownAccountException ue) {
                 alertMessage = new AlertMessage(AlertMessage.MessageType.WARNING,
@@ -102,7 +99,7 @@ public class AuthController extends BaseController {
 
     @RequestMapping("/logout")
     public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
-        CoreHttpUtils.clearCookie(request, response, globalConfig);
+        CoreHttpUtils.clearCookie(request, response);
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return new ModelAndView("redirect:/");

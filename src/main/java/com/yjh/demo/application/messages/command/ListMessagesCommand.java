@@ -7,9 +7,18 @@ import com.yjh.demo.core.common.BasicPaginationCommand;
  */
 public class ListMessagesCommand extends BasicPaginationCommand {
 
+    private String title;
     private String sendAccount;
     private String startSendDateTime;
     private String endStartDateTime;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getSendAccount() {
         return sendAccount;

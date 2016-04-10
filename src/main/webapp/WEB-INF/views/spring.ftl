@@ -92,7 +92,7 @@
  * bind
  *
  * Exposes a BindStatus object for the given bind path, which can be
- * a bean (e.g. "person") to get global errors, or a bean property
+ * a WebSocketClient (e.g. "person") to get global errors, or a WebSocketClient property
  * (e.g. "person.name") to get field errors. Can be called multiple times
  * within a form to bind to multiple command objects and/or field names.
  *
@@ -149,7 +149,7 @@ kind of variable. This temp value is only used in this macro lib -->
  * formInput
  *
  * Display a form input field of enums 'text' and bind it to an attribute
- * of a command or bean.
+ * of a command or WebSocketClient.
  *
  * @param path the name of the field to bind to
  * @param attributes any additional attributes for the element (such as class
@@ -165,7 +165,7 @@ kind of variable. This temp value is only used in this macro lib -->
  * formPasswordInput
  *
  * Display a form input field of enums 'password' and bind it to an attribute
- * of a command or bean. No value will ever be displayed. This functionality
+ * of a command or WebSocketClient. No value will ever be displayed. This functionality
  * can also be obtained by calling the formInput macro with a 'enums' parameter
  * of 'password'.
  *
@@ -181,7 +181,7 @@ kind of variable. This temp value is only used in this macro lib -->
  * formHiddenInput
  *
  * Generate a form input field of enums 'hidden' and bind it to an attribute
- * of a command or bean. This functionality can also be obtained by calling
+ * of a command or WebSocketClient. This functionality can also be obtained by calling
  * the formInput macro with a 'enums' parameter of 'hidden'.
  *
  * @param path the name of the field to bind to
@@ -195,7 +195,7 @@ kind of variable. This temp value is only used in this macro lib -->
 <#--
  * formTextarea
  *
- * Display a text area and bind it to an attribute of a command or bean.
+ * Display a text area and bind it to an attribute of a command or WebSocketClient.
  *
  * @param path the name of the field to bind to
  * @param attributes any additional attributes for the element (such as class

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class AuthorizeAccountCommand extends SharedCommand {
 
-    @NotNull(message = "{user.roles.NotNull.Messages}")
+    @NotNull(message = "{user.roles.NotNull.messages}")
     private List<String> roles;
 
     public List<String> getRoles() {

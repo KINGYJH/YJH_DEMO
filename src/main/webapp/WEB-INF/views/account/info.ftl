@@ -26,10 +26,6 @@
                 <div class="col-md-8 contract-box">${account.userName!}</div>
             </li>
             <li>
-                <span class="col-md-3">User最后更新时间</span>
-                <div class="col-md-8 contract-box">[@mc.dateShow account.updateDate/]</div>
-            </li>
-            <li>
                 <span class="col-md-3">创建时间</span>
                 <div class="col-md-8 contract-box">[@mc.dateShow account.createDate/]</div>
             </li>

@@ -14,7 +14,7 @@ public class RoleRepresentation {
 
     private String id;
     private Integer version;
-    private Date updateDate;
+    private Date createDate;
 
     private String name;                    //角色名称
     private String description;                //角色描述
@@ -38,12 +38,12 @@ public class RoleRepresentation {
         this.version = version;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public String getName() {

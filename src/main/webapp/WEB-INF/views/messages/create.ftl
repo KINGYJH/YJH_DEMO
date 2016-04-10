@@ -19,7 +19,7 @@
     [@mc.showAlert /]
 <div class="row">
     <div class="col-lg-8">
-        <form class="form-horizontal" action="/account/create.htm" method="post" data-parsley-validate>
+        <form class="form-horizontal" action="/messages/create.htm" method="post" data-parsley-validate>
 
             [@spring.bind "command.title"/]
             <div class="form-group">
@@ -70,7 +70,7 @@
                 <label class="col-md-3 control-label">发送角色*</label>
                 <div class="col-md-9">
                     <div class="col-sm- pull-left margin-sm">
-                        <button type="button" class="btn btn-primary modal-role-search-modal" data-toggle="modal">
+                        <button type="button" class="btn btn-primary role-modal-search-modal" data-toggle="modal">
                             点击选择角色
                         </button>
                     </div>
@@ -85,7 +85,7 @@
                 <label class="col-md-3 control-label">发送账户*</label>
                 <div class="col-md-9">
                     <div class="col-sm- pull-left margin-sm">
-                        <button type="button" class="btn btn-primary modal-account-search-modal" data-toggle="modal">
+                        <button type="button" class="btn btn-primary account-modal-search-modal" data-toggle="modal">
                             点击选择账户
                         </button>
                     </div>
@@ -183,9 +183,9 @@
                             <h3><strong>已选</strong>列表</h3>
                         </div>
                         <div class="tile-body selector-box modal-search-selector">
-                            <button class="btn margin-top-15 btn-success modal-search-hide-modal">确定</button>
-                            <button class="btn margin-top-15 btn-danger selector-remove-all">删除全部</button>
-                            <div class="selector-box-data"></div>
+                            <button class="btn margin-top-15 btn-success role-modal-search-hide-modal">确定</button>
+                            <button class="btn margin-top-15 btn-danger role-selector-remove-all">删除全部</button>
+                            <div class="role-selector-box-data"></div>
                         </div>
                     </div>
                 </div>
@@ -268,9 +268,9 @@
                             <h3><strong>已选</strong>列表</h3>
                         </div>
                         <div class="tile-body selector-box modal-search-selector">
-                            <button class="btn margin-top-15 btn-success modal-search-hide-modal">确定</button>
-                            <button class="btn margin-top-15 btn-danger selector-remove-all">删除全部</button>
-                            <div class="selector-box-data">
+                            <button class="btn margin-top-15 btn-success account-modal-search-hide-modal">确定</button>
+                            <button class="btn margin-top-15 btn-danger account-selector-remove-all">删除全部</button>
+                            <div class="account-selector-box-data">
 
                             </div>
                         </div>
@@ -292,66 +292,64 @@
     //加载appKey数据
     $("#appKey-modal").selectAjaxData({url: "/app_key/all_list"});
 
-    new ModalSearch({
+    $(".account-send").hide("fast");
+    $("input[name='sendType']").on("click", function () {
+        if ($(this).val() == "role") {
+            $(".role-send").show("fast");
+            $(".account-send").hide("fast");
+            $(_accountDate).find("ul").empty()
+            _accountModel._removeAll()
+        } else {
+            $(".account-send").show("fast");
+            $(".role-send").hide("fast");
+            $(_roleData).find("ul").empty()
+            _roleModel._removeAll();
+        }
+    });
+
+    //选中角色弹窗
+    var _roleModel = new ModalSearch({
         url: "/role/list",
-        pageSize: 1,
+        pageSize: 6,
         isSingle: false,
         id: "role-modalSearch",
-        openModalClass: ".modal-role-search-modal",
+        openModalClass: ".role-modal-search-modal",
+        hideModalClass: ".role-modal-search-hide-modal",
+        removeAllClass: ".role-selector-remove-all",
+        selectorBoxClass: ".role-selector-box-data",
         headers: ['角色名称', '角色描述', 'AppKey'],
         rowDataName: ["name", "description", "appKey.name"],
         selectorDateName: ["name"],
         hideModalHandler: function (jsonDataArr) {
             var ul_list = _roleData.find("ul");
             ul_list.empty();
-            for (var key in jsonDataArr) {
-                logger.info(jsonDataArr[key]);
-                ul_list.append("<li><div class=\"col-md-12 contract-box\">" + jsonDataArr[key].name + "-----" + jsonDataArr[key].description + "</div><input type=\"hidden\" name=\"permissions\" value=\"" + jsonDataArr[key].id + "\"/></li>");
-            }
+            $.each(jsonDataArr, function (a, b) {
+                ul_list.append("<li><div class=\"col-md-12 contract-box\">" + b.name + "-----" + b.description + "</div><input type=\"hidden\" name=\"roles\" value=\"" + b.id + "\"/></li>");
+            })
         }
     });
 
-    //    $("input[name='sendType']").on("click", function () {
-    //        if ($(this).val() == "role") {
-    //            _roleModel = new ModalSearch({
-    //                url: "/role/list",
-    //                pageSize: 6,
-    //                isSingle: false,
-    //                id: "role-modalSearch",
-    //                openModalBtn: ".modal-role-search-modal",
-    //                header: ['角色名称', '角色描述', 'AppKey'],
-    //                rowData: ["name", "description", "appKey.name"],
-    //                selectorData: ["name"],
-    //                hideModalHandler: function (jsonDataArr) {
-    //                    var ul_list = _roleData.find("ul");
-    //                    ul_list.empty();
-    //                    for (var key in jsonDataArr) {
-    //                        logger.info(jsonDataArr[key]);
-    //                        ul_list.append("<li><div class=\"col-md-12 contract-box\">" + jsonDataArr[key].name + "-----" + jsonDataArr[key].description + "</div><input type=\"hidden\" name=\"permissions\" value=\"" + jsonDataArr[key].id + "\"/></li>");
-    //                    }
-    //                }
-    //            });
-    //        } else {
-    //            _accountModel = new ModalSearch({
-    //                url: "/account/list",
-    //                pageSize: 6,
-    //                isSingle: false,
-    //                id: "account-modalSearch",
-    //                openModalBtn: ".modal-account-search-modal",
-    //                header: ['账户名称', 'AppKey'],
-    //                rowData: ["userName", "appKey.name"],
-    //                selectorData: ["userName"],
-    //                hideModalHandler: function (jsonDataArr) {
-    //                    var ul_list = _accountDate.find("ul");
-    //                    ul_list.empty();
-    //                    for (var key in jsonDataArr) {
-    //                        logger.info(jsonDataArr[key]);
-    //                        ul_list.append("<li><div class=\"col-md-12 contract-box\">" + jsonDataArr[key].userName + "-----" + jsonDataArr[key].appKey.name + "</div><input type=\"hidden\" name=\"permissions\" value=\"" + jsonDataArr[key].id + "\"/></li>");
-    //                    }
-    //                }
-    //            });
-    //        }
-    //    });
+    //选中账户弹窗
+    var _accountModel = new ModalSearch({
+        url: "/account/list",
+        pageSize: 6,
+        isSingle: false,
+        id: "account-modalSearch",
+        openModalClass: ".account-modal-search-modal",
+        hideModalClass: ".account-modal-search-hide-modal",
+        removeAllClass: ".account-selector-remove-all",
+        selectorBoxClass: ".account-selector-box-data",
+        headers: ['账户名称', 'AppKey'],
+        rowDataName: ["userName", "appKey.name"],
+        selectorDateName: ["userName"],
+        hideModalHandler: function (jsonDataArr) {
+            var ul_list = _accountDate.find("ul");
+            ul_list.empty();
+            $.each(jsonDataArr, function (a, b) {
+                ul_list.append("<li><div class=\"col-md-12 contract-box\">" + b.userName + "-----" + b.appKey.name + "</div><input type=\"hidden\" name=\"receiveAccounts\" value=\"" + b.id + "\"/></li>");
+            })
+        }
+    });
 
     var _roleData = $(".role-list");
     _roleData.slimScroll({
