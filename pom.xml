@@ -19,7 +19,19 @@
             </plugin>
         </plugins>
     </build>
-    <packaging>war</packaging>
+    <!--<build>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-compiler-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<source>1.6</source>-->
+                    <!--<target>1.6</target>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    <!--</build>-->
+    <!--<packaging>war</packaging>-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -30,6 +42,7 @@
 
         <version.commons.lang3>3.1</version.commons.lang3>
         <version.commons.io>2.4</version.commons.io>
+        <version.fileupload>1.3.1</version.fileupload>
 
         <version.testng>6.1.1</version.testng>
 
@@ -46,7 +59,7 @@
         <version.orika>1.4.5</version.orika>
         <version.shiro>1.2.3</version.shiro>
         <version.httpclient>4.5.1</version.httpclient>
-
+        <version.thumbnailator>0.4.8</version.thumbnailator>
     </properties>
 
 
@@ -86,6 +99,12 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${version.commons.io}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${version.fileupload}</version>
         </dependency>
         <!-- End Commmons -->
 
@@ -287,5 +306,10 @@
         </dependency>
         <!-- End httpcient -->
 
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>${version.thumbnailator}</version>
+        </dependency>
     </dependencies>
 </project>

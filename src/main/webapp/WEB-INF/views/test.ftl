@@ -1,88 +1,126 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--
-                   _ooOoo_
-                  o8888888o
-                  88" . "88
-                  (| -_- |)
-                  O\  =  /O
-               ____/`---'\____
-             .'  \\|     |//  `.
-            /  \\|||  :  |||//  \
-           /  _||||| -:- |||||-  \
-           |   | \\\  -  /// |   |
-           | \_|  ''\---/''  |   |
-           \  .-\__  `-`  ___/-. /
-         ___`. .'  /--.--\  `. . __
-      ."" '<  `.___\_<|>_/___.'  >'"".
-     | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-     \  \ `-.   \_ __\ /__ _/   .-` /  /
-======`-.____`-.___\_____/___.-`____.-'======
-                   `=---='
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-         佛祖保佑       永无BUG
--->
-<html lang="zh_cn">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 <head>
-[@block name="Meta"]
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="yjh">
-    <link rel="shortcut icon" href="[@spring.url '/resources/images/favicon.ico' /]" type="image/x-icon"/>
-[/@block]
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 
-    <title>YJH_DEMO Admin - 登录</title>
+    <title>Plupload - jQuery UI Widget</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="[@spring.url '/resources/bootstrap/css/bootstrap.min.css'/]" rel="stylesheet">
+    <link rel="stylesheet" href="[@spring.url '/resources/css/jquery-ui.min.css'/]" type="text/css"/>
+    <link rel="stylesheet" href="[@spring.url '/resources/js/upload/css/jquery.ui.plupload.css'/]" type="text/css"/>
 
-    <!-- Font Awesome -->
-    <link href="[@spring.url '/resources/css/font-awesome.min.css'/]" rel="stylesheet">
+    <script src="[@spring.url '/resources/js/jquery.min.js'/]"></script>
+    <script type="text/javascript" src="[@spring.url '/resources/js/jquery-ui.min.js'/]"></script>
 
-    <!-- ionicons -->
-    <link href="[@spring.url '/resources/css/ionicons.min.css'/]" rel="stylesheet">
+    <!-- production -->
+    <script type="text/javascript" src="[@spring.url '/resources/js/upload/plupload.full.min.js'/]"></script>
+    <script type="text/javascript" src="[@spring.url '/resources/js/upload/jquery.ui.plupload.js'/]"></script>
 
-    <!-- Simplify -->
-    <link href="[@spring.url '/resources/css/simplify.min.css'/]" rel="stylesheet">
+    <!-- debug
+    <script type="text/javascript" src="../../js/moxie.js"></script>
+    <script type="text/javascript" src="../../js/plupload.dev.js"></script>
+    <script type="text/javascript" src="../../js/jquery.ui.plupload/jquery.ui.plupload.js"></script>
+    -->
 
-    <link href="[@spring.url '/resources/app/login/login.css'/]" rel="stylesheet">
-
-    <!-- Jquery -->
-    <script src="[@spring.url '/resources/js/jquery-1.11.1.min.js'/]"></script>
-
-    <!--验证表单-->
-    <script src="[@spring.url '/resources/js/parsley/parsley.js' /]" type="text/javascript"></script>
 </head>
+<body style="font: 13px Verdana; background: #eee; color: #333">
 
-<body class="overflow-hidden light-background">
-<div class="wrapper no-navigation preload">
-    <button class="socket_close" id="socket_close">关闭连接</button>
-    <button class="socket_open" id="socket_open">打开连接</button>
-    <input id="status"/>
-    <button class="socket_send" id="socket_send">发送</button>
-</div><!-- /wrapper -->
+<h1>jQuery UI Widget</h1>
 
-<a href="" id="scroll-to-top" class="hidden-print"><i class="icon-chevron-up"></i></a>
+<p>You can see this example with different themes on the <a href="http://plupload.com/example_jquery_ui.php">www.plupload.com</a>
+    website.</p>
 
-<!-- Le javascript
-================================================== -->
-<!-- Bootstrap -->
-<script src="[@spring.url '/resources/bootstrap/js/bootstrap.min.js'/]"></script>
+<form id="form" method="post" action="../dump.php">
+    <div id="uploader">
+        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+    </div>
+    <br/>
+    <input type="submit" value="Submit"/>
+</form>
 
-<!-- Slimscroll -->
-<script src="[@spring.url '/resources/js/jquery.slimscroll.min.js'/]"></script>
+<script type="text/javascript">
+    // 初始化控件在DOM就绪
+    $(function () {
+        $("#uploader").plupload({
+            // 一般设置
+            runtimes: 'html5,flash,silverlight,html4',
+            url: '/upload/img_upload',
+            name: 'files',
+            // 用户可以上传不超过20的文件中去（假集multiple_queues）
+            max_file_count: 20,
 
-<!-- Popup Overlay -->
-<script src="[@spring.url '/resources/js/jquery.popupoverlay.min.js'/]"></script>
+            chunk_size: '1mb',
 
-<!-- Modernizr -->
-<script src="[@spring.url '/resources/js/modernizr.min.js'/]"></script>
+            // 调整图像在客户端如果我们能
+            resize: {
+                width: 200,
+                height: 200,
+                quality: 90,
+                crop: true // crop to exact dimensions
+            },
 
-<!-- Simplify -->
-<script src="[@spring.url '/resources/js/simplify/simplify.js'/]"></script>
+            filters: {
+                // 最大文件大小
+                max_file_size: '1000mb',
+                // 指定要浏览的文件
+                mime_types: [
+                    {title: "Image files", extensions: "jpg,gif,png"},
+                    {title: "Zip files", extensions: "zip"}
+                ]
+            },
 
-<script src="[@spring.url '/resources/js/sockjs-0.3.4.min.js'/]"></script>
-<script src="[@spring.url '/resources/js/messages-webSocket.js'/]"></script>
+            // 通过点击他们的标题来重命名文件
+            rename: true,
 
+            // 文件排序
+            sortable: true,
+
+            // 可以拖放文件到窗口小部件的能力（目前只有HTML5的支持）
+            dragdrop: true,
+
+            // 视图激活
+            views: {
+                list: true,
+                thumbs: true, // 显示的大拇指
+                active: 'thumbs'
+            },
+
+            // Flash 位置
+            flash_swf_url: '/resources/js/upload/Moxie.swf',
+
+            // Silverlight 位置
+            silverlight_xap_url: '/resources/js/upload/Moxie.xap',
+            init: {
+                PostInit: function () {
+                },
+                FileUploaded: function (up,file,info) {
+                    console.log(up);
+                    console.log(file);
+                    console.log(info);
+                },
+                Error: function (up, err) {
+                    console.log(err);
+                }
+            }
+        });
+
+
+        // 在上传完成前处理表单提交的情况
+//        $('#form').submit(function (e) {
+//            // 队列中的文件先上传
+//            if ($('#uploader').plupload('getFiles').length > 0) {
+//
+//                // 当所有文件上传提交表单
+//                $('#uploader').on('complete', function () {
+//                    $('#form')[0].submit();
+//                });
+//
+//                $('#uploader').plupload('start');
+//            } else {
+//                alert("在队列中至少有一个文件.");
+//            }
+//            return false; // 保持表单提交
+//        });
+    });
+</script>
 </body>
 </html>

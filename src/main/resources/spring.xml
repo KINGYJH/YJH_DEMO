@@ -24,4 +24,5 @@
     <import resource="spring-shiro.xml"/>
     <import resource="spring-config.xml"/>
     <import resource="spring-webSocket.xml"/>
+    <import resource="spring-upload.xml"/>
 </beans>

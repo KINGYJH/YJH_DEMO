@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="maxUploadSize" value="2000000000"/>
+    </bean>
+
+    <bean id="uploadService" class="com.yjh.demo.core.upload.FileUploadService">
+        <property name="imgUploadConfig" ref="imgUploadConfig"/>
+        <property name="fileUploadConfig" ref="fileUploadConfig"/>
+    </bean>
+
+    <bean id="imgUploadConfig" class="com.yjh.demo.core.upload.ImgUploadConfig">
+        <property name="domainName" value="${upload.domainName}"/>
+        <property name="path" value="${upload.path}"/>
+
+        <property name="temp" value="${img.upload.temp}"/>
+        <property name="folder" value="${img.upload.folder}"/>
+        <property name="maxSize" value="${img.upload.maxSize}"/>
+        <property name="type" value="${img.upload.type}"/>
+        <property name="miniThumbnailWidth" value="${img.upload.miniThumbnailWidth}"/>
+        <property name="miniThumbnailHeight" value="${img.upload.miniThumbnailHeight}"/>
+        <property name="mediumThumbnailMultiple" value="${img.upload.mediumThumbnailMultiple}"/>
+    </bean>
+
+    <bean id="fileUploadConfig" class="com.yjh.demo.core.upload.FileUploadConfig">
+        <property name="domainName" value="${upload.domainName}"/>
+        <property name="path" value="${upload.path}"/>
+
+        <property name="temp" value="${file.upload.temp}"/>
+        <property name="folder" value="${file.upload.folder}"/>
+        <property name="maxSize" value="${file.upload.maxSize}"/>
+        <property name="type" value="${file.upload.type}"/>
+    </bean>
+
+</beans>
