@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field" default-cascade="all">
+    <class name="com.yjh.demo.domain.mode.picture.Picture" table="t_picture" lazy="true">
+        <id name="id" type="java.lang.String" column="id" unsaved-value="null" length="32">
+            <generator class="uuid"/>
+        </id>
+
+        <version column="version" name="version" type="java.lang.Integer"/>
+
+        <property name="createDate" column="create_date" type="java.util.Date"/>
+
+        <property name="picPath" column="pic_path" type="java.lang.String"/>
+        <property name="miniPicPath" column="mini_pic_path" type="java.lang.String"/>
+        <property name="mediumPicPath" column="medium_pic_path" type="java.lang.String"/>
+
+        <property name="size" column="size" type="java.lang.Double"/>
+        <property name="name" column="name" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>

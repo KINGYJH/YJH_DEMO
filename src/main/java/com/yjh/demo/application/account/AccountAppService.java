@@ -99,4 +99,9 @@ public class AccountAppService implements IAccountAppService {
         List<AccountRepresentation> data = mappingService.mapAsList(pagination.getData(), AccountRepresentation.class);
         return new Pagination<AccountRepresentation>(data, pagination.getCount(), pagination.getPage(), pagination.getPageSize());
     }
+
+    @Override
+    public void updateHeadPic(UpdateHeadPicCommand command) {
+        accountService.updateHeadPic(command);
+    }
 }

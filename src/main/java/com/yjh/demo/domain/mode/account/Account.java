@@ -3,6 +3,7 @@ package com.yjh.demo.domain.mode.account;
 import com.yjh.demo.core.enums.EnableStatus;
 import com.yjh.demo.core.id.ConcurrencySafeEntity;
 import com.yjh.demo.domain.mode.appkey.AppKey;
+import com.yjh.demo.domain.mode.picture.Picture;
 import com.yjh.demo.domain.mode.role.Role;
 
 import java.util.Date;
@@ -22,6 +23,7 @@ public class Account extends ConcurrencySafeEntity {
     private List<Role> roles;               //用户角色
     private AppKey appKey;          //应用标识
     private EnableStatus status;     //状态
+    private Picture headPic;        //头像
 
     public void changeUserName(String userName) {
         this.userName = userName;
@@ -59,6 +61,10 @@ public class Account extends ConcurrencySafeEntity {
         this.status = status;
     }
 
+    public void changeHeadPic(Picture headPic) {
+        this.headPic = headPic;
+    }
+
     private void setUserName(String userName) {
         this.userName = userName;
     }
@@ -83,12 +89,20 @@ public class Account extends ConcurrencySafeEntity {
         this.lastLoginPlatform = lastLoginPlatform;
     }
 
+    private void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     private void setAppKey(AppKey appKey) {
         this.appKey = appKey;
     }
 
     private void setStatus(EnableStatus status) {
         this.status = status;
+    }
+
+    private void setHeadPic(Picture headPic) {
+        this.headPic = headPic;
     }
 
     public String getUserName() {
@@ -125,6 +139,10 @@ public class Account extends ConcurrencySafeEntity {
 
     public EnableStatus getStatus() {
         return status;
+    }
+
+    public Picture getHeadPic() {
+        return headPic;
     }
 
     public Account() {

@@ -24,11 +24,6 @@
 </head>
 <body style="font: 13px Verdana; background: #eee; color: #333">
 
-<h1>jQuery UI Widget</h1>
-
-<p>You can see this example with different themes on the <a href="http://plupload.com/example_jquery_ui.php">www.plupload.com</a>
-    website.</p>
-
 <form id="form" method="post" action="../dump.php">
     <div id="uploader">
         <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
@@ -47,24 +42,15 @@
             name: 'files',
             // 用户可以上传不超过20的文件中去（假集multiple_queues）
             max_file_count: 20,
-
             chunk_size: '1mb',
-
-            // 调整图像在客户端如果我们能
-            resize: {
-                width: 200,
-                height: 200,
-                quality: 90,
-                crop: true // crop to exact dimensions
-            },
-
+            //单选
+            multi_selection: false,
             filters: {
                 // 最大文件大小
                 max_file_size: '1000mb',
                 // 指定要浏览的文件
                 mime_types: [
-                    {title: "Image files", extensions: "jpg,gif,png"},
-                    {title: "Zip files", extensions: "zip"}
+                    {title: "Image files", extensions: "png,gif,jpg,jpeg,bmp"},
                 ]
             },
 
@@ -92,34 +78,23 @@
             init: {
                 PostInit: function () {
                 },
-                FileUploaded: function (up,file,info) {
-                    console.log(up);
-                    console.log(file);
+                FileUploaded: function (up, file, info) {
                     console.log(info);
                 },
                 Error: function (up, err) {
                     console.log(err);
+                },
+                FilesAdded: function (up, files) {
+                    $.each(up.files, function (i, file) {
+                        if (up.files.length <= 1) {
+                            return;
+                        }
+
+                        up.removeFile(file);
+                    });
                 }
             }
         });
-
-
-        // 在上传完成前处理表单提交的情况
-//        $('#form').submit(function (e) {
-//            // 队列中的文件先上传
-//            if ($('#uploader').plupload('getFiles').length > 0) {
-//
-//                // 当所有文件上传提交表单
-//                $('#uploader').on('complete', function () {
-//                    $('#form')[0].submit();
-//                });
-//
-//                $('#uploader').plupload('start');
-//            } else {
-//                alert("在队列中至少有一个文件.");
-//            }
-//            return false; // 保持表单提交
-//        });
     });
 </script>
 </body>

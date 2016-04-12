@@ -4,12 +4,14 @@ import com.yjh.demo.application.account.IAccountAppService;
 import com.yjh.demo.application.account.command.*;
 import com.yjh.demo.application.account.representation.AccountRepresentation;
 import com.yjh.demo.application.shared.command.SharedCommand;
+import com.yjh.demo.core.common.Constants;
 import com.yjh.demo.core.exception.ConcurrencyException;
 import com.yjh.demo.core.exception.ExistException;
 import com.yjh.demo.core.exception.NoFoundException;
 import com.yjh.demo.infrastructure.persistence.hibernate.generic.Pagination;
 import com.yjh.demo.interfaces.shared.web.AlertMessage;
 import com.yjh.demo.interfaces.shared.web.BaseController;
+import com.yjh.demo.interfaces.shared.web.JsonMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.Locale;
@@ -391,5 +394,32 @@ public class AccountController extends BaseController {
         alertMessage = new AlertMessage(this.getMessage("default.edit.success.messages", null, locale));
         redirectAttributes.addFlashAttribute(AlertMessage.MODEL_ATTRIBUTE_KEY, alertMessage);
         return new ModelAndView("redirect:/account/pagination.htm");
+    }
+
+    @RequestMapping(value = "/update_headPic")
+    @ResponseBody
+    public JsonMessage updateHeadPic(@RequestParam UpdateHeadPicCommand command, HttpSession session) {
+        JsonMessage jsonMessage = new JsonMessage();
+        try {
+            AccountRepresentation user = (AccountRepresentation) session.getAttribute(Constants.SESSION_USER);
+            command.setId(user.getId());
+            if (null == command.getHandPic()) {
+                jsonMessage.setCode("400");
+                jsonMessage.setMessage("图片不能为空");
+                return jsonMessage;
+            }
+            accountAppService.updateHeadPic(command);
+            jsonMessage.setCode("200");
+            jsonMessage.setMessage("成功");
+        } catch (Exception e) {
+            jsonMessage.setCode("500");
+            jsonMessage.setMessage(e.getMessage());
+        }
+        return jsonMessage;
+    }
+
+    @RequestMapping(value = "/profile.htm")
+    public ModelAndView profile(HttpSession session){
+        return new ModelAndView("/account/profile");
     }
 }

@@ -2,6 +2,7 @@ package com.yjh.demo.domain.service.account;
 
 import com.yjh.demo.application.account.command.*;
 import com.yjh.demo.application.auth.command.LoginCommand;
+import com.yjh.demo.application.picture.command.CreatePictureCommand;
 import com.yjh.demo.application.shared.command.SharedCommand;
 import com.yjh.demo.core.common.Constants;
 import com.yjh.demo.core.common.PasswordHelper;
@@ -9,14 +10,18 @@ import com.yjh.demo.core.enums.EnableStatus;
 import com.yjh.demo.core.exception.ExistException;
 import com.yjh.demo.core.exception.NoFoundException;
 import com.yjh.demo.core.shiro.UsernamePasswordAppKeyToken;
+import com.yjh.demo.core.upload.IFileUploadService;
 import com.yjh.demo.core.util.CoreStringUtils;
 import com.yjh.demo.domain.mode.account.Account;
 import com.yjh.demo.domain.mode.account.IAccountRepository;
 import com.yjh.demo.domain.mode.appkey.AppKey;
+import com.yjh.demo.domain.mode.picture.Picture;
 import com.yjh.demo.domain.mode.role.Role;
 import com.yjh.demo.domain.service.appkey.IAppKeyService;
+import com.yjh.demo.domain.service.picture.IPictureService;
 import com.yjh.demo.domain.service.role.IRoleService;
 import com.yjh.demo.infrastructure.persistence.hibernate.generic.Pagination;
+import org.apache.commons.io.FileUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
@@ -27,6 +32,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -43,6 +49,12 @@ public class AccountService implements IAccountService {
 
     @Autowired
     private IAppKeyService appKeyService;
+
+    @Autowired
+    private IPictureService pictureService;
+
+    @Autowired
+    private IFileUploadService fileUploadService;
 
     @Override
     public Pagination<Account> pagination(ListAccountCommand command) {
@@ -188,5 +200,24 @@ public class AccountService implements IAccountService {
         Map<String, String> alias = new HashMap<String, String>();
         alias.put("roles", "role");
         return accountRepository.list(criterionList, null, null, null, alias);
+    }
+
+    @Override
+    public void updateHeadPic(UpdateHeadPicCommand command) {
+        Account account = this.searchByID(command.getId());
+        Picture oldHeadPic = account.getHeadPic();
+        File imgFile = fileUploadService.moveToImg(command.getHandPic());
+        CreatePictureCommand picCommand = new CreatePictureCommand();
+        picCommand.setName(fileUploadService.getHttpPath("img") + "/" + imgFile.getName());
+        picCommand.setPicPath(imgFile.getName());
+        picCommand.setMiniPicPath(fileUploadService.getHttpPath("img") + "/" + fileUploadService.getMiniImgFile(imgFile.getName()).getName());
+        picCommand.setMediumPicPath(fileUploadService.getHttpPath("img") + "/" + fileUploadService.getMediumImgFile(imgFile.getName()).getName());
+        picCommand.setSize((double) FileUtils.sizeOf(imgFile) / 1024 / 1024);//单位MB
+        Picture newHeadPic = pictureService.create(picCommand);
+        if (null != oldHeadPic) {
+            fileUploadService.deleteImg(oldHeadPic.getName());
+        }
+        account.changeHeadPic(newHeadPic);
+        accountRepository.update(account);
     }
 }

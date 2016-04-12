@@ -38,4 +38,6 @@ public interface IAccountService {
     List<Account> searchByIDs(List<String> ids);
 
     List<Account> searchByRoleIDs(List<String> ids);
+
+    void updateHeadPic(UpdateHeadPicCommand command);
 }

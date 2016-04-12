@@ -1877,7 +1877,7 @@ a.list-group-item.active, a.list-group-item.active:focus, a.list-group-item.acti
 }
 
 .footer {
-    position: absolute;
+    /*position: absolute;*/
     padding: 10px 15px;
     bottom: 0;
     right: 0;

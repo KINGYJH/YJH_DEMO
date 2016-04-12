@@ -62,6 +62,9 @@ public class FileUploadConfig {
     }
 
     public void setFolder(String folder) {
+        if (!folder.endsWith("/")) {
+            folder += "/";
+        }
         this.folder = folder;
     }
 

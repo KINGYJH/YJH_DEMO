@@ -84,4 +84,6 @@
 
     <!-- 对静态资源文件的访问 -->
     <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
+    <mvc:resources mapping="/img/**" location="/img/" />
+    <mvc:resources mapping="/img_tmp/**" location="/img_tmp/" />
 </beans>
