@@ -10,4 +10,6 @@ public interface IPictureService {
     Picture create(CreatePictureCommand command);
 
     Picture searchBuID(String id);
+
+    void delete(String id);
 }

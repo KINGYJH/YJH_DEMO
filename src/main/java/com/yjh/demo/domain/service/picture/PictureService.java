@@ -33,4 +33,10 @@ public class PictureService implements IPictureService {
         return picture;
     }
 
+    @Override
+    public void delete(String id) {
+        Picture picture = this.searchBuID(id);
+        pictureRepository.delete(picture);
+    }
+
 }

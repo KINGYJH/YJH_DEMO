@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-sm-4 col-md-12">
                 <div class="user-profile-pic">
-                    <img id="head-img" src="[@spring.url '/resources/images/profile/profile1.jpg'/]" alt="">
+                    <img id="head-img" src="${Session["sessionUser"].headPic.picPath!?default('/resources/images/profile/profile1.jpg')}" alt="">
                     <div class="ribbon-wrapper">
                         <div class="ribbon-inner shadow-pulse bg-success">
                             点击修改头像
@@ -651,7 +651,7 @@
         // 自动上传。
         auto: true,
         // 文件接收服务端。
-        server: '/upload/img_upload',
+        server: '/account/update_headPic',
         // 选择文件的按钮。可选。
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.
         pick: '.user-profile-pic',

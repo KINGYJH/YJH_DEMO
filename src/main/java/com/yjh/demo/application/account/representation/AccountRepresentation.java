@@ -1,8 +1,10 @@
 package com.yjh.demo.application.account.representation;
 
 import com.yjh.demo.application.appkey.representation.AppKeyRepresentation;
+import com.yjh.demo.application.picture.representation.PictureRepresentation;
 import com.yjh.demo.application.role.representation.RoleRepresentation;
 import com.yjh.demo.core.enums.EnableStatus;
+import com.yjh.demo.domain.mode.picture.Picture;
 
 import java.util.Date;
 import java.util.List;
@@ -25,6 +27,7 @@ public class AccountRepresentation {
     private List<RoleRepresentation> roles;               //用户角色
     private AppKeyRepresentation appKey;          //应用标识
     private EnableStatus status;     //状态
+    private PictureRepresentation headPic;  //头像
 
     public String getId() {
         return id;
@@ -120,5 +123,13 @@ public class AccountRepresentation {
 
     public void setStatus(EnableStatus status) {
         this.status = status;
+    }
+
+    public PictureRepresentation getHeadPic() {
+        return headPic;
+    }
+
+    public void setHeadPic(PictureRepresentation headPic) {
+        this.headPic = headPic;
     }
 }

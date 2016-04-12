@@ -2,6 +2,7 @@ package com.yjh.demo.application.account.representation.mapping;
 
 import com.yjh.demo.application.appkey.representation.AppKeyRepresentation;
 import com.yjh.demo.application.account.representation.AccountRepresentation;
+import com.yjh.demo.application.picture.representation.PictureRepresentation;
 import com.yjh.demo.application.role.representation.RoleRepresentation;
 import com.yjh.demo.core.mapping.IMappingService;
 import com.yjh.demo.domain.mode.account.Account;
@@ -29,6 +30,10 @@ public class AccountRepresentationMapper extends CustomMapper<Account, AccountRe
         if (null != account.getRoles()) {
             List<RoleRepresentation> data = mappingService.mapAsList(account.getRoles(), RoleRepresentation.class);
             representation.setRoles(data);
+        }
+        if (null != account.getHeadPic()) {
+            PictureRepresentation data = mappingService.map(account.getHeadPic(), PictureRepresentation.class, false);
+            representation.setHeadPic(data);
         }
     }
 

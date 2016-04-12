@@ -8,21 +8,27 @@ import com.yjh.demo.core.common.Constants;
 import com.yjh.demo.core.exception.ConcurrencyException;
 import com.yjh.demo.core.exception.ExistException;
 import com.yjh.demo.core.exception.NoFoundException;
+import com.yjh.demo.core.upload.IFileUploadService;
+import com.yjh.demo.core.upload.UploadResult;
+import com.yjh.demo.core.upload.UploadSuccess;
 import com.yjh.demo.infrastructure.persistence.hibernate.generic.Pagination;
 import com.yjh.demo.interfaces.shared.web.AlertMessage;
 import com.yjh.demo.interfaces.shared.web.BaseController;
-import com.yjh.demo.interfaces.shared.web.JsonMessage;
+import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Locale;
 
@@ -37,6 +43,9 @@ public class AccountController extends BaseController {
 
     @Autowired
     private IAccountAppService accountAppService;
+
+    @Autowired
+    private IFileUploadService fileUploadService;
 
     @RequestMapping(value = "/pagination.htm")
     public ModelAndView pagination(ListAccountCommand command) {
@@ -396,30 +405,39 @@ public class AccountController extends BaseController {
         return new ModelAndView("redirect:/account/pagination.htm");
     }
 
-    @RequestMapping(value = "/update_headPic")
-    @ResponseBody
-    public JsonMessage updateHeadPic(@RequestParam UpdateHeadPicCommand command, HttpSession session) {
-        JsonMessage jsonMessage = new JsonMessage();
-        try {
-            AccountRepresentation user = (AccountRepresentation) session.getAttribute(Constants.SESSION_USER);
-            command.setId(user.getId());
-            if (null == command.getHandPic()) {
-                jsonMessage.setCode("400");
-                jsonMessage.setMessage("图片不能为空");
-                return jsonMessage;
-            }
-            accountAppService.updateHeadPic(command);
-            jsonMessage.setCode("200");
-            jsonMessage.setMessage("成功");
-        } catch (Exception e) {
-            jsonMessage.setCode("500");
-            jsonMessage.setMessage(e.getMessage());
-        }
-        return jsonMessage;
-    }
 
     @RequestMapping(value = "/profile.htm")
-    public ModelAndView profile(HttpSession session){
+    public ModelAndView profile(HttpSession session) {
         return new ModelAndView("/account/profile");
+    }
+
+    @RequestMapping(value = "/update_headPic")
+    @ResponseBody
+    public UploadResult updateHeadPic(@RequestParam MultipartFile file, HttpSession session, HttpServletResponse response) {
+        AccountRepresentation user = (AccountRepresentation) session.getAttribute(Constants.SESSION_USER);
+        if (null == user) {
+            return null;
+        }
+        UploadResult uploadResult = null;
+        try {
+            MultipartFile[] files = new MultipartFile[1];
+            files[0] = file;
+            uploadResult = fileUploadService.imgUpload(files);
+            Object[] objects = uploadResult.getFiles();
+
+            UploadSuccess uploadSuccess = (UploadSuccess) objects[0];
+            UpdateHeadPicCommand command = new UpdateHeadPicCommand();
+            command.setId(user.getId());
+            command.setHandPic(uploadSuccess.getUrl());
+
+            accountAppService.updateHeadPic(command);
+
+            user = accountAppService.searchByID(user.getId());
+            session.setAttribute(Constants.SESSION_USER, user);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+        }
+        return uploadResult;
     }
 }

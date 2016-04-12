@@ -6,6 +6,7 @@ import com.yjh.demo.application.permission.command.ListPermissionCommand;
 import com.yjh.demo.application.permission.representation.PermissionRepresentation;
 import com.yjh.demo.application.shared.command.SharedCommand;
 import com.yjh.demo.core.mapping.IMappingService;
+import com.yjh.demo.core.shiro.ShiroFilterChainManager;
 import com.yjh.demo.domain.mode.permission.Permission;
 import com.yjh.demo.domain.service.permission.IPermissionService;
 import com.yjh.demo.infrastructure.persistence.hibernate.generic.Pagination;

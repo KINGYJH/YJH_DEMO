@@ -208,14 +208,15 @@ public class AccountService implements IAccountService {
         Picture oldHeadPic = account.getHeadPic();
         File imgFile = fileUploadService.moveToImg(command.getHandPic());
         CreatePictureCommand picCommand = new CreatePictureCommand();
-        picCommand.setName(fileUploadService.getHttpPath("img") + "/" + imgFile.getName());
-        picCommand.setPicPath(imgFile.getName());
+        picCommand.setName(imgFile.getName());
+        picCommand.setPicPath(fileUploadService.getHttpPath("img") + "/" + imgFile.getName());
         picCommand.setMiniPicPath(fileUploadService.getHttpPath("img") + "/" + fileUploadService.getMiniImgFile(imgFile.getName()).getName());
         picCommand.setMediumPicPath(fileUploadService.getHttpPath("img") + "/" + fileUploadService.getMediumImgFile(imgFile.getName()).getName());
         picCommand.setSize((double) FileUtils.sizeOf(imgFile) / 1024 / 1024);//单位MB
         Picture newHeadPic = pictureService.create(picCommand);
         if (null != oldHeadPic) {
             fileUploadService.deleteImg(oldHeadPic.getName());
+            pictureService.delete(oldHeadPic.getId());
         }
         account.changeHeadPic(newHeadPic);
         accountRepository.update(account);

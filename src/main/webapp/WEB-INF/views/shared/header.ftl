@@ -13,7 +13,7 @@
                     <span class="badge badge-danger bounceIn">1</span>
                     <ul class="dropdown-menu dropdown-sm pull-right user-dropdown">
                         <li class="user-avatar">
-                            <img src="[@spring.url '/resources/images/favicon.ico'/]" alt="" class="img-circle">
+                            <img src="${Session["sessionUser"].headPic.picPath!}" alt="" class="img-circle">
                             <div class="user-content">
                                 <h5 class="no-m-bottom">${Session["sessionUser"].userName!}</h5>
                                 <div class="m-top-xs">
@@ -71,7 +71,7 @@
             <div class="pull-right m-right-sm">
                 <div class="user-block hidden-xs">
                     <a href="#" id="userToggle" data-toggle="dropdown">
-                        <img src="[@spring.url '/resources/images/favicon.ico'/]" alt=""
+                        <img src="${Session["sessionUser"].headPic.picPath!}" alt=""
                              class="img-circle inline-block user-profile-pic">
                         <div class="user-detail inline-block">
                         ${Session["sessionUser"].userName!}
@@ -82,7 +82,7 @@
                         <div class="panel-body paddingTB-sm">
                             <ul>
                                 <li>
-                                    <a href="#">
+                                    <a href="[@spring.url '/account/profile.htm'/]">
                                         <i class="fa fa-edit fa-lg"></i><span class="m-left-xs">我的资料</span>
                                     </a>
                                 </li>

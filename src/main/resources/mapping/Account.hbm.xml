@@ -31,6 +31,8 @@
 
         <many-to-one name="appKey" column="app_key_id" class="com.yjh.demo.domain.mode.appkey.AppKey"/>
 
+        <many-to-one name="headPic" column="head_pic_id" class="com.yjh.demo.domain.mode.picture.Picture"/>
+
         <property name="status" column="status">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">com.yjh.demo.core.enums.EnableStatus</param>
