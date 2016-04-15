@@ -17,7 +17,7 @@
                             <div class="user-content">
                                 <h5 class="no-m-bottom">${Session["sessionUser"].userName!}</h5>
                                 <div class="m-top-xs">
-                                    <a href="#" class="m-right-sm">个人资料</a>
+                                    <a href="[@spring.url '/account/profile.htm'/]" class="m-right-sm">个人资料</a>
                                     <a href="[@spring.url '/logout'/]">注销</a>
                                 </div>
                             </div>

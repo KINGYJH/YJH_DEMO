@@ -21,6 +21,14 @@
                         </span>
                     </a>
                 </li>
+                <li class="bg-palette2">
+                    <a href="[@spring.url '/messages/pagination.htm'/]">
+                        <span class="menu-content block">
+                            <span class="menu-icon"><i class="block fa fa-envelope fa-lg"></i></span>
+                            <span class="text m-left-sm">站内信</span>
+                        </span>
+                    </a>
+                </li>
                 <li class="openable bg-palette4">
                     <a href="#">
                         <span class="menu-content block">
@@ -30,6 +38,11 @@
                         <span class="menu-content-hover block">Menu</span>
                     </a>
                     <ul class="submenu">
+                        <li>
+                            <a href="[@spring.url '/area/pagination.htm'/]">
+                                <span class="submenu-label">区域管理</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="[@spring.url '/app_key/pagination.htm'/]">
                                 <span class="submenu-label">AppKey管理</span>

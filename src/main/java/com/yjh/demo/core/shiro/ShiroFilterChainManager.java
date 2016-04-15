@@ -26,11 +26,11 @@ public class ShiroFilterChainManager {
     @PostConstruct
     public void init() {
         defaultFilterChains = new HashMap<String, NamedFilterList>(filterChainManager.getFilterChains());
-        List<PermissionRepresentation> permissions = authAppService.findAllPermission();
-        initFilterChains(permissions);
+        initFilterChains();
     }
 
-    public void initFilterChains(List<PermissionRepresentation> permissions) {
+    public void initFilterChains() {
+        List<PermissionRepresentation> permissions = authAppService.findAllPermission();
         //1、首先删除以前老的filter chain并注册默认的
         filterChainManager.getFilterChains().clear();
         if (defaultFilterChains != null) {

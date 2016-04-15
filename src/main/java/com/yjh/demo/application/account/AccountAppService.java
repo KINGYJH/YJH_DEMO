@@ -92,6 +92,7 @@ public class AccountAppService implements IAccountAppService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Pagination<AccountRepresentation> paginationJSON(ListAccountCommand command) {
         command.verifyPage();
         command.setUserName(command.getAccountUserName());

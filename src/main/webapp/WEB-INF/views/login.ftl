@@ -50,7 +50,7 @@
     <link href="[@spring.url '/resources//js/parsley/parsley.css'/]" rel="stylesheet">
 
     <!-- Jquery -->
-    <script src="[@spring.url '/resources/js/jquery-1.11.1.min.js'/]"></script>
+    <script src="[@spring.url '/resources/js/jquery.min.js'/]"></script>
 </head>
 
 <body class="overflow-hidden light-background">

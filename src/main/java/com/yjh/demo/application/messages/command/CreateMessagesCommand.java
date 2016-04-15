@@ -11,9 +11,9 @@ public class CreateMessagesCommand {
 
     private List<String> roles;
     private List<String> receiveAccounts;
-    @NotBlank(message = "{messages.title,NotBlank.message}")
+    @NotBlank(message = "{messages.title,NotBlank.messages}")
     private String title;
-    @NotBlank(message = "{messages.content,NotBlank.message}")
+    @NotBlank(message = "{messages.content,NotBlank.messages}")
     private String content;
     private String sendAccount;
 

@@ -179,3 +179,11 @@ td, th {
     z-index: 9999999999999;
     display: none;
 }
+.user-profile-pic img{
+    min-width: 100%;
+    min-height: 377px;
+}
+.user-profile-pic .webuploader-pick{
+    min-width: 100%;
+    min-height: 377px;
+}

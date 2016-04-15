@@ -25,4 +25,5 @@
     <import resource="spring-config.xml"/>
     <import resource="spring-webSocket.xml"/>
     <import resource="spring-upload.xml"/>
+    <import resource="spring-aop.xml"/>
 </beans>

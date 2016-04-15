@@ -102,6 +102,9 @@
 </div>
 [/#macro]
 
+
+
+
 [#macro verificationCode id="verificationCode"]
 <img id="${id}" src="[@spring.url '/verificationCode'/]" data-toggle="tooltip" data-placement="bottom" title="点击切换验证码"/>
 <script type="text/javascript">

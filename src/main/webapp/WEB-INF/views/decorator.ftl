@@ -61,7 +61,7 @@
 
     <!-- 模板自定义css -->
     <link href="[@spring.url '/resources/css/simplify.css'/]" rel="stylesheet">
-    [#--<link href="[@spring.url '/resources/css/simplify.min.css'/]" rel="stylesheet">--]
+    <link href="[@spring.url '/resources/css/simplify.min.css'/]" rel="stylesheet">
     <link href="[@spring.url '/resources/css/reset.css'/]" rel="stylesheet">
 [/@block]
 </head>
@@ -160,6 +160,7 @@
 <script src="[@spring.url '/resources/js/common.js'/]"></script>
 <script src="[@spring.url '/resources/js/ArrayPrototype.js'/]"></script>
 <script src="[@spring.url '/resources/js/StringUtil.js'/]"></script>
+<script src="[@spring.url '/resources/js/layer/layer.js'/]"></script>
 
 [#--<script src="[@spring.url '/resources/js/sockjs-0.3.4.min.js'/]"></script>--]
 [#--<script src="[@spring.url '/resources/js/messages-webSocket.js'/]"></script>--]

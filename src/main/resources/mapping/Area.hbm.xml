@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field" default-cascade="all">
+    <class name="com.yjh.demo.domain.mode.area.Area" table="t_area" lazy="true">
+        <id name="id" type="java.lang.String" column="id" unsaved-value="null" length="32">
+            <generator class="uuid"/>
+        </id>
+
+        <version column="version" name="version" type="java.lang.Integer"/>
+
+        <property name="createDate" column="create_date" type="java.util.Date"/>
+
+        <property name="name" column="name" type="java.lang.String"/>
+
+        <property name="shortName" column="short_name" type="java.lang.String"/>
+
+        <property name="longitude" column="longitude" type="java.lang.Double"/>
+        <property name="latitude" column="latitude" type="java.lang.Double"/>
+        <property name="level" column="level">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.yjh.demo.core.enums.AreaLevel</param>
+                <param name="type">4</param>
+            </type>
+        </property>
+        <property name="status" column="status">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.yjh.demo.core.enums.EnableStatus</param>
+                <param name="type">4</param>
+            </type>
+        </property>
+        <many-to-one name="parent" column="parent_id" class="com.yjh.demo.domain.mode.area.Area"/>
+        <property name="sort" column="sort" type="java.lang.Integer"/>
+    </class>
+</hibernate-mapping>

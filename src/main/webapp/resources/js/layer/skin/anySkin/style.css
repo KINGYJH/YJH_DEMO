@@ -1,0 +1,73 @@
+html #layui_layer_skinanySkinstylecss{display:none; position: absolute; width:1989px;}
+body .layui-layer-title{
+	height: 42px;
+	line-height: 42px;
+	background: #2980b9;
+	color: #fff;
+	padding-left: 30px;
+	border-radius: 6px 6px 0 0;
+}
+body .layui-layer-ico{
+	background: url("../../../../images/close_btn.png");
+}
+body .layui-layer-setwin .layui-layer-close1{
+	height: 24px;
+	width: 24px;
+	background-position: 0;
+}
+body .layui-layer-setwin .layui-layer-close1:hover{
+	background-position: 0;
+	opacity: .8;
+}
+body .layui-layer-dialog{
+	border-radius: 6px;
+}
+body .layui-layer-dialog .layui-layer-padding{
+	padding: 0;
+	padding-top: 20px;
+}
+body .layui-layer-dialog .layui-layer-content .layui-layer-ico{
+	display: none;
+}
+body .layui-layer-btn a{
+	height: 37px;
+	line-height: 37px;
+	background: #2980b9;
+	width: 520px;
+	border-radius: 5px;
+}
+body .layer-ext-anySkin-msg .layui-layer-content{
+	text-align: center;
+}
+body .layer-ext-anySkin-msg .layui-layer-content:before{
+
+}
+body .layui-layer{
+	border-radius: 6px;
+}
+body .layui-layer-tab .layui-layer-title span.layui-layer-tabnow{
+	height: 43px;
+	color: #000;
+	cursor: pointer;
+}
+body .layui-layer-tab .layui-layer-title{
+	border-bottom: 1px solid #3498db;
+	background-color: #3498db;
+}
+body .layer-ext-anySkin-msg .layui-layer-ico1, body .layer-ext-anySkin-msg .layui-layer-ico2{
+	display: inline-block !important;
+	height: 26px !important;
+	width: 26px !important;
+	position: static !important;
+	margin-top: 6px;
+}
+body .layer-ext-anySkin-msg .layui-layer-ico1{
+	background: url("../../../../images/success_icon.png") no-repeat;
+}
+body .layer-ext-anySkin-msg .layui-layer-ico2{
+	background: url("../../../../images/fail_icon.png") no-repeat;
+}
+body .layer-ext-anySkin-msg .layui-layer-padding{
+	padding: 20px;
+	line-height: 30px;
+}

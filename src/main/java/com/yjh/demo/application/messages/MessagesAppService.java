@@ -41,6 +41,7 @@ public class MessagesAppService implements IMessagesAppService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MessagesInfoRepresentation searchByID(String id) {
         MessagesInfoRepresentation messages = mappingService.map(messagesService.searchMessagesByID(id), MessagesInfoRepresentation.class, false);
         List<HandMessagesRepresentation> handMessagesList = mappingService.mapAsList(messagesService.searchHandMessagesByMessagesID(id), HandMessagesRepresentation.class);
@@ -49,6 +50,7 @@ public class MessagesAppService implements IMessagesAppService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Pagination<MessagesRepresentation> pagination(ListMessagesCommand command) {
         command.verifyPage();
         command.verifyPageSize(15);

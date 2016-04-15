@@ -60,6 +60,7 @@
         <version.shiro>1.2.3</version.shiro>
         <version.httpclient>4.5.1</version.httpclient>
         <version.thumbnailator>0.4.8</version.thumbnailator>
+        <version.aspectj>1.8.6</version.aspectj>
     </properties>
 
 
@@ -310,6 +311,17 @@
             <groupId>net.coobird</groupId>
             <artifactId>thumbnailator</artifactId>
             <version>${version.thumbnailator}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${version.aspectj}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${version.aspectj}</version>
         </dependency>
     </dependencies>
 </project>

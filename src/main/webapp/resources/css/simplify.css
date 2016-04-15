@@ -1711,7 +1711,7 @@ a.list-group-item.active:focus {
   }
 }
 .footer {
-  /*position: absolute;*/
+  position: absolute;
   padding: 10px 15px;
   bottom: 0;
   right: 0;

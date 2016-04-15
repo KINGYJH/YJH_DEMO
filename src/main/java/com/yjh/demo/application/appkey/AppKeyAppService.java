@@ -55,6 +55,7 @@ public class AppKeyAppService implements IAppKeyAppService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Pagination<AppKeyRepresentation> paginationJSON(ListAppKeyCommand command) {
         command.verifyPage();
         command.setName(command.getAppKeyName());

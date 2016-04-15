@@ -41,6 +41,7 @@ public class PermissionAppService implements IPermissionAppService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Pagination<PermissionRepresentation> paginationJSON(ListPermissionCommand command) {
         command.verifyPage();
         command.setName(command.getPermissionName());
@@ -69,12 +70,14 @@ public class PermissionAppService implements IPermissionAppService {
 
     @Override
     public PermissionRepresentation create(CreatePermissionCommand command) {
-        return mappingService.map(permissionService.create(command), PermissionRepresentation.class, false);
+        PermissionRepresentation permission = mappingService.map(permissionService.create(command), PermissionRepresentation.class, false);
+        return permission;
     }
 
     @Override
     public PermissionRepresentation edit(EditPermissionCommand command) {
-        return mappingService.map(permissionService.edit(command), PermissionRepresentation.class, false);
+        PermissionRepresentation permission = mappingService.map(permissionService.edit(command), PermissionRepresentation.class, false);
+        return permission;
     }
 
     @Override
