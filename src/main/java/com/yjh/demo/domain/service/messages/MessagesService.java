@@ -17,6 +17,7 @@ import com.yjh.demo.domain.mode.message.Messages;
 import com.yjh.demo.domain.service.account.IAccountService;
 import com.yjh.demo.domain.service.role.IRoleService;
 import com.yjh.demo.infrastructure.persistence.hibernate.generic.Pagination;
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -45,7 +46,7 @@ public class MessagesService implements IMessagesService {
     @Override
     public Messages create(CreateMessagesCommand command) {
         Account sendAccount = accountService.searchByID(command.getSendAccount());
-        Messages messages = new Messages(command.getTitle(), command.getContent(), new Date());
+        Messages messages = new Messages(command.getTitle(), command.getContent(), new Date(), sendAccount);
         if (null != command.getRoles() && command.getRoles().size() > 0) {
             List<Account> accountList = accountService.searchByRoleIDs(command.getRoles());
             for (Account item : accountList) {
@@ -65,6 +66,7 @@ public class MessagesService implements IMessagesService {
                 }
             }
         }
+        messagesRepository.save(messages);
         return messages;
     }
 
@@ -152,5 +154,16 @@ public class MessagesService implements IMessagesService {
             criterionList.add(Restrictions.eq("readStatus", command.getReadStatus()));
         }
         return handMessagesRepository.list(criterionList, null);
+    }
+
+    @Override
+    public Pagination<HandMessages> paginationHandMessages(ListMessagesCommand command) {
+        List<Criterion> criterionList = new ArrayList<Criterion>();
+        if (!CoreStringUtils.isEmpty(command.getReceiveAccount())) {
+            criterionList.add(Restrictions.eq("receiveAccount.id", command.getReceiveAccount()));
+        }
+        List<Order> orderList = new ArrayList<Order>();
+        orderList.add(Order.desc("createDate"));
+        return handMessagesRepository.pagination(command.getPage(), command.getPageSize(), criterionList, orderList);
     }
 }

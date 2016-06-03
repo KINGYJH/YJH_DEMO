@@ -8,6 +8,8 @@ import com.yjh.demo.application.messages.representation.MessagesInfoRepresentati
 import com.yjh.demo.application.messages.representation.MessagesRepresentation;
 import com.yjh.demo.core.common.Constants;
 import com.yjh.demo.core.exception.NoFoundException;
+import com.yjh.demo.core.exception.NoLoginException;
+import com.yjh.demo.core.util.CoreHttpUtils;
 import com.yjh.demo.interfaces.shared.web.AlertMessage;
 import com.yjh.demo.interfaces.shared.web.BaseController;
 import org.slf4j.Logger;
@@ -40,7 +42,13 @@ public class MessagesController extends BaseController {
     private IMessagesAppService messagesAppService;
 
     @RequestMapping(value = "/pagination.htm")
-    public ModelAndView pagination(ListMessagesCommand command) {
+    public ModelAndView pagination(ListMessagesCommand command, HttpSession session) {
+        try {
+            command.setReceiveAccount(CoreHttpUtils.getSessionAccount(session).getId());
+        } catch (NoLoginException e) {
+            return new ModelAndView("redirect:/logout");
+        }
+
         return new ModelAndView("/messages/list", "pagination", messagesAppService.pagination(command)).addObject("command", command);
     }
 

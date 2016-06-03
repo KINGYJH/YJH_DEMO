@@ -127,5 +127,11 @@
 <script src="[@spring.url '/resources/js/simplify/simplify.js'/]"></script>
 
 <script src="[@spring.url '/resources/js/common.js'/]"></script>
+
+<!--[if lt IE 9]>
+<script type="text/javascript">
+    window.location.href = "ie_update";
+</script>
+<![endif]-->
 </body>
 </html>

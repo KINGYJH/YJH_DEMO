@@ -7,6 +7,7 @@ import com.yjh.demo.application.messages.representation.HandMessagesRepresentati
 import com.yjh.demo.application.messages.representation.MessagesInfoRepresentation;
 import com.yjh.demo.application.messages.representation.MessagesRepresentation;
 import com.yjh.demo.core.mapping.IMappingService;
+import com.yjh.demo.domain.mode.message.HandMessages;
 import com.yjh.demo.domain.mode.message.Messages;
 import com.yjh.demo.domain.service.messages.IMessagesService;
 import com.yjh.demo.infrastructure.persistence.hibernate.generic.Pagination;
@@ -51,12 +52,12 @@ public class MessagesAppService implements IMessagesAppService {
 
     @Override
     @Transactional(readOnly = true)
-    public Pagination<MessagesRepresentation> pagination(ListMessagesCommand command) {
+    public Pagination<HandMessagesRepresentation> pagination(ListMessagesCommand command) {
         command.verifyPage();
         command.verifyPageSize(15);
-        Pagination<Messages> pagination = messagesService.paginationMessages(command);
-        List<MessagesRepresentation> data = mappingService.mapAsList(pagination.getData(), MessagesRepresentation.class);
-        return new Pagination<MessagesRepresentation>(data, pagination.getCount(), pagination.getPage(), pagination.getPageSize());
+        Pagination<HandMessages> pagination = messagesService.paginationHandMessages(command);
+        List<HandMessagesRepresentation> data = mappingService.mapAsList(pagination.getData(), HandMessagesRepresentation.class);
+        return new Pagination<HandMessagesRepresentation>(data, pagination.getCount(), pagination.getPage(), pagination.getPageSize());
     }
 
 }

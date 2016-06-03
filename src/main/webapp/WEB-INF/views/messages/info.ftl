@@ -35,7 +35,7 @@
             </li>
             <li>
                 <span class="col-md-3">发送人</span>
-                <div class="col-md-8 contract-box">${messages.handMessagesList[0].senderAccount.userName!}</div>
+                <div class="col-md-8 contract-box">${messages.senderAccount.userName!}</div>
             </li>
             <li>
                 <span class="col-md-3">接收人</span>
@@ -51,10 +51,10 @@
                             <tbody>
                                 [#if messages.handMessagesList??]
                                     [#list messages.handMessagesList as handMessages]
-                                        <tr>
-                                            <td>${handMessages.receiveAccount.userName!}</td>
-                                            <td>${(handMessages.readStatus.getName())!}</td>
-                                        </tr>
+                                    <tr>
+                                        <td>${handMessages.receiveAccount.userName!}</td>
+                                        <td>${(handMessages.readStatus.getName())!}</td>
+                                    </tr>
                                     [/#list]
                                 [/#if]
                             </tbody>

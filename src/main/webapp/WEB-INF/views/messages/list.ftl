@@ -23,13 +23,13 @@
             <div class="inbox-menu-inner">
                 <ul>
                     <li>
-                        <a href="#">
+                        <a href="/messages/pagination.htm">
                             <span class="badge badge-success m-right-xs">5</span>
                             收件箱
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="/messages/create.htm">
                             发送站内信
                         </a>
                     </li>
@@ -41,7 +41,7 @@
             <div class="pagination-row clearfix m-bottom-md">
                 <div class="pull-left vertical-middle hidden-xs">112 messages</div>
                 <div class="pull-right pull-left-sm">
-                    <div class="inline-block vertical-middle m-right-xs">Page 1 of 8 </div>
+                    <div class="inline-block vertical-middle m-right-xs">Page 1 of 8</div>
                     <ul class="pagination vertical-middle">
                         <li class="disabled"><a href="#"><i class="fa fa-step-backward"></i></a></li>
                         <li class="disabled"><a href="#"><i class="fa fa-caret-left large"></i></a></li>
@@ -62,67 +62,54 @@
                             </div>
                         </th>
                         <th></th>
-                        <th>Author</th>
-                        <th>Message</th>
-                        <th>Date</th>
+                        <th>发送人</th>
+                        <th>信息</th>
+                        <th>发送时间</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="text-center">
-                            <div class="custom-checkbox">
-                                <input type="checkbox" id="chk5" class="inbox-check">
-                                <label for="chk5"></label>
-                            </div>
-                        </td>
-                        <td><a href="#"><i class="fa fa-star-o fa-lg"></i></a></td>
-                        <td>
-                            <div class="author-avatar">
-                                <img src="images/profile/profile5.jpg" alt="">
-                            </div>
-                            <div class="author-name">
-                                <strong class="block font-md">Elizabeth Carter</strong>
-                                <a href="#" class="text-muted">Family</a>
-                            </div>
-                        </td>
-                        <td>
-                            <a href="#">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                <small class="block">Lorem ipsum dolor sit amet.</small>
-                            </a>
-                        </td>
-                        <td>18 Jun, 01:12</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <div class="custom-checkbox">
-                                <input type="checkbox" id="chk6" class="inbox-check">
-                                <label for="chk6"></label>
-                            </div>
-                        </td>
-                        <td><a href="#"><i class="fa fa-star-o fa-lg"></i></a></td>
-                        <td>
-                            <div class="author-avatar">
-                                <img src="images/profile/profile7.jpg" alt="">
-                            </div>
-                            <div class="author-name">
-                                <a href="#"><strong class="block font-md">Karen Martin</strong></a>
-                                <a href="#" class="text-muted">Business</a>
-                            </div>
-                        </td>
-                        <td>
-                            Curabitur bibendum ornare dolor.
-                            <small class="block">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</small>
-                        </td>
-                        <td>18 Jun, 9:03</td>
-                    </tr>
+                        [#if pagination.data??]
+                            [#list pagination.data as message ]
+                            <tr>
+                                <td class="text-center">
+                                    <div class="custom-checkbox">
+                                        <input type="checkbox" id="chk5" class="inbox-check">
+                                        <label for="chk5"></label>
+                                    </div>
+                                </td>
+                            <td>
+                                [#if message.readStatus == "UNREAD"]
+                                    <a href="#"><i class="fa fa-envelope fa-lg"></i></a></td>
+                                [#else]
+                                    <a href="#"><i class="fa fa-envelope-o fa-lg"></i></a>
+                                [/#if]
+                                </td>
+                                <td>
+                                    <div class="author-avatar">
+                                        <img src="${message.senderAccount.headPic.picPath!}" alt="">
+                                    </div>
+                                    <div class="author-name">
+                                        <strong class="block font-md">${message.senderAccount.userName!}</strong>
+                                        <aclass
+                                        ="text-muted">${message.senderAccount.roles[0].name!}</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#">
+                                    ${message.messages.title!}
+                                    </a>
+                                </td>
+                                <td>${message.createDate!}</td>
+                            </tr>
+                            [/#list]
+                        [/#if]
                     </tbody>
                 </table>
             </div>
             <div class="pagination-row clearfix">
                 <div class="pull-left vertical-middle hidden-xs">112 messages</div>
                 <div class="pull-right pull-left-sm">
-                    <div class="inline-block vertical-middle m-right-xs">Page 1 of 8 </div>
+                    <div class="inline-block vertical-middle m-right-xs">Page 1 of 8</div>
                     <ul class="pagination vertical-middle">
                         <li class="disabled"><a href="#"><i class="fa fa-step-backward"></i></a></li>
                         <li class="disabled"><a href="#"><i class="fa fa-caret-left large"></i></a></li>

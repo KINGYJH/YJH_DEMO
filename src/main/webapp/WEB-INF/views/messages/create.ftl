@@ -1,6 +1,11 @@
 [@override name="title"]站内信管理 - 站内信创建[/@override]
 [@override name="topResources"]
     [@super /]
+<script type="text/javascript" charset="utf-8" src="[@spring.url '/resources/ueditor/ueditor.config.js'/]"></script>
+<script type="text/javascript" charset="utf-8" src="[@spring.url '/resources/ueditor/ueditor.all.min.js'/]"></script>
+<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" charset="utf-8" src="[@spring.url '/resources/ueditor/lang/zh-cn/zh-cn.js'/]"></script>
 [/@override]
 
 [@override name="breadcrumb"]
@@ -19,7 +24,8 @@
     [@mc.showAlert /]
 <div class="row">
     <div class="col-lg-8">
-        <form class="form-horizontal" action="/messages/create.htm" method="post" data-parsley-validate>
+        <form class="form-horizontal" id="message-form" action="/messages/create.htm" method="post"
+              data-parsley-validate>
 
             [@spring.bind "command.title"/]
             <div class="form-group">
@@ -37,11 +43,8 @@
             <div class="form-group">
                 <label for="content" class="col-md-3 control-label">站内信内容*</label>
                 <div class="col-md-9">
-                    <textarea class="form-control" id="content" name="content"
-                              value="${command.content!}" rows="10"
-                              placeholder="输入站内信内容"
-                              data-parsley-required="true" data-parsley-required-messages="站内信内容不能为空"
-                              data-parsley-trigger="change"></textarea>
+                    <script id="editor" type="text/plain" name="content"
+                            style="width:100%;height:300px;">${command.content!}</script>
                     [@spring.showErrors "content" "parsley-required"/]
                 </div>
             </div>
@@ -360,6 +363,27 @@
         height: '300px'
     });
 
+    var ue = UE.getEditor('editor');
+    $("#message-form").submit(function () {
+        if (UE.getEditor('editor').hasContents() == false) {
+            layer.msg("请输入站内信内容!！");
+            return false;
+        }
+        if ($('input:radio[name="sendType"]:checked').val() == "role") {
+            var data = $("input[name='roles']");
+            if (data.length <= 0) {
+                layer.msg("请选择要发送的角色");
+                return false;
+            }
+        } else {
+            var data = $("input[name='receiveAccounts']");
+            if (data.length <= 0) {
+                layer.msg("请选择要发送的用户");
+                return false;
+            }
+        }
+
+    })
 </script>
 [/@override]
 [@extends name="/decorator.ftl"/]

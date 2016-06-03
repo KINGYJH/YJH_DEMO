@@ -11,6 +11,7 @@ public class ListMessagesCommand extends BasicPaginationCommand {
     private String sendAccount;
     private String startSendDateTime;
     private String endStartDateTime;
+    private String receiveAccount;
 
     public String getTitle() {
         return title;
@@ -42,5 +43,13 @@ public class ListMessagesCommand extends BasicPaginationCommand {
 
     public void setEndStartDateTime(String endStartDateTime) {
         this.endStartDateTime = endStartDateTime;
+    }
+
+    public String getReceiveAccount() {
+        return receiveAccount;
+    }
+
+    public void setReceiveAccount(String receiveAccount) {
+        this.receiveAccount = receiveAccount;
     }
 }

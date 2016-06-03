@@ -17,5 +17,7 @@
         <property name="content" column="content" type="java.lang.String"/>
 
         <property name="sendDate" column="send_date" type="java.util.Date"/>
+
+        <many-to-one name="senderAccount" column="send_account_id" class="com.yjh.demo.domain.mode.account.Account"/>
     </class>
 </hibernate-mapping>

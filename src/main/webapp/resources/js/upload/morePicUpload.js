@@ -63,7 +63,7 @@ jQuery(function() {
     // 实例化
     uploader = WebUploader.create({
         pick: {
-            id: '#filePicker',
+            id: '#filePicker2',
             label: '点击选择图片'
         },
         dnd: '#uploader .queueList',

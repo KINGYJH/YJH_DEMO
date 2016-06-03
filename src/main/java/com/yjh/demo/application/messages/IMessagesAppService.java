@@ -19,5 +19,5 @@ public interface IMessagesAppService {
 
     MessagesInfoRepresentation searchByID(String id);
 
-    Pagination<MessagesRepresentation> pagination(ListMessagesCommand command);
+    Pagination<HandMessagesRepresentation> pagination(ListMessagesCommand command);
 }

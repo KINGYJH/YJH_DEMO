@@ -1,5 +1,7 @@
 package com.yjh.demo.application.messages.representation;
 
+import com.yjh.demo.application.account.representation.AccountRepresentation;
+
 import java.util.Date;
 
 /**
@@ -14,6 +16,7 @@ public class MessagesRepresentation {
     private String title;   //标题
     private String content; //内容
     private Date sendDate;  //发送时间
+    private AccountRepresentation senderAccount;          //发送人
 
     public String getId() {
         return id;
@@ -61,5 +64,13 @@ public class MessagesRepresentation {
 
     public void setSendDate(Date sendDate) {
         this.sendDate = sendDate;
+    }
+
+    public AccountRepresentation getSenderAccount() {
+        return senderAccount;
+    }
+
+    public void setSenderAccount(AccountRepresentation senderAccount) {
+        this.senderAccount = senderAccount;
     }
 }

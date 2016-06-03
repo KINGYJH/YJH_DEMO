@@ -62,7 +62,7 @@
 [@override name="bottomResources"]
     [@super /]
 <script src="[@spring.url '/resources/js/upload/webuploader.js'/]"></script>
-[#--<script src="[@spring.url '/resources/js/upload/morePicUpload.js'/]"></script>--]
+<script src="[@spring.url '/resources/js/upload/morePicUpload.js'/]"></script>
 <script src="[@spring.url '/resources/js/upload/onePicUpload.js'/]"></script>
 <script>
 </script>

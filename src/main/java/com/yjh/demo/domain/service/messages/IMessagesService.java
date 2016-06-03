@@ -27,4 +27,6 @@ public interface IMessagesService {
     Pagination<Messages> paginationMessages(ListMessagesCommand command);
 
     List<HandMessages> listHandMessages(ListHandMessagesCommand command);
+
+    Pagination<HandMessages> paginationHandMessages(ListMessagesCommand command);
 }

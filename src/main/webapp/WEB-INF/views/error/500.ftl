@@ -45,7 +45,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 
 <!-- Jquery -->
-<script src="[@spring.url '/resources/js/jquery-1.11.1.min.js'/]"></script>
+<script src="[@spring.url '/resources/js/jquery.min.js'/]"></script>
 
 <!-- Bootstrap -->
 <script src="[@spring.url '/resources/bootstrap/js/bootstrap.min.js'/]"></script>

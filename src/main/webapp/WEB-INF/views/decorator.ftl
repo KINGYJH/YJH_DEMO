@@ -164,6 +164,12 @@
 
 [#--<script src="[@spring.url '/resources/js/sockjs-0.3.4.min.js'/]"></script>--]
 [#--<script src="[@spring.url '/resources/js/messages-webSocket.js'/]"></script>--]
+
+<!--[if lt IE 9]>
+<script type="text/javascript">
+    window.location.href = "ie_update";
+</script>
+<![endif]-->
 [/@block]
 </body>
 </html>

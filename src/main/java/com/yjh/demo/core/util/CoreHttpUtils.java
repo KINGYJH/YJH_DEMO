@@ -1,7 +1,9 @@
 package com.yjh.demo.core.util;
 
+import com.yjh.demo.application.account.representation.AccountRepresentation;
 import com.yjh.demo.application.auth.command.LoginCommand;
 import com.yjh.demo.core.common.Constants;
+import com.yjh.demo.core.exception.NoLoginException;
 import com.yjh.demo.core.util.httpclient.CustomHttpClient;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Consts;
@@ -25,6 +27,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -333,6 +336,14 @@ public class CoreHttpUtils {
                 }
             }
         }
+    }
+
+    public static AccountRepresentation getSessionAccount(HttpSession session) {
+        AccountRepresentation account = (AccountRepresentation) session.getAttribute(Constants.SESSION_USER);
+        if (null == account) {
+            throw new NoLoginException("没有登录");
+        }
+        return account;
     }
 
 }

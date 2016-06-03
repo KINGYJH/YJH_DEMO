@@ -77,4 +77,9 @@ public class IndexController {
     public ModelAndView test() {
         return new ModelAndView("/test");
     }
+
+    @RequestMapping(value = "/ie_update")
+    public ModelAndView ipUpdate(){
+        return new ModelAndView("/IeUpdate");
+    }
 }
